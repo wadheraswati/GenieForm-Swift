@@ -1,0 +1,6 @@
+framework module Pods_GenieFormTests {
+  umbrella header "Pods-GenieFormTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02B2D1996E670E9531E4D5F8 /* Pods_GenieForm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08693DDD7E482BB274EEA11C /* Pods_GenieForm.framework */; };
+		A301E49E293A6CF9E0953A0A /* Pods_GenieFormUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1639BA797CEA9A3A8ECF5A3 /* Pods_GenieFormUITests.framework */; };
+		C7DD3C7A788D04F5F4ECADBA /* Pods_GenieFormTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45D82B0C1B2952BEEA21FFBA /* Pods_GenieFormTests.framework */; };
 		D9703B3F205CDB42004C9C3E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9703B3E205CDB42004C9C3E /* AppDelegate.swift */; };
 		D9703B41205CDB42004C9C3E /* GenieFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9703B40205CDB42004C9C3E /* GenieFormController.swift */; };
 		D9703B44205CDB42004C9C3E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9703B42205CDB42004C9C3E /* Main.storyboard */; };
@@ -36,6 +39,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08693DDD7E482BB274EEA11C /* Pods_GenieForm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GenieForm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DA6C49F7AC04E773DCF7B09 /* Pods-GenieFormTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GenieFormTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GenieFormTests/Pods-GenieFormTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2ED576D94C0BA05A02F54E74 /* Pods-GenieForm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GenieForm.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GenieForm/Pods-GenieForm.debug.xcconfig"; sourceTree = "<group>"; };
+		334B41B5030CF8F8E2C46B41 /* Pods-GenieFormTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GenieFormTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GenieFormTests/Pods-GenieFormTests.release.xcconfig"; sourceTree = "<group>"; };
+		45D82B0C1B2952BEEA21FFBA /* Pods_GenieFormTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GenieFormTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C279EF96429BAF153E73E5E /* Pods-GenieFormUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GenieFormUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GenieFormUITests/Pods-GenieFormUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		A8E3C7DB6BEDFCD31A3F22A8 /* Pods-GenieForm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GenieForm.release.xcconfig"; path = "Pods/Target Support Files/Pods-GenieForm/Pods-GenieForm.release.xcconfig"; sourceTree = "<group>"; };
+		C1639BA797CEA9A3A8ECF5A3 /* Pods_GenieFormUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GenieFormUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C167B39802C55FF494C9C966 /* Pods-GenieFormUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GenieFormUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GenieFormUITests/Pods-GenieFormUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D9703B3B205CDB42004C9C3E /* GenieForm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenieForm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9703B3E205CDB42004C9C3E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9703B40205CDB42004C9C3E /* GenieFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenieFormController.swift; sourceTree = "<group>"; };
@@ -58,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02B2D1996E670E9531E4D5F8 /* Pods_GenieForm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7DD3C7A788D04F5F4ECADBA /* Pods_GenieFormTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,12 +86,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A301E49E293A6CF9E0953A0A /* Pods_GenieFormUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		028206AFC18F8A53C1955B8F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				08693DDD7E482BB274EEA11C /* Pods_GenieForm.framework */,
+				45D82B0C1B2952BEEA21FFBA /* Pods_GenieFormTests.framework */,
+				C1639BA797CEA9A3A8ECF5A3 /* Pods_GenieFormUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		81C15518D7D9A7BD5038C866 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2ED576D94C0BA05A02F54E74 /* Pods-GenieForm.debug.xcconfig */,
+				A8E3C7DB6BEDFCD31A3F22A8 /* Pods-GenieForm.release.xcconfig */,
+				1DA6C49F7AC04E773DCF7B09 /* Pods-GenieFormTests.debug.xcconfig */,
+				334B41B5030CF8F8E2C46B41 /* Pods-GenieFormTests.release.xcconfig */,
+				6C279EF96429BAF153E73E5E /* Pods-GenieFormUITests.debug.xcconfig */,
+				C167B39802C55FF494C9C966 /* Pods-GenieFormUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D9703B32205CDB42004C9C3E = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +123,8 @@
 				D9703B52205CDB42004C9C3E /* GenieFormTests */,
 				D9703B5D205CDB42004C9C3E /* GenieFormUITests */,
 				D9703B3C205CDB42004C9C3E /* Products */,
+				81C15518D7D9A7BD5038C866 /* Pods */,
+				028206AFC18F8A53C1955B8F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -162,9 +202,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D9703B63205CDB42004C9C3E /* Build configuration list for PBXNativeTarget "GenieForm" */;
 			buildPhases = (
+				F33BD47694F4E87D83DF4FE3 /* [CP] Check Pods Manifest.lock */,
 				D9703B37205CDB42004C9C3E /* Sources */,
 				D9703B38205CDB42004C9C3E /* Frameworks */,
 				D9703B39205CDB42004C9C3E /* Resources */,
+				135AEDD810E9514896FD583F /* [CP] Embed Pods Frameworks */,
+				EB2261CF1B20FE53E2A6A05C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -179,9 +222,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D9703B66205CDB42004C9C3E /* Build configuration list for PBXNativeTarget "GenieFormTests" */;
 			buildPhases = (
+				51F9F80671910ADD88629EEF /* [CP] Check Pods Manifest.lock */,
 				D9703B4B205CDB42004C9C3E /* Sources */,
 				D9703B4C205CDB42004C9C3E /* Frameworks */,
 				D9703B4D205CDB42004C9C3E /* Resources */,
+				082EF94B7181DC45104F1380 /* [CP] Embed Pods Frameworks */,
+				8838A5B42CB6740BD97B110B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -197,9 +243,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D9703B69205CDB42004C9C3E /* Build configuration list for PBXNativeTarget "GenieFormUITests" */;
 			buildPhases = (
+				A7BC860915ACF5BE2C70316A /* [CP] Check Pods Manifest.lock */,
 				D9703B56205CDB42004C9C3E /* Sources */,
 				D9703B57205CDB42004C9C3E /* Frameworks */,
 				D9703B58205CDB42004C9C3E /* Resources */,
+				65010D9ED4C3BDEE4F642ECC /* [CP] Embed Pods Frameworks */,
+				488B480100CC6D69F7E30497 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -283,6 +332,156 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		082EF94B7181DC45104F1380 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GenieFormTests/Pods-GenieFormTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		135AEDD810E9514896FD583F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-GenieForm/Pods-GenieForm-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GenieForm/Pods-GenieForm-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		488B480100CC6D69F7E30497 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GenieFormUITests/Pods-GenieFormUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		51F9F80671910ADD88629EEF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GenieFormTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		65010D9ED4C3BDEE4F642ECC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GenieFormUITests/Pods-GenieFormUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8838A5B42CB6740BD97B110B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GenieFormTests/Pods-GenieFormTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A7BC860915ACF5BE2C70316A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GenieFormUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EB2261CF1B20FE53E2A6A05C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GenieForm/Pods-GenieForm-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F33BD47694F4E87D83DF4FE3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GenieForm-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D9703B37205CDB42004C9C3E /* Sources */ = {
@@ -456,6 +655,7 @@
 		};
 		D9703B64205CDB42004C9C3E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2ED576D94C0BA05A02F54E74 /* Pods-GenieForm.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -471,6 +671,7 @@
 		};
 		D9703B65205CDB42004C9C3E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A8E3C7DB6BEDFCD31A3F22A8 /* Pods-GenieForm.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -486,6 +687,7 @@
 		};
 		D9703B67205CDB42004C9C3E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1DA6C49F7AC04E773DCF7B09 /* Pods-GenieFormTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -503,6 +705,7 @@
 		};
 		D9703B68205CDB42004C9C3E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 334B41B5030CF8F8E2C46B41 /* Pods-GenieFormTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -520,6 +723,7 @@
 		};
 		D9703B6A205CDB42004C9C3E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6C279EF96429BAF153E73E5E /* Pods-GenieFormUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -536,6 +740,7 @@
 		};
 		D9703B6B205CDB42004C9C3E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C167B39802C55FF494C9C966 /* Pods-GenieFormUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
