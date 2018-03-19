@@ -19,6 +19,10 @@
 		D9703B71205D05C9004C9C3E /* WMGForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9703B70205D05C9004C9C3E /* WMGForm.swift */; };
 		D9703B74205D149A004C9C3E /* WMGService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9703B73205D149A004C9C3E /* WMGService.swift */; };
 		D9CD9F67205D2DE000B287ED /* GenieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CD9F66205D2DE000B287ED /* GenieViewModel.swift */; };
+		D9F021D3205FA1240092250D /* SelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F021D2205FA1240092250D /* SelectionCell.swift */; };
+		D9F021D6205FA2210092250D /* FormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F021D5205FA2210092250D /* FormField.swift */; };
+		D9F021E3205FB7F10092250D /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F021E2205FB7F10092250D /* UIColorExtensions.swift */; };
+		D9F021E5205FB8BA0092250D /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F021E4205FB8BA0092250D /* AppConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +67,10 @@
 		D9703B70205D05C9004C9C3E /* WMGForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WMGForm.swift; sourceTree = "<group>"; };
 		D9703B73205D149A004C9C3E /* WMGService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WMGService.swift; sourceTree = "<group>"; };
 		D9CD9F66205D2DE000B287ED /* GenieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenieViewModel.swift; sourceTree = "<group>"; };
+		D9F021D2205FA1240092250D /* SelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionCell.swift; sourceTree = "<group>"; };
+		D9F021D5205FA2210092250D /* FormField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormField.swift; sourceTree = "<group>"; };
+		D9F021E2205FB7F10092250D /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		D9F021E4205FB8BA0092250D /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +149,9 @@
 		D9703B3D205CDB42004C9C3E /* GenieForm */ = {
 			isa = PBXGroup;
 			children = (
+				D9F021E1205FB7CA0092250D /* Helper */,
+				D9F021D4205FA1FD0092250D /* FieldFactory */,
+				D9F021D1205FA0C90092250D /* Views */,
 				D9CD9F65205D2DB900B287ED /* GenieViewModel */,
 				D9703B72205D13A7004C9C3E /* APIService */,
 				D9703B6D205CFCF9004C9C3E /* Controller */,
@@ -149,6 +160,7 @@
 				D9703B45205CDB42004C9C3E /* Assets.xcassets */,
 				D9703B47205CDB42004C9C3E /* LaunchScreen.storyboard */,
 				D9703B4A205CDB42004C9C3E /* Info.plist */,
+				D9F021E4205FB8BA0092250D /* AppConstants.swift */,
 			);
 			path = GenieForm;
 			sourceTree = "<group>";
@@ -201,6 +213,30 @@
 				D9CD9F66205D2DE000B287ED /* GenieViewModel.swift */,
 			);
 			path = GenieViewModel;
+			sourceTree = "<group>";
+		};
+		D9F021D1205FA0C90092250D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D9F021D2205FA1240092250D /* SelectionCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D9F021D4205FA1FD0092250D /* FieldFactory */ = {
+			isa = PBXGroup;
+			children = (
+				D9F021D5205FA2210092250D /* FormField.swift */,
+			);
+			path = FieldFactory;
+			sourceTree = "<group>";
+		};
+		D9F021E1205FB7CA0092250D /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				D9F021E2205FB7F10092250D /* UIColorExtensions.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -364,10 +400,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-GenieForm/Pods-GenieForm-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/M13Checkbox/M13Checkbox.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/M13Checkbox.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -497,8 +535,12 @@
 			files = (
 				D9703B41205CDB42004C9C3E /* GenieFormController.swift in Sources */,
 				D9703B71205D05C9004C9C3E /* WMGForm.swift in Sources */,
+				D9F021E3205FB7F10092250D /* UIColorExtensions.swift in Sources */,
 				D9703B3F205CDB42004C9C3E /* AppDelegate.swift in Sources */,
+				D9F021D6205FA2210092250D /* FormField.swift in Sources */,
+				D9F021D3205FA1240092250D /* SelectionCell.swift in Sources */,
 				D9703B74205D149A004C9C3E /* WMGService.swift in Sources */,
+				D9F021E5205FB8BA0092250D /* AppConstants.swift in Sources */,
 				D9CD9F67205D2DE000B287ED /* GenieViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

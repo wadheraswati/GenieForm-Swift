@@ -11,9 +11,9 @@ import UIKit
 class GenieViewModel {
     let apiService : WMGServiceProtocol = WMGService()
     
-    private var Fields : [WMGForm] = [WMGForm]()
+    var Fields : [WMGForm] = [WMGForm]()
     
-    func getFormData() {
+    func getFormData(completion : @escaping (_ success : Bool) -> ()) {
         apiService.fetchGenieForm(url: "form/genie?category_slug=wedding-photographers&city_slug=delhi-ncr", completion: {(success, result) in
             if(success) {
                 let apiResponse = result.value as! NSDictionary
@@ -21,7 +21,6 @@ class GenieViewModel {
                 for form in data {
                     do {
                         let formData = try JSONSerialization.data(withJSONObject: form, options: .prettyPrinted)
-//                        let value = try JSONSerialization.jsonObject(with: formData, options: .allowFragments)
                         let formObject = try JSONDecoder().decode(WMGForm.self, from: formData)
                         self.Fields.append(formObject)
                         print(self.Fields)
@@ -31,6 +30,7 @@ class GenieViewModel {
                     }
                 }
             }
+            completion(success)
         })
     }
 }

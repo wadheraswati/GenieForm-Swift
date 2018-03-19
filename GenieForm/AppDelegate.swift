@@ -19,7 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow.init(frame: UIScreen.main.bounds)
         let viewController = GenieFormController.init(nibName: nil, bundle: nil)
         let navController = UINavigationController.init(rootViewController: viewController)
-        navController.setNavigationBarHidden(true, animated: false)
         self.window!.rootViewController = navController
         self.window!.makeKeyAndVisible()
         
