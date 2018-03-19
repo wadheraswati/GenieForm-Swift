@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import M13Checkbox
 
-class GenieFormController: UIViewController {
+class GenieFormController: UIViewController, UITextFieldDelegate, FormSelectionListDelegate {
     
-    
+
     let cellIdentifier : String = "formCell"
     let viewModel : GenieViewModel = {
         return GenieViewModel()
@@ -30,29 +31,7 @@ class GenieFormController: UIViewController {
         
     }
     
-    @objc func keyboardWillShow(_ notification : NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-                formScroll.frame.size.height -= keyboardSize.height
-            }
-        }
-    
-    @objc func keyboardWillHide(_ notification : NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            formScroll.frame.size.height += keyboardSize.height
-        }
-    }
-    
-    
-    func initAPIData() {
-        viewModel.getFormData(completion: {(success) in
-            if(self.viewModel.Fields.count > 0) {
-                self.initView()
-                self.createFormUI()
-            }
-        })
-        
-    }
-    
+    // MARK: - INIT Methods -
     func initView() {
         
         let submitBtn = UIButton(type: .custom)
@@ -68,8 +47,83 @@ class GenieFormController: UIViewController {
         self.view.addSubview(formScroll)
     }
     
+    func initAPIData() {
+        viewModel.getFormData(completion: {(success) in
+            if(self.viewModel.Fields.count > 0) {
+                self.initView()
+                self.createFormUI()
+            }
+        })
+        
+    }
+    
+    // MARK: - Keyboard Notifications -
+    @objc func keyboardWillShow(_ notification : NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+                formScroll.frame.size.height -= keyboardSize.height
+            }
+        }
+    
+    @objc func keyboardWillHide(_ notification : NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            formScroll.frame.size.height += keyboardSize.height
+        }
+    }
+    
+    //MARK: - UITextFieldDelegateMethods -
+    
+    public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        let formObj = self.viewModel.Fields[textField.tag - 1]
+        var allow = true
+        switch formObj.type {
+        case .DatePicker, .TimePicker, .DateTimePicker, .MultiSelect, .SingleSelect:
+            allow = false
+        default:
+            allow = true
+        }
+        
+        switch formObj.type {
+        case .DatePicker:
+                let view = textField.superview as? FormDatepicker
+                view?.showDatePickerInView(self.view)
+        case .MultiSelect, .SingleSelect:
+                let view = textField.superview as? FormSelectionList
+                view?.showSelectionView(self.view)
+        default:
+            print("do nothing")
+        }
+        
+        return allow
+    }
+    
+    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if string == "\n" {
+            textField.resignFirstResponder()
+            return false
+        }
+        return true
+    }
+    
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    public func textFieldDidEndEditing(_ textField: UITextField) {
+        
+    }
+    
+    //MARK: - Actions -
     @objc func submitBtnClicked() {
         
+    }
+    
+    func checkboxStateChanged(_ checkbox: M13Checkbox) {
+        print("checkbox state is \(checkbox.checkState)")
+    }
+    
+    func completedSelection(_ values: [Options]) {
+        print("selected options - \(values)")
     }
     
     func createFormUI() {
@@ -77,55 +131,74 @@ class GenieFormController: UIViewController {
         var y : CGFloat = 0.0
         let width : CGFloat = self.view.bounds.size.width
         let height : CGFloat = 50.0
+        var tag : Int = 0
         for form in viewModel.Fields {
-            
+            tag += 1
             switch form.type {
             case .TextField:
                 let fieldFrame = CGRect(x: 0.0, y: y, width: width, height: height)
                 let currentTF : FormTextField = FormTextField(frame: fieldFrame)
+                currentTF.fieldTF.delegate = self
+                currentTF.fieldTF.tag = tag
                 currentTF.fieldTF.placeholder = form.display_name
                 formScroll.addSubview(currentTF)
             case .Email:
                 let fieldFrame = CGRect(x: 0.0, y: y, width: width, height: height)
                 let currentTF : FormEmail = FormEmail(frame: fieldFrame)
                 currentTF.fieldTF.placeholder = form.display_name
+                currentTF.fieldTF.delegate = self
+                currentTF.fieldTF.tag = tag
                 formScroll.addSubview(currentTF)
             case .MobileNumber:
                 let fieldFrame = CGRect(x: 0.0, y: y, width: width, height: height)
                 let currentTF : FormMobileNumber = FormMobileNumber(frame: fieldFrame)
                 currentTF.fieldTF.placeholder = form.display_name
+                currentTF.fieldTF.delegate = self
+                currentTF.fieldTF.tag = tag
                 formScroll.addSubview(currentTF)
             case .DatePicker:
                 let fieldFrame = CGRect(x: 0.0, y: y, width: width, height: height)
                 let currentTF : FormDatepicker = FormDatepicker(frame: fieldFrame)
                 currentTF.datePicker.datePickerMode = .date
+                currentTF.fieldTF.delegate = self
+                currentTF.fieldTF.tag = tag
                 currentTF.fieldTF.placeholder = form.display_name
                 formScroll.addSubview(currentTF)
             case .TimePicker:
                 let fieldFrame = CGRect(x: 0.0, y: y, width: width, height: height)
                 let currentTF : FormDatepicker = FormDatepicker(frame: fieldFrame)
                 currentTF.datePicker.datePickerMode = .time
+                currentTF.fieldTF.delegate = self
+                currentTF.fieldTF.tag = tag
                 currentTF.fieldTF.placeholder = form.display_name
                 formScroll.addSubview(currentTF)
             case .DateTimePicker:
                 let fieldFrame = CGRect(x: 0.0, y: y, width: width, height: height)
                 let currentTF : FormDatepicker = FormDatepicker(frame: fieldFrame)
                 currentTF.datePicker.datePickerMode = .dateAndTime
+                currentTF.fieldTF.delegate = self
+                currentTF.fieldTF.tag = tag
                 currentTF.fieldTF.placeholder = form.display_name
                 formScroll.addSubview(currentTF)
             case .SingleSelect:
                 let fieldFrame = CGRect(x: 0.0, y: y, width: width, height: height)
                 let currentTF : FormSelectionList = FormSelectionList(frame: fieldFrame)
                 currentTF.multiSelect = false
+                currentTF.fieldTF.tag = tag
+                currentTF.fieldTF.delegate = self
                 currentTF.values = form.options!
                 currentTF.fieldTF.placeholder = form.display_name
+                currentTF.delegate = self
                 formScroll.addSubview(currentTF)
             case .MultiSelect:
                 let fieldFrame = CGRect(x: 0.0, y: y, width: width, height: height)
                 let currentTF : FormSelectionList = FormSelectionList(frame: fieldFrame)
                 currentTF.multiSelect = true
+                currentTF.fieldTF.tag = tag
+                currentTF.fieldTF.delegate = self
                 currentTF.values = form.options!
                 currentTF.fieldTF.placeholder = form.display_name
+                currentTF.delegate = self
                 formScroll.addSubview(currentTF)
             default:
                 print("add nothing")
