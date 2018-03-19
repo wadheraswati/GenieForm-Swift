@@ -8,51 +8,53 @@
 
 import Foundation
 
-enum FormType : String, Codable {
-    case TextField
-    case Email
-    case MobileNumber
-    case DatePicker
-    case TimePicker
-    case DateTimePicker
-    case Checkbox
-    case RadioButton
-    case SingleSelect
-    case MultiSelect
-    case FilePicker
-    case Range
-    case TextBox
-    case Dropdown
-    case Label
+enum FieldType : Int, Codable {
+    case TextField = 1
+    case Email = 2
+    case MobileNumber = 3
+    case DatePicker = 4
+    case TimePicker = 5
+    case DateTimePicker = 6
+    case Checkbox = 7
+    case RadioButton = 8
+    case SingleSelect = 9
+    case MultiSelect = 10
+    case FilePicker = 11
+    case Range = 12
+    case Toggle = 13
+    case TextBox = 14
+    case Dropdown = 15
+    case Label = 16
 }
 
 struct WMGForm : Codable {
-    let id : Int
-    let name : String
-    let displayName : String
-    let type : FormType
-    let subtype : Int
-    let placeholder : String
-    let options : [Options]
-    let required : Bool
-    let validation : [Validation]
-    let isValid :Bool
+    var id : Int
+    var name : String
+    var display_name : String
+    var type : FieldType
+    var subtype : FieldType
+    var placeholder : String?
+    var options : [Options]?
+    var required : Int
+    var validation : [Validation]?
+    var isValid : Bool? = false
+    
 }
 
 struct Validation : Codable {
-    let error : String
-    let min_length : Int
-    let max_length : Int
-    let min_value : Int
-    let max_value : Int
-    let step_size : Int
-    let text : Int
+    var error : String
+    var min_length : Int
+    var max_length : Int
+    var min_value : Int
+    var max_value : Int
+    var step_size : Int
+    var text : Int
 }
 
 struct Options : Codable {
-    let id : Int
-    let display_name : String
-    let name : String
+    var id : Int
+    var display_name : String
+    var name : String
 }
 
 

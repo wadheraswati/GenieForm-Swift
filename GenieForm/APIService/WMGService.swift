@@ -15,13 +15,8 @@ protocol WMGServiceProtocol {
 
 class WMGService : WMGServiceProtocol {
     
-    let baseURL : String = "https://developmentwow.wedmegood.com/api/"
-    /*
-     func hardProcessingWithString(input: String, completion: (result: String) -> Void) {
-     ...
-     completion("we finished!")
-     }
- */
+    let baseURL : String = "https://developmentwow.wedmegood.com/api/v1/"
+    
     func fetchGenieForm(url : String, completion : @escaping (_ success : Bool, _ response : Result<Any>) -> ())
     {
         let apiURL = URL(string: baseURL + url)
@@ -39,18 +34,6 @@ class WMGService : WMGServiceProtocol {
             else {
                 completion(false, response.result)
             }
-            }
-        
-            
-//            .responseJSON { response in
-//                print(response.request)  // original URL request
-//                print(response.response) // URL response
-//                print(response.data)     // server data
-//                print(response.result)   // result of response serialization
-//
-//                if let JSON = response.result.value {
-//                    print("JSON: \(JSON)")
-//                }
-//        }
+        }
     }
 }
