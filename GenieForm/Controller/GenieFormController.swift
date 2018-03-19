@@ -9,17 +9,31 @@
 import UIKit
 
 class GenieFormController: UIViewController {
-
+    
+    let viewModel : GenieViewModel = {
+        return GenieViewModel()
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    
+        initAPIData()
+        
+        initView()
     }
-
+    
+    func initAPIData() {
+        viewModel.getFormData()
+    }
+    
+    func initView() {
+        
+    }
+        
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
 
 }
 
