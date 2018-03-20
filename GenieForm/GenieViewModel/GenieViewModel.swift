@@ -14,7 +14,7 @@ class GenieViewModel {
     var Fields : [WMGForm] = [WMGForm]()
     
     func getFormData(completion : @escaping (_ success : Bool) -> ()) {
-        apiService.GETAPI(url: "form/genie?category_slug=bridal-makeup&city_slug=delhi-ncr", completion: {(success, result) in
+        apiService.GETAPI(url: "form/genie?category_slug=wedding-venues&city_slug=delhi-ncr", completion: {(success, result) in
             if(success) {
                 let apiResponse = result.value as! NSDictionary
                 let data = apiResponse.value(forKey: "data") as! NSArray
@@ -35,7 +35,7 @@ class GenieViewModel {
     }
     
     func postFormData(_ params : [String : AnyObject], completion : @escaping (_ success : Bool) -> ()) {
-        apiService.POSTAPI(url : "booking-lead/add?version=1.1&token=5aaf67d3973bf4.63432396&city_slug=delhi-ncr&category_slug=bridal-makeup", parameters: params, completion : {(success, result) in
+        apiService.POSTAPI(url : "booking-lead/add?version=1.1&token=5aaf67d3973bf4.63432396&city_slug=delhi-ncr&category_slug=wedding-venues", parameters: params, completion : {(success, result) in
             if(success) {
                 print("api success")
             } else { print("api failure") }

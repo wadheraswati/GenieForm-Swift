@@ -23,6 +23,7 @@ class SelectionCell: UITableViewCell {
         checkbox.tintColor = AppConstants.primaryRedColor
         checkbox.secondaryTintColor = AppConstants.primaryBlackColor
         checkbox.checkmarkLineWidth = 3
+        checkbox.stateChangeAnimation = M13Checkbox.Animation.fill
         self.addSubview(checkbox)
         
         titleLbl.frame = CGRect(x: checkbox.frame.origin.x + checkbox.frame.size.width + 10, y: 5, width: self.bounds.size.width - 50, height: 30)

@@ -210,6 +210,10 @@ class FormSelectionList: UIView, UITableViewDataSource, UITableViewDelegate, UIG
         view.window?.addSubview(darkView)
         
         tableView.frame = CGRect(x: 0.0, y: darkView.bounds.size.height - CGFloat(self.values.count * 40), width: darkView.bounds.size.width, height: CGFloat(self.values.count * 40))
+        if(tableView.frame.origin.y < view.bounds.size.height/2) { // checking so that tableview does not go out of bounds
+            tableView.frame.origin.y = darkView.bounds.size.height - (view.bounds.size.height/2)
+            tableView.frame.size.height = view.bounds.size.height/2
+        }
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(SelectionCell.self, forCellReuseIdentifier: self.selectionCellIdentifier)
