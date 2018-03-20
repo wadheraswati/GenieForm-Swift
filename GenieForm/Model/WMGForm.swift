@@ -77,7 +77,7 @@ struct WMGForm : Codable {
 struct Validation : Codable {
     var id : Int
     var error : String
-    var reg_ex : String
+    var reg_ex : String?
     var min_length : Int?
     var max_length : Int?
     var min_value : Int?

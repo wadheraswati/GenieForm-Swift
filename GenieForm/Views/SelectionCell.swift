@@ -19,12 +19,15 @@ class SelectionCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        checkbox.frame = CGRect(x: 5, y: 5, width: 25, height: 25)
+        checkbox.frame = CGRect(x: 5, y: 7.5, width: 25, height: 25)
+        checkbox.tintColor = AppConstants.primaryRedColor
+        checkbox.secondaryTintColor = AppConstants.primaryBlackColor
+        checkbox.checkmarkLineWidth = 3
         self.addSubview(checkbox)
         
         titleLbl.frame = CGRect(x: checkbox.frame.origin.x + checkbox.frame.size.width + 10, y: 5, width: self.bounds.size.width - 50, height: 30)
         titleLbl.textColor = AppConstants.primaryBlackColor
-        titleLbl.font = UIFont.systemFont(ofSize: 15)
+        titleLbl.font = UIFont.systemFont(ofSize: 16)
         titleLbl.textAlignment = .left
         titleLbl.numberOfLines = 1
         titleLbl.lineBreakMode = .byTruncatingTail
@@ -44,8 +47,8 @@ class SelectionCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        checkbox.frame = CGRect(x: 5, y: 5, width: multiselect ? 25 : 0, height: multiselect ? 25 : 0)
-        checkbox.isHidden = !multiselect
+        checkbox.frame = CGRect(x: 5, y: 7.5, width: multiselect ? 25 : 0, height: multiselect ? 25 : 0)
+        checkbox.hideBox = !multiselect
         titleLbl.frame = CGRect(x: checkbox.frame.origin.x + checkbox.frame.size.width + 10, y: 5, width: self.bounds.size.width - (checkbox.frame.origin.x + checkbox.frame.size.width + 20), height: 30)
 
         

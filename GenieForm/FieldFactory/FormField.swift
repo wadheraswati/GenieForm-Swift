@@ -157,7 +157,7 @@ class FormDatepicker: UIView {
 
 protocol FormSelectionListDelegate: class {
     func checkboxStateChanged(_ checkbox : M13Checkbox)
-    func completedSelection(_ values : [Options])
+    func completedSelection(_ values: [Options], _ textField : UITextField)
 }
 
 class FormSelectionList: UIView, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate {
@@ -259,13 +259,19 @@ class FormSelectionList: UIView, UITableViewDataSource, UITableViewDelegate, UIG
             let finalStr = valueStr.prefix(valueStr.count - 2)
             self.fieldTF.text = String(finalStr)
         }
-        delegate?.completedSelection(selectedValues)
+        delegate?.completedSelection(selectedValues, fieldTF)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: self.selectionCellIdentifier, for: indexPath) as! SelectionCell
         cell.titleLbl.text = self.values[indexPath.row].display_name
+        if(cell.titleLbl.text == self.fieldTF.text || cell.checkbox.checkState == M13Checkbox.CheckState.checked) {
+            cell.titleLbl.textColor = AppConstants.primaryRedColor
+        } else {
+            cell.titleLbl.textColor = AppConstants.primaryBlackColor
+        }
+        
         cell.multiselect = self.multiSelect
         cell.checkbox.isUserInteractionEnabled = false
         //cell.checkbox.addTarget(self, action: Selector("checkboxTapped:"), for: UIControlEvents.touchUpInside)
@@ -287,7 +293,11 @@ class FormSelectionList: UIView, UITableViewDataSource, UITableViewDelegate, UIG
         let cell = tableView.cellForRow(at: indexPath) as? SelectionCell
         if(multiSelect) {
             cell?.checkbox.toggleCheckState()
-            //delegate?.checkboxStateChanged(cell?.checkbox)
+            if(cell?.checkbox.checkState == M13Checkbox.CheckState.checked) {
+                cell?.titleLbl.textColor = AppConstants.primaryRedColor
+            } else {
+                cell?.titleLbl.textColor = AppConstants.primaryBlackColor
+            }
         } else {
             fieldTF.text = cell?.titleLbl.text
             self.dismissSelector(cell!)

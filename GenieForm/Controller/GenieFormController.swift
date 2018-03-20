@@ -17,6 +17,8 @@ class GenieFormController: UIViewController, UITextFieldDelegate, FormSelectionL
         return GenieViewModel()
     }()
     
+    var apiParams : [String : String] = [:]
+    
     var formScroll : UIScrollView = UIScrollView()
     
     override func viewDidLoad() {
@@ -116,14 +118,84 @@ class GenieFormController: UIViewController, UITextFieldDelegate, FormSelectionL
     //MARK: - Actions -
     @objc func submitBtnClicked() {
         
+        if validate() {
+            print("success")
+        } else {
+            print("failure")
+        }
+        
+       
     }
+    
+    func validate() ->Bool{
+        var tag = 0
+        for field in viewModel.Fields {
+            tag += 1
+            let textField : UITextField = formScroll.viewWithTag(tag) as! UITextField
+            if(field.required == 1) {
+                if(field.validation != nil) {
+                    if !checkFieldForValidations(textField, field.validation!) {
+                        return false
+                    }
+                }
+            }
+        }
+        
+        return true
+    }
+    
+    func checkFieldForValidations(_ textField : UITextField, _ validations : [Validation]) -> Bool {
+        for validation in validations {
+            if(validation.reg_ex != nil) {
+                do {
+                    let pass = try validateRegex(validation.reg_ex!, textField)
+                    if !pass {
+                        UIView.animate(withDuration: 0.15, animations: { () -> Void in
+                            textField.backgroundColor = AppConstants.validationErrorColor
+                        }, completion: { (finished) -> Void in
+                            // ....
+                            UIView.animate(withDuration: 0.15, delay: 1.0, options: .curveEaseOut, animations: {() -> Void in
+                                textField.backgroundColor = AppConstants.invisibleLightColor
+                            }, completion: nil)
+                        })
+                        self.showAlertWithMessage(validation.error)
+                        return false
+                    }
+                } catch {
+                    print("catched error")
+                    return true
+                }
+            }
+        }
+        return true
+    }
+    
+    func validateRegex(_ regex : String, _ textField : UITextField) throws -> Bool {
+        let testRegex = try NSRegularExpression(pattern: regex, options: [.caseInsensitive])
+        let test = NSPredicate(format:"SELF MATCHES %@", regex)
+        return test.evaluate(with: textField.text)
+    }
+    
+    func showAlertWithMessage(_ msg : String) {
+        let alert = UIAlertController.init(title: "WMG Genie", message: msg, preferredStyle: .alert)
+        alert.addAction(UIAlertAction.init(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
     
     func checkboxStateChanged(_ checkbox: M13Checkbox) {
         print("checkbox state is \(checkbox.checkState)")
     }
     
-    func completedSelection(_ values: [Options]) {
+    func completedSelection(_ values: [Options], _ textField : UITextField) {
         print("selected options - \(values)")
+        var index = 0
+        for option in values{
+            let key : String =  String.init(format: "%@[%d]", viewModel.Fields[textField.tag].name, index)
+            apiParams[key] = option.name
+            index += 1
+        }
     }
     
     func createFormUI() {
