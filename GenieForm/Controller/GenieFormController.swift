@@ -17,7 +17,7 @@ class GenieFormController: UIViewController, UITextFieldDelegate, FormSelectionL
         return GenieViewModel()
     }()
     
-    var apiParams : [String : String] = [:]
+    var apiParams : [String : AnyObject] = [:]
     
     var formScroll : UIScrollView = UIScrollView()
     
@@ -115,18 +115,8 @@ class GenieFormController: UIViewController, UITextFieldDelegate, FormSelectionL
         
     }
     
-    //MARK: - Actions -
-    @objc func submitBtnClicked() {
-        
-        if validate() {
-            print("success")
-        } else {
-            print("failure")
-        }
-        
-       
-    }
-    
+    //MARK: - Validation Methods -
+
     func validate() ->Bool{
         var tag = 0
         for field in viewModel.Fields {
@@ -191,22 +181,58 @@ class GenieFormController: UIViewController, UITextFieldDelegate, FormSelectionL
         self.present(alert, animated: true, completion: nil)
     }
     
+    //MARK: - Actions -
     
-    
-    func checkboxStateChanged(_ checkbox: M13Checkbox) {
-        print("checkbox state is \(checkbox.checkState)")
+    @objc func submitBtnClicked() {
+        
+        if validate() {
+            setParams()
+            viewModel.postFormData(apiParams, completion: {(success) in
+                
+            })
+            print("success")
+        } else {
+            print("failure")
+        }
+        
+        
     }
     
+    func setParams() {
+        var tag = 0
+        for field in viewModel.Fields {
+            tag += 1
+            let textField = formScroll.viewWithTag(tag) as! UITextField
+            switch field.type {
+            case .TextField, .MobileNumber, .Email, .DatePicker, .TimePicker, .DateTimePicker:
+                apiParams[field.name] = textField.text as AnyObject
+            default:
+                print("default")
+            }
+        }
+    }
+    
+    // MARK - FormSelectionListDelegate Methods -
     func completedSelection(_ values: [Options], _ textField : UITextField) {
         print("selected options - \(values)")
         var index = 0
         for option in values{
-            let key : String =  String.init(format: "%@[%d]", viewModel.Fields[textField.tag].name, index)
-            apiParams[key] = option.name
+            let key : String =  String.init(format: "%@[%d]", viewModel.Fields[textField.tag - 1].name, index)
+            apiParams[key] = option.name as AnyObject
             index += 1
         }
     }
     
+    func selectedValue(_ textField : UITextField) {
+        let field : WMGForm = viewModel.Fields[textField.tag - 1]
+        for value in field.options! {
+            if value.display_name == textField.text {
+                apiParams[field.name] = value.name as AnyObject
+            }
+        }
+    }
+    
+    // MARK - UI Methods -
     func createFormUI() {
         
         var y : CGFloat = 0.0

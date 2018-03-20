@@ -10,19 +10,38 @@ import Foundation
 import Alamofire
 
 protocol WMGServiceProtocol {
-     func fetchGenieForm(url : String, completion : @escaping (_ success : Bool, _ response : Result<Any>) -> ())
+     func GETAPI(url : String, completion : @escaping (_ success : Bool, _ response : Result<Any>) -> ())
+    func POSTAPI(url : String, parameters : [String : AnyObject], completion : @escaping (_ success : Bool, _ response : Result<Any>) -> ())
 }
 
 class WMGService : WMGServiceProtocol {
     
     let baseURL : String = "https://developmentwow.wedmegood.com/api/v1/"
     
-    func fetchGenieForm(url : String, completion : @escaping (_ success : Bool, _ response : Result<Any>) -> ())
+    func GETAPI(url : String, completion : @escaping (_ success : Bool, _ response : Result<Any>) -> ())
     {
         let apiURL = URL(string: baseURL + url)
         let request = Alamofire.request(apiURL!,
                                         method: .get,
                                         parameters: nil)
+        request.validate().responseJSON {response in
+            if let result = response.result.value {
+                let JSON = result as! NSDictionary
+                print(JSON)
+            }
+            if response.response?.statusCode == 200 {
+                completion(true, response.result)
+            }
+            else {
+                completion(false, response.result)
+            }
+        }
+    }
+    
+    func POSTAPI(url : String, parameters : [String : AnyObject], completion : @escaping (_ success : Bool, _ response : Result<Any>) -> ())
+    {
+        let apiURL = URL(string: baseURL + url)
+        let request = Alamofire.request(apiURL!, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil)
         request.validate().responseJSON {response in
             if let result = response.result.value {
                 let JSON = result as! NSDictionary

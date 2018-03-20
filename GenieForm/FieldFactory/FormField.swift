@@ -156,8 +156,8 @@ class FormDatepicker: UIView {
 }
 
 protocol FormSelectionListDelegate: class {
-    func checkboxStateChanged(_ checkbox : M13Checkbox)
     func completedSelection(_ values: [Options], _ textField : UITextField)
+    func selectedValue(_ textField : UITextField)
 }
 
 class FormSelectionList: UIView, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate {
@@ -300,6 +300,7 @@ class FormSelectionList: UIView, UITableViewDataSource, UITableViewDelegate, UIG
             }
         } else {
             fieldTF.text = cell?.titleLbl.text
+            delegate?.selectedValue(fieldTF)
             self.dismissSelector(cell!)
         }
     }
