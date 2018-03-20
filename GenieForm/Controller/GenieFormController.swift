@@ -133,6 +133,10 @@ class GenieFormController: UIViewController, UITextFieldDelegate, FormSelectionL
             tag += 1
             let textField : UITextField = formScroll.viewWithTag(tag) as! UITextField
             if(field.required == 1) {
+                if textField.text?.count == 0 {
+                    highlightTextField(textField)
+                    return false
+                }
                 if(field.validation != nil) {
                     if !checkFieldForValidations(textField, field.validation!) {
                         return false
@@ -145,19 +149,13 @@ class GenieFormController: UIViewController, UITextFieldDelegate, FormSelectionL
     }
     
     func checkFieldForValidations(_ textField : UITextField, _ validations : [Validation]) -> Bool {
+        
         for validation in validations {
             if(validation.reg_ex != nil) {
                 do {
                     let pass = try validateRegex(validation.reg_ex!, textField)
                     if !pass {
-                        UIView.animate(withDuration: 0.15, animations: { () -> Void in
-                            textField.backgroundColor = AppConstants.validationErrorColor
-                        }, completion: { (finished) -> Void in
-                            // ....
-                            UIView.animate(withDuration: 0.15, delay: 1.0, options: .curveEaseOut, animations: {() -> Void in
-                                textField.backgroundColor = AppConstants.invisibleLightColor
-                            }, completion: nil)
-                        })
+                        highlightTextField(textField)
                         self.showAlertWithMessage(validation.error)
                         return false
                     }
@@ -168,6 +166,17 @@ class GenieFormController: UIViewController, UITextFieldDelegate, FormSelectionL
             }
         }
         return true
+    }
+    
+    func highlightTextField(_ textField : UITextField) {
+        UIView.animate(withDuration: 0.15, animations: { () -> Void in
+            textField.backgroundColor = AppConstants.validationErrorColor
+        }, completion: { (finished) -> Void in
+            // ....
+            UIView.animate(withDuration: 0.15, delay: 1.0, options: .curveEaseOut, animations: {() -> Void in
+                textField.backgroundColor = AppConstants.invisibleLightColor
+            }, completion: nil)
+        })
     }
     
     func validateRegex(_ regex : String, _ textField : UITextField) throws -> Bool {
