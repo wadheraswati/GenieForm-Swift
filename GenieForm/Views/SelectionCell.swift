@@ -20,14 +20,14 @@ class SelectionCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         checkbox.frame = CGRect(x: 5, y: 7.5, width: 25, height: 25)
-        checkbox.tintColor = AppConstants.primaryRedColor
-        checkbox.secondaryTintColor = AppConstants.primaryBlackColor
+        checkbox.tintColor = AppColor.primaryRedColor
+        checkbox.secondaryTintColor = AppColor.primaryBlackColor
         checkbox.checkmarkLineWidth = 3
         checkbox.stateChangeAnimation = M13Checkbox.Animation.fill
         self.addSubview(checkbox)
         
         titleLbl.frame = CGRect(x: checkbox.frame.origin.x + checkbox.frame.size.width + 10, y: 5, width: self.bounds.size.width - 50, height: 30)
-        titleLbl.textColor = AppConstants.primaryBlackColor
+        titleLbl.textColor = AppColor.primaryBlackColor
         titleLbl.font = UIFont.systemFont(ofSize: 16)
         titleLbl.textAlignment = .left
         titleLbl.numberOfLines = 1

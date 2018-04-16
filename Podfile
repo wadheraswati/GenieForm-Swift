@@ -6,6 +6,8 @@ target 'GenieForm' do
   use_frameworks!
   pod 'Alamofire', '~> 4.7'
   pod 'M13Checkbox'
+  pod 'AlamofireImage', '~> 3.3'
+
 
 
   # Pods for GenieForm

@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         self.window = UIWindow.init(frame: UIScreen.main.bounds)
-        let viewController = GenieFormController.init(nibName: nil, bundle: nil)
+        let viewController = ProfileController.init(nibName: nil, bundle: nil)
         let navController = UINavigationController.init(rootViewController: viewController)
         self.window!.rootViewController = navController
         self.window!.makeKeyAndVisible()

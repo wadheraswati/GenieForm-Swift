@@ -24,7 +24,7 @@ class GenieFormController: UIViewController, UITextFieldDelegate, FormSelectionL
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        self.view.backgroundColor = AppConstants.secondaryWhiteColor
+        self.view.backgroundColor = AppColor.secondaryWhiteColor
         self.navigationItem.title = "WMG Genie"
         initAPIData()
         
@@ -40,7 +40,7 @@ class GenieFormController: UIViewController, UITextFieldDelegate, FormSelectionL
         submitBtn.setTitle("SUBMIT", for: UIControlState.normal)
         submitBtn.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         submitBtn.frame = CGRect(x: 0, y: self.view.bounds.size.height - 40, width: self.view.bounds.size.width, height: 40)
-        submitBtn.backgroundColor = AppConstants.primaryRedColor
+        submitBtn.backgroundColor = AppColor.primaryRedColor
         submitBtn.addTarget(self, action: #selector(submitBtnClicked), for: UIControlEvents.touchUpInside)
         self.view.addSubview(submitBtn)
         
@@ -160,11 +160,11 @@ class GenieFormController: UIViewController, UITextFieldDelegate, FormSelectionL
     
     func highlightTextField(_ textField : UITextField) {
         UIView.animate(withDuration: 0.15, animations: { () -> Void in
-            textField.backgroundColor = AppConstants.validationErrorColor
+            textField.backgroundColor = AppColor.validationErrorColor
         }, completion: { (finished) -> Void in
             // ....
             UIView.animate(withDuration: 0.15, delay: 1.0, options: .curveEaseOut, animations: {() -> Void in
-                textField.backgroundColor = AppConstants.invisibleLightColor
+                textField.backgroundColor = AppColor.invisibleLightColor
             }, completion: nil)
         })
     }

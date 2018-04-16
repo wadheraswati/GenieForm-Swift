@@ -20,7 +20,7 @@ class FormTextField: UIView {
         fieldTF.textColor = .black
         fieldTF.textAlignment = .left
         fieldTF.keyboardType = .default
-        fieldTF.layer.borderColor = AppConstants.textFieldBorderColor.cgColor
+        fieldTF.layer.borderColor = AppColor.textFieldBorderColor.cgColor
         fieldTF.layer.borderWidth = 1
         let view = UIView()
         view.frame = CGRect(x: 0, y: 0, width: 5, height: 5)
@@ -44,7 +44,7 @@ class FormMobileNumber: UIView {
         fieldTF.font = UIFont.systemFont(ofSize: 15)
         fieldTF.textColor = .black
         fieldTF.textAlignment = .left
-        fieldTF.layer.borderColor = AppConstants.textFieldBorderColor.cgColor
+        fieldTF.layer.borderColor = AppColor.textFieldBorderColor.cgColor
         fieldTF.layer.borderWidth = 1
         fieldTF.keyboardType = .numbersAndPunctuation
         let view = UIView()
@@ -70,7 +70,7 @@ class FormEmail: UIView {
         fieldTF.textColor = .black
         fieldTF.textAlignment = .left
         fieldTF.keyboardType = .emailAddress
-        fieldTF.layer.borderColor = AppConstants.textFieldBorderColor.cgColor
+        fieldTF.layer.borderColor = AppColor.textFieldBorderColor.cgColor
         fieldTF.layer.borderWidth = 1
         let view = UIView()
         view.frame = CGRect(x: 0, y: 0, width: 5, height: 5)
@@ -97,7 +97,7 @@ class FormDatepicker: UIView {
         fieldTF.textColor = .black
         fieldTF.textAlignment = .left
         fieldTF.keyboardType = .default
-        fieldTF.layer.borderColor = AppConstants.textFieldBorderColor.cgColor
+        fieldTF.layer.borderColor = AppColor.textFieldBorderColor.cgColor
         fieldTF.layer.borderWidth = 1
         let view = UIView()
         view.frame = CGRect(x: 0, y: 0, width: 5, height: 5)
@@ -124,7 +124,7 @@ class FormDatepicker: UIView {
         view.window?.addSubview(darkView)
         
         datePicker.minimumDate = NSDate() as Date
-        datePicker.backgroundColor = AppConstants.secondaryWhiteColor
+        datePicker.backgroundColor = AppColor.secondaryWhiteColor
         datePicker.frame = CGRect(x: 0, y: darkView.bounds.size.height - 216, width: view.bounds.size.width, height: datePicker.frame.size.height)
         darkView.addSubview(datePicker)
         
@@ -133,7 +133,7 @@ class FormDatepicker: UIView {
         toolBar.isTranslucent = true
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(setDate(_:)))
-        doneBtn.tintColor = AppConstants.primaryRedColor
+        doneBtn.tintColor = AppColor.primaryRedColor
         toolBar.items = [spacer, doneBtn, spacer]
         darkView.addSubview(toolBar)
         darkView.alpha = 1
@@ -180,7 +180,7 @@ class FormSelectionList: UIView, UITableViewDataSource, UITableViewDelegate, UIG
         fieldTF.font = UIFont.systemFont(ofSize: 15)
         fieldTF.textColor = .black
         fieldTF.textAlignment = .left
-        fieldTF.layer.borderColor = AppConstants.textFieldBorderColor.cgColor
+        fieldTF.layer.borderColor = AppColor.textFieldBorderColor.cgColor
         fieldTF.layer.borderWidth = 1
         let view = UIView()
         view.frame = CGRect(x: 0, y: 0, width: 5, height: 5)
@@ -224,7 +224,7 @@ class FormSelectionList: UIView, UITableViewDataSource, UITableViewDelegate, UIG
         toolBar.isTranslucent = true
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(finishedSelection(_:)))
-        doneBtn.tintColor = AppConstants.primaryRedColor
+        doneBtn.tintColor = AppColor.primaryRedColor
         toolBar.items = [spacer, doneBtn, spacer]
         if(multiSelect) {darkView.addSubview(toolBar)}
         darkView.alpha = 1
@@ -271,9 +271,9 @@ class FormSelectionList: UIView, UITableViewDataSource, UITableViewDelegate, UIG
         let cell = tableView.dequeueReusableCell(withIdentifier: self.selectionCellIdentifier, for: indexPath) as! SelectionCell
         cell.titleLbl.text = self.values[indexPath.row].display_name
         if(cell.titleLbl.text == self.fieldTF.text || cell.checkbox.checkState == M13Checkbox.CheckState.checked) {
-            cell.titleLbl.textColor = AppConstants.primaryRedColor
+            cell.titleLbl.textColor = AppColor.primaryRedColor
         } else {
-            cell.titleLbl.textColor = AppConstants.primaryBlackColor
+            cell.titleLbl.textColor = AppColor.primaryBlackColor
         }
         
         cell.multiselect = self.multiSelect
@@ -298,9 +298,9 @@ class FormSelectionList: UIView, UITableViewDataSource, UITableViewDelegate, UIG
         if(multiSelect) {
             cell?.checkbox.toggleCheckState()
             if(cell?.checkbox.checkState == M13Checkbox.CheckState.checked) {
-                cell?.titleLbl.textColor = AppConstants.primaryRedColor
+                cell?.titleLbl.textColor = AppColor.primaryRedColor
             } else {
-                cell?.titleLbl.textColor = AppConstants.primaryBlackColor
+                cell?.titleLbl.textColor = AppColor.primaryBlackColor
             }
         } else {
             fieldTF.text = cell?.titleLbl.text
