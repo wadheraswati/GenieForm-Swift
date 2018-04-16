@@ -11,7 +11,8 @@ import UIKit
 
 struct AppColor {
     static let primaryRedColor = UIColor(rgb : 0x673ab7)
-    static let primaryCreamColor = UIColor(rgb : 0x673ab7)
+    static let primaryCreamColor = UIColor(red: 244.0/255.0, green: 235.0/255.0, blue: 202.0/255.0, alpha: 1.0)
+
     static let primaryGreenColor = UIColor(red: 39.0/255.0, green: 174.0/255.0, blue: 96.0/255.0, alpha: 1.0)
     
     static let primaryWhiteColor = UIColor(red: 189.0/255.0, green: 195.0/255.0, blue: 199.0/255.0, alpha: 1.0)

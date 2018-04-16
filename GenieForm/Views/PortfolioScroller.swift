@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class PortfolioScroller: UIScrollView {
 
@@ -19,17 +20,13 @@ class PortfolioScroller: UIScrollView {
         var x : CGFloat = 0
         for image in images {
             let imgV = UIImageView(frame: CGRect(x: x, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
-            do {
-                let imgData = try Data(contentsOf: URL(string: image.image_url.replacingOccurrences(of: "%%", with: "800"))!)
-                let downloadedImg = UIImage.init(data: imgData)
-                imgV.image = downloadedImg
-                self.addSubview(imgV)
-                x = x + self.bounds.size.width
-            }
-            catch {
-                
-            }
+            imgV.af_setImage(withURL: URL(string: image.image_url.replacingOccurrences(of: "%%", with: "800"))!)
+            imgV.contentMode = .scaleAspectFill
+            imgV.clipsToBounds = true
+            self.addSubview(imgV)
+            x = x + self.bounds.size.width
         }
+        self.contentSize = CGSize(width: x, height: self.bounds.size.height)
     }
     
     required init?(coder aDecoder: NSCoder) {

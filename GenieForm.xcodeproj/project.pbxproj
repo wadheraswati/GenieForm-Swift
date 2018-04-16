@@ -74,6 +74,7 @@
 		D9703B60205CDB42004C9C3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D9703B70205D05C9004C9C3E /* WMGForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WMGForm.swift; sourceTree = "<group>"; };
 		D9703B73205D149A004C9C3E /* WMGService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WMGService.swift; sourceTree = "<group>"; };
+		D99A9A132084C1670073D301 /* AlamofireImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AlamofireImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9CD9F66205D2DE000B287ED /* GenieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenieViewModel.swift; sourceTree = "<group>"; };
 		D9E4EBD42084736B002D59B1 /* VendorProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorProfile.swift; sourceTree = "<group>"; };
 		D9E4EBD6208477D7002D59B1 /* WMGInfinity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WMGInfinity.swift; sourceTree = "<group>"; };
@@ -114,6 +115,7 @@
 		028206AFC18F8A53C1955B8F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D99A9A132084C1670073D301 /* AlamofireImage.framework */,
 				08693DDD7E482BB274EEA11C /* Pods_GenieForm.framework */,
 				45D82B0C1B2952BEEA21FFBA /* Pods_GenieFormTests.framework */,
 				C1639BA797CEA9A3A8ECF5A3 /* Pods_GenieFormUITests.framework */,
@@ -423,11 +425,13 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-GenieForm/Pods-GenieForm-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/M13Checkbox/M13Checkbox.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/M13Checkbox.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
