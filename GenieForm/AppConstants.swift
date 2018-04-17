@@ -15,7 +15,7 @@ struct AppColor {
 
     static let primaryGreenColor = UIColor(red: 39.0/255.0, green: 174.0/255.0, blue: 96.0/255.0, alpha: 1.0)
     
-    static let primaryWhiteColor = UIColor(red: 189.0/255.0, green: 195.0/255.0, blue: 199.0/255.0, alpha: 1.0)
+    static let primaryWhiteColor = UIColor.white//UIColor(red: 189.0/255.0, green: 195.0/255.0, blue: 199.0/255.0, alpha: 1.0)
     static let primaryBlackColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
     
     static let secondaryWhiteColor = UIColor(rgb : 0xF1F1F1)

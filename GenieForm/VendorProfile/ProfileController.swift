@@ -37,6 +37,8 @@ class ProfileController: UIViewController {
                 self.containerScroll.backgroundColor = AppColor.primaryCreamColor
                 self.view.addSubview(self.containerScroll)
                 self.initPortfolioScroller()
+                
+                self.initUI()
             }
         })
         
@@ -46,6 +48,32 @@ class ProfileController: UIViewController {
         portfolioScroll = PortfolioScroller(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: (self.view.bounds.size.width * 3/4)))
         portfolioScroll.loadImages(images: viewModel.portfolio)
         containerScroll.addSubview(portfolioScroll)
+    }
+    
+    func initUI() {
+        
+        let viewPhotosBtn = UIButton(type: .custom)
+        viewPhotosBtn.setTitle("View Photos", for: .normal)
+        viewPhotosBtn.setTitleColor(AppColor.primaryBlackColor, for: .normal)
+        viewPhotosBtn.titleLabel?.font = UIFont.init(name: AppFont.mainFont, size: 15)
+        viewPhotosBtn.backgroundColor = AppColor.primaryWhiteColor
+        viewPhotosBtn.layer.cornerRadius = 4
+        viewPhotosBtn.titleLabel?.numberOfLines = 1
+        viewPhotosBtn.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        viewPhotosBtn.sizeToFit()
+        viewPhotosBtn.frame.origin.y = portfolioScroll.frame.origin.y + portfolioScroll.frame.size.height - 60 - viewPhotosBtn.bounds.size.height
+        viewPhotosBtn.frame.origin.x = containerScroll.frame.size.width - viewPhotosBtn.bounds.size.width - 10
+        containerScroll.addSubview(viewPhotosBtn)
+        
+        let shareBtn = UIButton(type: .custom)
+        shareBtn.setImage(UIImage(named: "shareContent"), for: .normal)
+        shareBtn.backgroundColor = AppColor.primaryWhiteColor
+        shareBtn.layer.cornerRadius = 4
+        shareBtn.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        shareBtn.sizeToFit()
+        shareBtn.frame.origin.y = portfolioScroll.frame.origin.y + 10
+        shareBtn.frame.origin.x = containerScroll.frame.size.width - shareBtn.bounds.size.width - 10
+        containerScroll.addSubview(shareBtn)
     }
     
     override func viewDidLayoutSubviews() {

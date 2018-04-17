@@ -21,6 +21,12 @@
 		D9703B5F205CDB42004C9C3E /* GenieFormUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9703B5E205CDB42004C9C3E /* GenieFormUITests.swift */; };
 		D9703B71205D05C9004C9C3E /* WMGForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9703B70205D05C9004C9C3E /* WMGForm.swift */; };
 		D9703B74205D149A004C9C3E /* WMGService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9703B73205D149A004C9C3E /* WMGService.swift */; };
+		D99A9A1B2085AA150073D301 /* Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D99A9A152085AA150073D301 /* Regular.ttf */; };
+		D99A9A1C2085AA150073D301 /* icon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D99A9A162085AA150073D301 /* icon.ttf */; };
+		D99A9A1D2085AA150073D301 /* Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D99A9A172085AA150073D301 /* Bold.ttf */; };
+		D99A9A1E2085AA150073D301 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D99A9A182085AA150073D301 /* FontAwesome.ttf */; };
+		D99A9A1F2085AA150073D301 /* SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D99A9A192085AA150073D301 /* SemiBold.ttf */; };
+		D99A9A202085AA150073D301 /* Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D99A9A1A2085AA150073D301 /* Light.ttf */; };
 		D9CD9F67205D2DE000B287ED /* GenieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CD9F66205D2DE000B287ED /* GenieViewModel.swift */; };
 		D9E4EBD52084736B002D59B1 /* VendorProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E4EBD42084736B002D59B1 /* VendorProfile.swift */; };
 		D9E4EBD7208477D7002D59B1 /* WMGInfinity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E4EBD6208477D7002D59B1 /* WMGInfinity.swift */; };
@@ -75,6 +81,12 @@
 		D9703B70205D05C9004C9C3E /* WMGForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WMGForm.swift; sourceTree = "<group>"; };
 		D9703B73205D149A004C9C3E /* WMGService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WMGService.swift; sourceTree = "<group>"; };
 		D99A9A132084C1670073D301 /* AlamofireImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AlamofireImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D99A9A152085AA150073D301 /* Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Regular.ttf; sourceTree = "<group>"; };
+		D99A9A162085AA150073D301 /* icon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = icon.ttf; sourceTree = "<group>"; };
+		D99A9A172085AA150073D301 /* Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bold.ttf; sourceTree = "<group>"; };
+		D99A9A182085AA150073D301 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		D99A9A192085AA150073D301 /* SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SemiBold.ttf; sourceTree = "<group>"; };
+		D99A9A1A2085AA150073D301 /* Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Light.ttf; sourceTree = "<group>"; };
 		D9CD9F66205D2DE000B287ED /* GenieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenieViewModel.swift; sourceTree = "<group>"; };
 		D9E4EBD42084736B002D59B1 /* VendorProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorProfile.swift; sourceTree = "<group>"; };
 		D9E4EBD6208477D7002D59B1 /* WMGInfinity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WMGInfinity.swift; sourceTree = "<group>"; };
@@ -170,6 +182,7 @@
 		D9703B3D205CDB42004C9C3E /* GenieForm */ = {
 			isa = PBXGroup;
 			children = (
+				D99A9A142085AA030073D301 /* Fonts */,
 				D94364B4208467150023507E /* VendorProfile */,
 				D9F021E1205FB7CA0092250D /* Helper */,
 				D9F021D4205FA1FD0092250D /* FieldFactory */,
@@ -229,6 +242,19 @@
 				D9703B73205D149A004C9C3E /* WMGService.swift */,
 			);
 			path = APIService;
+			sourceTree = "<group>";
+		};
+		D99A9A142085AA030073D301 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				D99A9A172085AA150073D301 /* Bold.ttf */,
+				D99A9A182085AA150073D301 /* FontAwesome.ttf */,
+				D99A9A162085AA150073D301 /* icon.ttf */,
+				D99A9A1A2085AA150073D301 /* Light.ttf */,
+				D99A9A152085AA150073D301 /* Regular.ttf */,
+				D99A9A192085AA150073D301 /* SemiBold.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		D9CD9F65205D2DB900B287ED /* GenieViewModel */ = {
@@ -380,8 +406,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D99A9A1B2085AA150073D301 /* Regular.ttf in Resources */,
+				D99A9A1D2085AA150073D301 /* Bold.ttf in Resources */,
+				D99A9A1F2085AA150073D301 /* SemiBold.ttf in Resources */,
+				D99A9A1C2085AA150073D301 /* icon.ttf in Resources */,
 				D9703B49205CDB42004C9C3E /* LaunchScreen.storyboard in Resources */,
+				D99A9A202085AA150073D301 /* Light.ttf in Resources */,
 				D9703B46205CDB42004C9C3E /* Assets.xcassets in Resources */,
+				D99A9A1E2085AA150073D301 /* FontAwesome.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

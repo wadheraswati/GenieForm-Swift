@@ -18,6 +18,15 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>icon.ttf</string>
+		<string>FontAwesome.ttf</string>
+		<string>Bold.ttf</string>
+		<string>Light.ttf</string>
+		<string>Regular.ttf</string>
+		<string>SemiBold.ttf</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
