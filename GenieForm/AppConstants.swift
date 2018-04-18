@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FontAwesome_swift
 
 struct AppColor {
     static let primaryRedColor = UIColor(rgb : 0x673ab7)
@@ -19,10 +20,10 @@ struct AppColor {
     static let primaryBlackColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
     
     static let secondaryWhiteColor = UIColor(rgb : 0xF1F1F1)
-    static let secondaryBlackColor = UIColor(red: 144.0/255.0, green: 144.0/255.0, blue: 144.0/255.0, alpha: 144.0/255.0)
+    static let secondaryBlackColor = UIColor(rgb : 0xA5A5A5)
     static let secondaryRedColor = UIColor(red: 192.0/255.0, green: 57.0/255.0, blue: 43.0/255.0, alpha: 1.0)
     
-    static let tertiaryBlackColor = UIColor(red: 37.0/255.0, green: 37.0/255.0, blue: 37.0/255.0, alpha: 1.0)
+    static let tertiaryBlackColor = UIColor(rgb : 0xC4C4C4)
     static let invisibleLightColor = UIColor(white: 1, alpha: 0.01)
     
     static let textFieldBorderColor = AppColor.secondaryBlackColor.withAlphaComponent(0.3)
@@ -50,3 +51,13 @@ struct AppFont {
 struct AppMessage {
     static let genieSuccessMsg = "Thanks for providing the information. Our genie team will get back to you soon."
 }
+
+struct AppConstants {
+    enum MembershipType : Int {
+        case HandPicked = 1
+        case Featured = 2
+        case Basic = 3
+        case Lite = 4
+    }
+}
+

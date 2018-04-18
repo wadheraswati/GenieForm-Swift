@@ -27,6 +27,8 @@
 		D99A9A1E2085AA150073D301 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D99A9A182085AA150073D301 /* FontAwesome.ttf */; };
 		D99A9A1F2085AA150073D301 /* SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D99A9A192085AA150073D301 /* SemiBold.ttf */; };
 		D99A9A202085AA150073D301 /* Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D99A9A1A2085AA150073D301 /* Light.ttf */; };
+		D99A9A222085B0BA0073D301 /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99A9A212085B0BA0073D301 /* ProfileHeader.swift */; };
+		D99A9A242085DAC40073D301 /* ReviewInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99A9A232085DAC40073D301 /* ReviewInfo.swift */; };
 		D9CD9F67205D2DE000B287ED /* GenieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CD9F66205D2DE000B287ED /* GenieViewModel.swift */; };
 		D9E4EBD52084736B002D59B1 /* VendorProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E4EBD42084736B002D59B1 /* VendorProfile.swift */; };
 		D9E4EBD7208477D7002D59B1 /* WMGInfinity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E4EBD6208477D7002D59B1 /* WMGInfinity.swift */; };
@@ -87,6 +89,9 @@
 		D99A9A182085AA150073D301 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		D99A9A192085AA150073D301 /* SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SemiBold.ttf; sourceTree = "<group>"; };
 		D99A9A1A2085AA150073D301 /* Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Light.ttf; sourceTree = "<group>"; };
+		D99A9A212085B0BA0073D301 /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
+		D99A9A232085DAC40073D301 /* ReviewInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewInfo.swift; sourceTree = "<group>"; };
+		D99A9A262086157E0073D301 /* FontAwesome_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FontAwesome_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9CD9F66205D2DE000B287ED /* GenieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenieViewModel.swift; sourceTree = "<group>"; };
 		D9E4EBD42084736B002D59B1 /* VendorProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorProfile.swift; sourceTree = "<group>"; };
 		D9E4EBD6208477D7002D59B1 /* WMGInfinity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WMGInfinity.swift; sourceTree = "<group>"; };
@@ -127,6 +132,7 @@
 		028206AFC18F8A53C1955B8F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D99A9A262086157E0073D301 /* FontAwesome_swift.framework */,
 				D99A9A132084C1670073D301 /* AlamofireImage.framework */,
 				08693DDD7E482BB274EEA11C /* Pods_GenieForm.framework */,
 				45D82B0C1B2952BEEA21FFBA /* Pods_GenieFormTests.framework */,
@@ -224,6 +230,7 @@
 				D9703B70205D05C9004C9C3E /* WMGForm.swift */,
 				D9E4EBD42084736B002D59B1 /* VendorProfile.swift */,
 				D9E4EBD6208477D7002D59B1 /* WMGInfinity.swift */,
+				D99A9A232085DAC40073D301 /* ReviewInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -270,6 +277,7 @@
 			children = (
 				D9F021D2205FA1240092250D /* SelectionCell.swift */,
 				D94364B2208464F80023507E /* PortfolioScroller.swift */,
+				D99A9A212085B0BA0073D301 /* ProfileHeader.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -458,12 +466,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-GenieForm/Pods-GenieForm-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/FontAwesome.swift/FontAwesome_swift.framework",
 				"${BUILT_PRODUCTS_DIR}/M13Checkbox/M13Checkbox.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FontAwesome_swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/M13Checkbox.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -600,6 +610,8 @@
 				D9F021D6205FA2210092250D /* FormField.swift in Sources */,
 				D9F021D3205FA1240092250D /* SelectionCell.swift in Sources */,
 				D94364B7208467680023507E /* ProfileViewModel.swift in Sources */,
+				D99A9A222085B0BA0073D301 /* ProfileHeader.swift in Sources */,
+				D99A9A242085DAC40073D301 /* ReviewInfo.swift in Sources */,
 				D9703B74205D149A004C9C3E /* WMGService.swift in Sources */,
 				D94364B1208464180023507E /* ProfileController.swift in Sources */,
 				D9F021E5205FB8BA0092250D /* AppConstants.swift in Sources */,

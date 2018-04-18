@@ -21,6 +21,8 @@ class ProfileViewModel {
     var priceFAQ = [FAQ]()
     var pricing = [Pricing]()
     
+    var reviews = [Reviews]()
+    var reviewInfo = ReviewsInfo()
     
     func getVendorProfile(completion : @escaping (_ success : Bool) -> ()) {
         let apiStr = String.init(format: APIList.getVendorProfile, vendorID, isMember ? 1 : 0)
@@ -73,6 +75,35 @@ class ProfileViewModel {
                     catch {
                         print("json error: \(error)")
                     }
+            }
+            completion(success)
+        })
+    }
+    
+    func getVendorReviewInfo(completion : @escaping (_ success : Bool) -> ()) {
+        let apiStr = String.init(format: APIList.getVendorReviews, vendorID, isMember ? 1 : 0)
+        
+        apiService.GETAPI(url: apiStr, completion: {(success, result) in
+            if(success) {
+                let apiResponse = result.value as! NSDictionary
+                let data = apiResponse.value(forKey: "data") as! NSDictionary
+                do {
+                    
+                    let reviewInfoData = try JSONSerialization.data(withJSONObject: data.value(forKey: "profile")!, options: .prettyPrinted)
+                    self.reviewInfo = try JSONDecoder().decode(ReviewsInfo.self, from: reviewInfoData)
+                    print(self.reviewInfo)
+                    
+                    let reviews = data.value(forKey: "reviews") as! NSArray
+                    for review in reviews {
+                        let reviewData = try JSONSerialization.data(withJSONObject: review, options: .prettyPrinted)
+                        self.reviews.append(try JSONDecoder().decode(Reviews.self, from: reviewData))
+                    }
+                    print(self.reviews)
+                    self.profile.reviewInfo = self.reviewInfo
+                }
+                catch {
+                    print("json error: \(error)")
+                }
             }
             completion(success)
         })

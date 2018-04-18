@@ -17,4 +17,27 @@ extension UIColor {
             alpha: CGFloat(1.0)
         )
     }
+    
+    /*
+     if(rating <=1) return UIColorFromRGB(0xcb202d);
+     else if(rating <=2) return UIColorFromRGB(0xff7800);
+     else if(rating <=3) return UIColorFromRGB(0xffba00);
+     else if(rating <=4) return UIColorFromRGB(0x9acd32);
+     else return UIColorFromRGB(0x5ba829);
+ */
+    convenience init(rating : String) {
+        var ratingF = CGFloat(0)
+        if let n = NumberFormatter().number(from: rating) {
+            ratingF = CGFloat(truncating: n)
+        }
+        var colorUint : UInt = 0x5ba829
+        if ratingF <= 1 { colorUint = 0xcb202d }
+        else if ratingF <= 2 { colorUint = 0xff7800 }
+        else if ratingF <= 3 { colorUint = 0xffba00 }
+        else if ratingF <= 4 { colorUint = 0x9acd32 }
+        else { colorUint = 0x5ba829 }
+        self.init(rgb: colorUint)
+    }
 }
+
+

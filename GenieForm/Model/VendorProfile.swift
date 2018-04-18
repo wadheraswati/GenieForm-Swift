@@ -26,6 +26,7 @@ struct Profile : Codable {
     var shortlisted : Int
     var inbox_thread_id : String?
     var send_query_default_message : String?
+    var reviewInfo : ReviewsInfo?
     
     // this init method is created to initialise an object in view model class of this struct
     init() {
@@ -118,26 +119,6 @@ struct Pricing : Codable {
     var unit : String
     var show_inr : Int
     var icon : String
-}
-
-struct Reviews : Codable {
-    var id : Int
-    var reviewer_name : String
-    var reviewer_id : String
-    var review_description : String
-    var star_rating : String
-    var reviewTimestamp : Int64
-    var status : String
-    var user_image : String
-    var share_link : String
-    var reviewed_on_text : String
-    var review_images : [ReviewImage]?
-    var stickers : [Sticker]?
-}
-
-struct ReviewImage : Codable {
-    var image_id : Int64
-    var image_url : String
 }
 
 struct Sticker : Codable {

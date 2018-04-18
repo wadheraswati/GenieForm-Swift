@@ -12,8 +12,12 @@ class ProfileController: UIViewController {
 
     let viewModel : ProfileViewModel = ProfileViewModel()
 
-    var portfolioScroll = PortfolioScroller()
+    // main scrollView
     var containerScroll = UIScrollView()
+    
+    // sections
+    var portfolioScroll = PortfolioScroller()
+    var header = ProfileHeader()
     
     override func viewDidLoad() {
         
@@ -33,19 +37,24 @@ class ProfileController: UIViewController {
         viewModel.getVendorProfile(completion: {(success) in
             if(success) {
                 let y = (self.navigationController?.navigationBar.bounds.size.height)! + 20
-                self.containerScroll = UIScrollView(frame: CGRect(x: 0, y: y, width: self.view.bounds.size.width, height: self.view.bounds.size.height - y))
-                self.containerScroll.backgroundColor = AppColor.primaryCreamColor
+                self.containerScroll = UIScrollView(frame: CGRect(x: 10, y: y, width: self.view.bounds.size.width - 20, height: self.view.bounds.size.height - y))
+                self.containerScroll.clipsToBounds = false
                 self.view.addSubview(self.containerScroll)
                 self.initPortfolioScroller()
-                
                 self.initUI()
+            }
+        })
+        
+        viewModel.getVendorReviewInfo(completion: {(success) in
+            if(success) {
+                self.header.updateReviewBoxForProfile(profile: self.viewModel.profile)
             }
         })
         
     }
     
     func initPortfolioScroller() {
-        portfolioScroll = PortfolioScroller(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: (self.view.bounds.size.width * 3/4)))
+        portfolioScroll = PortfolioScroller(frame: CGRect(x: -10, y: 0, width: self.view.bounds.size.width, height: (self.view.bounds.size.width * 3/4)))
         portfolioScroll.loadImages(images: viewModel.portfolio)
         containerScroll.addSubview(portfolioScroll)
     }
@@ -57,23 +66,29 @@ class ProfileController: UIViewController {
         viewPhotosBtn.setTitleColor(AppColor.primaryBlackColor, for: .normal)
         viewPhotosBtn.titleLabel?.font = UIFont.init(name: AppFont.mainFont, size: 15)
         viewPhotosBtn.backgroundColor = AppColor.primaryWhiteColor
-        viewPhotosBtn.layer.cornerRadius = 4
+        viewPhotosBtn.layer.cornerRadius = 3
         viewPhotosBtn.titleLabel?.numberOfLines = 1
         viewPhotosBtn.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         viewPhotosBtn.sizeToFit()
         viewPhotosBtn.frame.origin.y = portfolioScroll.frame.origin.y + portfolioScroll.frame.size.height - 60 - viewPhotosBtn.bounds.size.height
-        viewPhotosBtn.frame.origin.x = containerScroll.frame.size.width - viewPhotosBtn.bounds.size.width - 10
+        viewPhotosBtn.frame.origin.x = containerScroll.frame.size.width - viewPhotosBtn.bounds.size.width
         containerScroll.addSubview(viewPhotosBtn)
         
         let shareBtn = UIButton(type: .custom)
         shareBtn.setImage(UIImage(named: "shareContent"), for: .normal)
         shareBtn.backgroundColor = AppColor.primaryWhiteColor
-        shareBtn.layer.cornerRadius = 4
+        shareBtn.layer.cornerRadius = 3
         shareBtn.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         shareBtn.sizeToFit()
         shareBtn.frame.origin.y = portfolioScroll.frame.origin.y + 10
-        shareBtn.frame.origin.x = containerScroll.frame.size.width - shareBtn.bounds.size.width - 10
+        shareBtn.frame.origin.x = containerScroll.frame.size.width - shareBtn.bounds.size.width
         containerScroll.addSubview(shareBtn)
+        
+        header = ProfileHeader(frame: CGRect(x: 0, y: portfolioScroll.frame.origin.y + portfolioScroll.frame.size.height - 50, width: containerScroll.bounds.size.width, height: 100))
+        header.loadHeaderWithProfile(profile: viewModel.profile)
+        header.sizeToFit()
+        containerScroll.addSubview(header)
+        
     }
     
     override func viewDidLayoutSubviews() {

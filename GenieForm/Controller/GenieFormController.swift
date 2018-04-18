@@ -170,7 +170,7 @@ class GenieFormController: UIViewController, UITextFieldDelegate, FormSelectionL
     }
     
     func validateRegex(_ regex : String, _ textField : UITextField) throws -> Bool {
-        let testRegex = try NSRegularExpression(pattern: regex, options: [.caseInsensitive])
+        _ = try NSRegularExpression(pattern: regex, options: [.caseInsensitive])
         let test = NSPredicate(format:"SELF MATCHES %@", regex)
         return test.evaluate(with: textField.text)
     }

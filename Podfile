@@ -7,7 +7,7 @@ target 'GenieForm' do
   pod 'Alamofire', '~> 4.7'
   pod 'M13Checkbox'
   pod 'AlamofireImage', '~> 3.3'
-
+  pod 'FontAwesome.swift'
 
 
   # Pods for GenieForm
