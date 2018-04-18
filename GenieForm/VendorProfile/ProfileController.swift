@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileController: UIViewController {
+class ProfileController: UIViewController, ProfileHeaderDelegate {
 
     let viewModel : ProfileViewModel = ProfileViewModel()
 
@@ -18,6 +18,7 @@ class ProfileController: UIViewController {
     // sections
     var portfolioScroll = PortfolioScroller()
     var header = ProfileHeader()
+    var aboutView = AboutVendor()
     
     override func viewDidLoad() {
         
@@ -31,10 +32,9 @@ class ProfileController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    // MARK: - API Calls -
     func initAPIData() {
-        viewModel.isMember = false
-        viewModel.vendorID = "274"
-        viewModel.getVendorProfile(completion: {(success) in
+        viewModel.getVendorProfile(vendorID: "274", isMember: false, completion: {(success) in
             if(success) {
                 let y = (self.navigationController?.navigationBar.bounds.size.height)! + 20
                 self.containerScroll = UIScrollView(frame: CGRect(x: 10, y: y, width: self.view.bounds.size.width - 20, height: self.view.bounds.size.height - y))
@@ -42,17 +42,21 @@ class ProfileController: UIViewController {
                 self.view.addSubview(self.containerScroll)
                 self.initPortfolioScroller()
                 self.initUI()
+                self.getVendorReviews()
             }
         })
-        
-        viewModel.getVendorReviewInfo(completion: {(success) in
+    }
+    func getVendorReviews() {
+        viewModel.getVendorReviewInfo(vendorID : "274", isMember : false, completion: {(success) in
             if(success) {
-                self.header.updateReviewBoxForProfile(profile: self.viewModel.profile)
+                self.header.currentProfile = self.viewModel.profile
+                self.header.updateReviewBox()
             }
         })
         
     }
     
+    // MARK: UI Methods
     func initPortfolioScroller() {
         portfolioScroll = PortfolioScroller(frame: CGRect(x: -10, y: 0, width: self.view.bounds.size.width, height: (self.view.bounds.size.width * 3/4)))
         portfolioScroll.loadImages(images: viewModel.portfolio)
@@ -85,17 +89,59 @@ class ProfileController: UIViewController {
         containerScroll.addSubview(shareBtn)
         
         header = ProfileHeader(frame: CGRect(x: 0, y: portfolioScroll.frame.origin.y + portfolioScroll.frame.size.height - 50, width: containerScroll.bounds.size.width, height: 100))
-        header.loadHeaderWithProfile(profile: viewModel.profile)
+        header.currentProfile = viewModel.profile
+        header.load()
+        
+        header.reviewBtn.addTarget(self, action: #selector(reviewBtnClicked), for: .touchUpInside)
+        header.shortlistBtn.addTarget(self, action: #selector(shortlistVendor), for: .touchUpInside)
+        header.queryBtn.addTarget(self, action: #selector(queryVendor), for: .touchUpInside)
+        header.callBtn.addTarget(self, action: #selector(callVendor), for: .touchUpInside)
+
         header.sizeToFit()
         containerScroll.addSubview(header)
+        
+        aboutView = AboutVendor(frame: CGRect(x: 0, y: header.frame.origin.y + header.frame.size.height + 10, width: containerScroll.bounds.size.width, height: 100))
+        aboutView.faqList = viewModel.faq
+        aboutView.information = viewModel.profile.information
+        aboutView.load()
+        aboutView.sizeToFit()
+        containerScroll.addSubview(aboutView)
+        self.perform(#selector(viewDidLayoutSubviews), with: nil, afterDelay: 0.5)
+    }
+    
+    //MARK: - ProfileHeaderDelegate Methods -
+    
+    @objc func reviewBtnClicked() {
+        
+    }
+    
+    @objc func shortlistVendor() {
+        UIButton.showLoveLoadingAnimationOnButton(header.shortlistBtn)
+        viewModel.shortlistVendor(vendorID: "274", completion: {(success) in
+            if success {
+                self.header.currentProfile = self.viewModel.profile
+                self.header.updateShortlistBtn()
+            }
+        })
+    }
+    
+    @objc func queryVendor() {
+        
+    }
+    
+    @objc func callVendor() {
         
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        if let lastview = containerScroll.subviews.last {
-            containerScroll.contentSize = CGSize(width: containerScroll.bounds.size.width, height: (lastview.frame.origin.y) + (lastview.frame.size.height))
-        }
+        
+        header.sizeToFit()
+        aboutView.sizeToFit()
+        aboutView.frame.size.height = aboutView.aboutTable.frame.size.height
+        
+        containerScroll.contentSize = CGSize(width: containerScroll.bounds.size.width, height: (aboutView.frame.origin.y) + (aboutView.frame.size.height) + 15)
+    
     }
 
     override func didReceiveMemoryWarning() {

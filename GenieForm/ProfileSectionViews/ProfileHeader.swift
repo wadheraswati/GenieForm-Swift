@@ -8,10 +8,20 @@
 
 import UIKit
 
+protocol ProfileHeaderDelegate : class {
+    
+}
+
 class ProfileHeader: UIView {
 
     var ctaView = UIView()
     var currentProfile = Profile()
+    
+    var reviewBtn = UIButton()
+    var shortlistBtn = UIButton()
+    var queryBtn = UIButton()
+    var callBtn = UIButton()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = AppColor.primaryWhiteColor
@@ -22,12 +32,11 @@ class ProfileHeader: UIView {
         self.layer.masksToBounds = false
     }
     
-    func loadHeaderWithProfile(profile : Profile) {
+    func load() {
         
-        currentProfile = profile
         var y : CGFloat = 10
         let categoryImgV = UIImageView(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
-        categoryImgV.image = UIImage(named: (profile.membership_id == AppConstants.MembershipType.HandPicked.rawValue) ? "venD_handpicked" : "venD_featured")
+        categoryImgV.image = UIImage(named: (currentProfile.membership_id == AppConstants.MembershipType.HandPicked.rawValue) ? "venD_handpicked" : "venD_featured")
         categoryImgV.sizeToFit()
         categoryImgV.frame.origin.x = self.bounds.size.width - categoryImgV.bounds.size.width
         self.addSubview(categoryImgV)
@@ -36,12 +45,11 @@ class ProfileHeader: UIView {
         nameLbl.numberOfLines = 2
         nameLbl.lineBreakMode = .byTruncatingTail
         nameLbl.minimumScaleFactor = 0.5
-        nameLbl.textAlignment = .justified
+        nameLbl.textAlignment = .left
         nameLbl.adjustsFontSizeToFitWidth = true
-        //nameLbl.backgroundColor = AppColor.primaryCreamColor
         nameLbl.font = UIFont(name: AppFont.heavyFont, size: 20)
         nameLbl.textColor = AppColor.primaryBlackColor
-        nameLbl.text = profile.name
+        nameLbl.text = currentProfile.name
         nameLbl.sizeToFit()
         self.addSubview(nameLbl)
         
@@ -50,8 +58,8 @@ class ProfileHeader: UIView {
         let cityLbl = UILabel(frame : CGRect(x: 10, y: y, width: self.bounds.size.width - 20, height: 0))
         
         var text = ""
-        if profile.address != nil {
-            text = " " + currentProfile.city + ((profile.address != nil) ? " (View on Map)" : "") }
+        if currentProfile.address != nil {
+            text = " " + currentProfile.city + ((currentProfile.address != nil) ? " (View on Map)" : "") }
         else {
             text = " " + currentProfile.city }
         
@@ -74,9 +82,9 @@ class ProfileHeader: UIView {
         
         y = y + cityLbl.bounds.size.height + 10
         
-        if profile.address != nil {
+        if currentProfile.address != nil {
             let addressLbl = UILabel(frame: CGRect(x: 10, y: y, width: self.bounds.size.width - 20, height: 0))
-            addressLbl.text = profile.address?.last?.display_address
+            addressLbl.text = currentProfile.address?.last?.display_address
             addressLbl.textColor = AppColor.secondaryBlackColor
             addressLbl.textAlignment = .left
             addressLbl.font = UIFont(name: AppFont.mainFont, size: 15)
@@ -118,13 +126,14 @@ class ProfileHeader: UIView {
         }
         
         let attrStr = NSMutableAttributedString(string: resultStr)
+        
         // setting background color to complete text
         attrStr.addAttribute(.foregroundColor, value: AppColor.primaryBlackColor, range: NSRange(location : 0, length : attrStr.length))
+        
         // setting font to complete text
         attrStr.addAttribute(.font, value: UIFont.init(name: AppFont.mainFont, size: 14)!, range: NSRange(location: titleImgString.count, length: attrStr.length - titleImgString.count))
         
         // setting font based on googleicon or fontawesome
-        
         attrStr.addAttribute(.font, value: UIFont.init(name: AppFont.googleFont, size: 25)!, range: NSRange(location: 0, length: titleImgString.count))
         
         // setting button colors
@@ -147,51 +156,21 @@ class ProfileHeader: UIView {
 
         let reviewText = " ★ 0.0 \nNo Reviews"
         
-        let reviewBtn = createBtn("", reviewText, CGRect(x: 0, y: 0, width: ctaView.bounds.size.width/4, height: ctaView.bounds.size.height))
+        reviewBtn = createBtn("", reviewText, CGRect(x: 0, y: 0, width: ctaView.bounds.size.width/4, height: ctaView.bounds.size.height))
         reviewBtn.tag = 100
         ctaView.addSubview(reviewBtn)
         
-        let shortlistBtn = createBtn("", "Shortlist", CGRect(x: ctaView.bounds.size.width/4, y: 0, width: ctaView.bounds.size.width/4, height: ctaView.bounds.size.height))
+        shortlistBtn = createBtn((currentProfile.shortlisted! > 0) ? "" : "", "Shortlist", CGRect(x: ctaView.bounds.size.width/4, y: 0, width: ctaView.bounds.size.width/4, height: ctaView.bounds.size.height))
         ctaView.addSubview(shortlistBtn)
 
-        let queryBtn = createBtn("", "Message", CGRect(x: (ctaView.bounds.size.width/4)*2, y: 0, width: ctaView.bounds.size.width/4, height: ctaView.bounds.size.height))
+        queryBtn = createBtn("", "Message", CGRect(x: (ctaView.bounds.size.width/4)*2, y: 0, width: ctaView.bounds.size.width/4, height: ctaView.bounds.size.height))
         ctaView.addSubview(queryBtn)
 
-        let callBtn = createBtn("", "Call", CGRect(x: (ctaView.bounds.size.width/4)*3, y: 0, width: ctaView.bounds.size.width/4, height: ctaView.bounds.size.height))
+        callBtn = createBtn("", "Call", CGRect(x: (ctaView.bounds.size.width/4)*3, y: 0, width: ctaView.bounds.size.width/4, height: ctaView.bounds.size.height))
         ctaView.addSubview(callBtn)
-
-        //        NSString *star = [NSString stringWithFormat:@"%.1f",[[[vendorDataDict valueForKey:@"profile"] valueForKey:@"vendor_rating"] floatValue]];
-//        NSString *reviewCount = [NSString stringWithFormat:@"%lu",(unsigned long)[reviewsArray count]];
-//        UIButton *reviewsButton = [self createButtonWithTitle:@"" withText:[NSString stringWithFormat:@" ★ %@ \n(%@ Review%@)", star, reviewCount, reviewsArray.count > 1?@"s":@""] andAction:@"scrollToReviews"
-//            andFrame:CGRectMake(0, y, (headerView.bounds.size.width/4), 50)];
-//        [reviewsButton setBackgroundColor:[kSecondaryWhiteColor colorWithAlphaComponent:0.3]];
-//        if([reviewCount isEqualToString:@"No Reviews"] || [reviewCount isEqualToString:@"0"] || !reviewCount) {
-//            NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"No Reviews"]];
-//            [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:MAIN_FONT size:12] range:NSMakeRange(0, attrStr.length)];
-//            [attrStr addAttribute:NSForegroundColorAttributeName value:kPrimaryBlackColor range:NSMakeRange(0, attrStr.length)];
-//            reviewsButton.titleLabel.attributedText = attrStr;
-//            [reviewsButton setAttributedTitle:attrStr forState:UIControlStateNormal];
-//        } else {
-//            NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" ★ %@ \n(%@ Review%@)", star, reviewCount, reviewsArray.count > 1?@"s":@""]];
-//            [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:MAIN_FONT size:12] range:NSMakeRange(0, attrStr.length)];
-//            [attrStr addAttribute:NSForegroundColorAttributeName value:kPrimaryBlackColor range:NSMakeRange(0, attrStr.length)];
-//            NSRange ran = [attrStr.string rangeOfString:@"\n"];
-//            [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:MAIN_FONT size:14] range:NSMakeRange(0, ran.location)];
-//            [attrStr addAttribute:NSBackgroundColorAttributeName value:[ATWMGJsonParser getVenRatingBackgroundColor:[star floatValue]] range:NSMakeRange(0, ran.location)];
-//            [attrStr addAttribute:NSBaselineOffsetAttributeName value:[NSNumber numberWithInteger:-5] range:NSMakeRange(ran.location + 1, attrStr.length - ran.location - 1)];
-//            [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"googleicon" size:14] range:NSMakeRange(0, 1)];
-//            [attrStr addAttribute:NSForegroundColorAttributeName value:kPrimaryWhiteColor range:NSMakeRange(0, ran.location)];
-//
-//            [reviewsButton setAttributedTitle:attrStr forState:UIControlStateNormal];
-//        }
-//
-//        [headerView addSubview:reviewsButton];
     }
     
-    func updateReviewBoxForProfile(profile : Profile) {
-        currentProfile = profile
-        let reviewBtn = ctaView.viewWithTag(100) as! UIButton
-        //if(reviewBtn)
+    func updateReviewBox() {
         
         let rating = String.init(format: " ★ %@ ",(currentProfile.reviewInfo?.vendor_rating) ?? "0.0")
         let reviewCount = Double((currentProfile.reviewInfo?.reviews_count)!)
@@ -213,6 +192,24 @@ class ProfileHeader: UIView {
         reviewBtn.setAttributedTitle(attrStr, for: .normal)
         
     }
+    
+    func updateShortlistBtn() {
+        
+        let titleImgString = (currentProfile.shortlisted! > 0) ? "" : ""
+        let text = (currentProfile.shortlisted! > 0) ? "Shortlisted" : "Shortlist"
+        let resultStr = titleImgString + "\n" + text
+        
+        let attrStr = NSMutableAttributedString(string: resultStr)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        
+        attrStr.addAttribute(.foregroundColor, value: AppColor.primaryBlackColor, range: NSRange(location : 0, length : attrStr.length))
+        attrStr.addAttribute(.font, value: UIFont.init(name: AppFont.mainFont, size: 14)!, range: NSRange(location: titleImgString.count, length: attrStr.length - titleImgString.count))
+        attrStr.addAttribute(.font, value: UIFont.init(name: AppFont.googleFont, size: 25)!, range: NSRange(location: 0, length: titleImgString.count))
+        attrStr.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attrStr.length))
+        shortlistBtn.setAttributedTitle(attrStr, for: .normal)
+    }
+   
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

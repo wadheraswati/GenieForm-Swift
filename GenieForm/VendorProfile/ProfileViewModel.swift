@@ -10,8 +10,6 @@ import UIKit
 
 class ProfileViewModel {
     let apiService : WMGServiceProtocol = WMGService()
-    var vendorID : String = ""
-    var isMember : Bool = false
     
     var profile = Profile()
     var portfolio = [Images]()
@@ -24,7 +22,7 @@ class ProfileViewModel {
     var reviews = [Reviews]()
     var reviewInfo = ReviewsInfo()
     
-    func getVendorProfile(completion : @escaping (_ success : Bool) -> ()) {
+    func getVendorProfile(vendorID : String, isMember : Bool, completion : @escaping (_ success : Bool) -> ()) {
         let apiStr = String.init(format: APIList.getVendorProfile, vendorID, isMember ? 1 : 0)
 
         apiService.GETAPI(url: apiStr, completion: {(success, result) in
@@ -80,7 +78,7 @@ class ProfileViewModel {
         })
     }
     
-    func getVendorReviewInfo(completion : @escaping (_ success : Bool) -> ()) {
+    func getVendorReviewInfo(vendorID : String, isMember : Bool, completion : @escaping (_ success : Bool) -> ()) {
         let apiStr = String.init(format: APIList.getVendorReviews, vendorID, isMember ? 1 : 0)
         
         apiService.GETAPI(url: apiStr, completion: {(success, result) in
@@ -104,6 +102,22 @@ class ProfileViewModel {
                 catch {
                     print("json error: \(error)")
                 }
+            }
+            completion(success)
+        })
+    }
+    
+    func shortlistVendor(vendorID : String, completion : @escaping (_ success : Bool) -> ()) {
+        let apiStr = String.init(format: APIList.shortlistVendor)
+        var apiParams : [String : AnyObject] = [:]
+        
+        apiParams["wedding_id"] = "" as AnyObject
+        apiParams["vendor_id"] = vendorID as AnyObject
+
+        apiService.POSTAPI(url: apiStr, parameters: apiParams, completion : {(success, result) in
+            if(success) {
+                let apiResponse = result.value as! NSDictionary
+                self.profile.shortlisted = apiResponse.value(forKey: "data") as? Double
             }
             completion(success)
         })

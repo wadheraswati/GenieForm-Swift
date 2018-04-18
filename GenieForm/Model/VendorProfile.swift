@@ -22,8 +22,8 @@ struct Profile : Codable {
     var phone : [String]
     var address : [Address]?
     var status : Int?
-    var managed_by_wmg : Int?
-    var shortlisted : Int
+    var managed_by_wmg : Double?
+    var shortlisted : Double?
     var inbox_thread_id : String?
     var send_query_default_message : String?
     var reviewInfo : ReviewsInfo?
@@ -105,7 +105,7 @@ struct FAQ : Codable {
     var id : String?
     var question : String
     var answer : String
-    var highlight_text : Int?
+    var highlight_text : Double?
     var span : Int
     
     var unit : String?

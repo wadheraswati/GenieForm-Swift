@@ -29,6 +29,8 @@
 		D99A9A202085AA150073D301 /* Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D99A9A1A2085AA150073D301 /* Light.ttf */; };
 		D99A9A222085B0BA0073D301 /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99A9A212085B0BA0073D301 /* ProfileHeader.swift */; };
 		D99A9A242085DAC40073D301 /* ReviewInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99A9A232085DAC40073D301 /* ReviewInfo.swift */; };
+		D9B478E220876ED1002D9B5D /* AboutVendor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B478E120876ED1002D9B5D /* AboutVendor.swift */; };
+		D9B478E5208771B7002D9B5D /* AboutVendorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B478E4208771B7002D9B5D /* AboutVendorCell.swift */; };
 		D9CD9F67205D2DE000B287ED /* GenieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CD9F66205D2DE000B287ED /* GenieViewModel.swift */; };
 		D9E4EBD52084736B002D59B1 /* VendorProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E4EBD42084736B002D59B1 /* VendorProfile.swift */; };
 		D9E4EBD7208477D7002D59B1 /* WMGInfinity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E4EBD6208477D7002D59B1 /* WMGInfinity.swift */; };
@@ -92,6 +94,8 @@
 		D99A9A212085B0BA0073D301 /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
 		D99A9A232085DAC40073D301 /* ReviewInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewInfo.swift; sourceTree = "<group>"; };
 		D99A9A262086157E0073D301 /* FontAwesome_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FontAwesome_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9B478E120876ED1002D9B5D /* AboutVendor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutVendor.swift; sourceTree = "<group>"; };
+		D9B478E4208771B7002D9B5D /* AboutVendorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutVendorCell.swift; sourceTree = "<group>"; };
 		D9CD9F66205D2DE000B287ED /* GenieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenieViewModel.swift; sourceTree = "<group>"; };
 		D9E4EBD42084736B002D59B1 /* VendorProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorProfile.swift; sourceTree = "<group>"; };
 		D9E4EBD6208477D7002D59B1 /* WMGInfinity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WMGInfinity.swift; sourceTree = "<group>"; };
@@ -188,6 +192,7 @@
 		D9703B3D205CDB42004C9C3E /* GenieForm */ = {
 			isa = PBXGroup;
 			children = (
+				D9B478E320877182002D9B5D /* ProfileSectionViews */,
 				D99A9A142085AA030073D301 /* Fonts */,
 				D94364B4208467150023507E /* VendorProfile */,
 				D9F021E1205FB7CA0092250D /* Helper */,
@@ -264,6 +269,16 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		D9B478E320877182002D9B5D /* ProfileSectionViews */ = {
+			isa = PBXGroup;
+			children = (
+				D94364B2208464F80023507E /* PortfolioScroller.swift */,
+				D99A9A212085B0BA0073D301 /* ProfileHeader.swift */,
+				D9B478E120876ED1002D9B5D /* AboutVendor.swift */,
+			);
+			path = ProfileSectionViews;
+			sourceTree = "<group>";
+		};
 		D9CD9F65205D2DB900B287ED /* GenieViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -276,8 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				D9F021D2205FA1240092250D /* SelectionCell.swift */,
-				D94364B2208464F80023507E /* PortfolioScroller.swift */,
-				D99A9A212085B0BA0073D301 /* ProfileHeader.swift */,
+				D9B478E4208771B7002D9B5D /* AboutVendorCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -609,6 +623,7 @@
 				D9703B3F205CDB42004C9C3E /* AppDelegate.swift in Sources */,
 				D9F021D6205FA2210092250D /* FormField.swift in Sources */,
 				D9F021D3205FA1240092250D /* SelectionCell.swift in Sources */,
+				D9B478E5208771B7002D9B5D /* AboutVendorCell.swift in Sources */,
 				D94364B7208467680023507E /* ProfileViewModel.swift in Sources */,
 				D99A9A222085B0BA0073D301 /* ProfileHeader.swift in Sources */,
 				D99A9A242085DAC40073D301 /* ReviewInfo.swift in Sources */,
@@ -618,6 +633,7 @@
 				D9E4EBD52084736B002D59B1 /* VendorProfile.swift in Sources */,
 				D9CD9F67205D2DE000B287ED /* GenieViewModel.swift in Sources */,
 				D94364B3208464F80023507E /* PortfolioScroller.swift in Sources */,
+				D9B478E220876ED1002D9B5D /* AboutVendor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -780,9 +796,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R3N9B3ER78;
 				INFOPLIST_FILE = GenieForm/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.WedMeGood.GenieForm;
+				PRODUCT_BUNDLE_IDENTIFIER = com.WedMeGood.testApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -798,9 +814,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R3N9B3ER78;
 				INFOPLIST_FILE = GenieForm/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.WedMeGood.GenieForm;
+				PRODUCT_BUNDLE_IDENTIFIER = com.WedMeGood.testApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;

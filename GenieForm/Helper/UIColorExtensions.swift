@@ -17,14 +17,7 @@ extension UIColor {
             alpha: CGFloat(1.0)
         )
     }
-    
-    /*
-     if(rating <=1) return UIColorFromRGB(0xcb202d);
-     else if(rating <=2) return UIColorFromRGB(0xff7800);
-     else if(rating <=3) return UIColorFromRGB(0xffba00);
-     else if(rating <=4) return UIColorFromRGB(0x9acd32);
-     else return UIColorFromRGB(0x5ba829);
- */
+
     convenience init(rating : String) {
         var ratingF = CGFloat(0)
         if let n = NumberFormatter().number(from: rating) {
@@ -37,6 +30,25 @@ extension UIColor {
         else if ratingF <= 4 { colorUint = 0x9acd32 }
         else { colorUint = 0x5ba829 }
         self.init(rgb: colorUint)
+    }
+}
+
+extension UIButton {
+
+    class func showLoveLoadingAnimationOnButton(_ btn : UIButton) {
+        let transform = btn.transform
+
+        UIView.animate(withDuration: 0.33, animations: {
+            btn.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        }, completion: {(success) in
+            UIView.animate(withDuration: 0.15, animations: {
+                btn.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            }, completion: {(success) in
+                UIView.animate(withDuration: 0.25, animations: {
+                    btn.transform = CGAffineTransform(scaleX: 1, y: 1)
+                }, completion: nil)
+            })
+        })
     }
 }
 

@@ -38,6 +38,8 @@ struct APIList {
     
     static let getVendorProfile = APIList.baseURL + "v2/vendor/%@?version=1.1&member=%d"
     static let getVendorReviews = APIList.baseURL + "v1/vendor/%@/reviews?version=1.1&member=%d"
+    
+    static let shortlistVendor = APIList.baseURL + "v2/vendor_shortlist?version=1.1"
 }
 
 struct AppFont {
