@@ -10,6 +10,7 @@ import UIKit
 
 protocol AboutVendorDelegate: class {
     func showMoreBtnClicked(_ full : Bool)
+    func showAboutVendor()
 }
 class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
 
@@ -46,14 +47,13 @@ class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
         aboutTable.separatorStyle = .none
         aboutTable.isScrollEnabled = false
         aboutTable.backgroundColor = AppColor.primaryWhiteColor
-        aboutTable.allowsSelection = false
         aboutTable.register(AboutVendorCell.self, forCellReuseIdentifier: cellIdentifier)
         self.addSubview(aboutTable)
         
         showMoreBtn = UIButton(type: .custom)
         showMoreBtn.backgroundColor = AppColor.secondaryWhiteColor
         showMoreBtn.setTitle("Read More", for: .normal)
-        showMoreBtn.titleLabel?.font = UIFont.init(name: AppFont.mainFont, size: 18)
+        showMoreBtn.titleLabel?.font = UIFont.init(name: AppFont.mainFont, size: 16)
         showMoreBtn.setTitleColor(AppColor.primaryRedColor, for: .normal)
         showMoreBtn.frame = CGRect(x: 0, y: aboutTable.frame.origin.y + aboutTable.frame.size.height, width: self.bounds.size.width, height: 40)
         showMoreBtn.addTarget(self, action: #selector(showMoreBtnClicked), for: .touchUpInside)
@@ -71,7 +71,7 @@ class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
         subtitleLbl.font = UIFont(name: AppFont.mainFont, size: 15)
         subtitleLbl.textAlignment = .left
         subtitleLbl.numberOfLines = (indexPath.row == 0) ? 3 : 0
-        subtitleLbl.lineBreakMode = .byTruncatingTail
+        subtitleLbl.lineBreakMode = .byCharWrapping
         subtitleLbl.text = (indexPath.row == 0) ? information : faqList[indexPath.row - 1].answer
         if(indexPath.row == 0) {
             if subtitleLbl.numberOfLines == 3 {
@@ -90,6 +90,7 @@ class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! AboutVendorCell
         
+        cell.selectionStyle = .none
         if(indexPath.row == 0) {
             cell.titleLbl.text = "About " + vendorName
             cell.subtitleLbl.text = information
@@ -105,6 +106,10 @@ class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
             }
             cell.titleLbl.attributedText = attrStr
             cell.subtitleLbl.text = faqList[indexPath.row - 1].answer
+            cell.subtitleLbl.textColor = AppColor.secondaryBlackColor
+            if let fade = faqList[indexPath.row - 1].fade {
+                cell.subtitleLbl.alpha = (fade == 0) ? 1 : 0.5
+            }
         }
         
         cell.subtitleLbl.sizeToFit()
@@ -132,7 +137,11 @@ class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        if(indexPath.row == 0) {
+            delegate?.showAboutVendor()
+
+            // show about vendor text full
+        }
     }
     
     override func sizeToFit() {

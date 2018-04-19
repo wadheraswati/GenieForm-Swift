@@ -20,6 +20,8 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
     var header = ProfileHeader()
     var aboutView = AboutVendor()
     
+    let vendorID = "274"
+    
     override func viewDidLoad() {
         
         self.view.backgroundColor = AppColor.secondaryWhiteColor
@@ -34,7 +36,7 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
     
     // MARK: - API Calls -
     func initAPIData() {
-        viewModel.getVendorProfile(vendorID: "274", isMember: false, completion: {(success) in
+        viewModel.getVendorProfile(vendorID: vendorID, isMember: false, completion: {(success) in
             if(success) {
                 let y = (self.navigationController?.navigationBar.bounds.size.height)! + 20
                 self.containerScroll = UIScrollView(frame: CGRect(x: 10, y: y, width: self.view.bounds.size.width - 20, height: self.view.bounds.size.height - y))
@@ -47,7 +49,7 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         })
     }
     func getVendorReviews() {
-        viewModel.getVendorReviewInfo(vendorID : "274", isMember : false, completion: {(success) in
+        viewModel.getVendorReviewInfo(vendorID : vendorID, isMember : false, completion: {(success) in
             if(success) {
                 self.header.currentProfile = self.viewModel.profile
                 self.header.updateReviewBox()
@@ -116,6 +118,58 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         self.viewDidLayoutSubviews()
     }
     
+    func showAboutVendor() {
+        
+        let darkView = UIView(frame: (self.view.window?.bounds)!)
+        darkView.backgroundColor = AppColor.secondaryBlackColor.withAlphaComponent(0.5)
+        darkView.tag = 101
+        darkView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissInfoView)))
+        
+        let backView = UIView(frame: CGRect(x: 0, y: darkView.bounds.size.height, width: darkView.bounds.size.width, height: darkView.bounds.size.height))
+
+        let aboutTitleLbl = UILabel(frame: CGRect(x: 0, y: 5, width: backView.bounds.size.width, height: 20))
+        aboutTitleLbl.text = "About " + viewModel.profile.name
+        aboutTitleLbl.font = UIFont.init(name: AppFont.mediumFont, size: 15)
+        aboutTitleLbl.textColor = AppColor.primaryBlackColor
+        aboutTitleLbl.textAlignment = .center
+        aboutTitleLbl.lineBreakMode = .byTruncatingTail
+        backView.addSubview(aboutTitleLbl)
+        
+        let infoLbl = UILabel(frame: CGRect(x: 0, y: aboutTitleLbl.frame.origin.y + aboutTitleLbl.frame.size.height, width: self.view.bounds.size.width - 20, height: 0))
+        infoLbl.numberOfLines = 0
+        infoLbl.textColor = AppColor.primaryBlackColor
+        infoLbl.font = UIFont.init(name: AppFont.mainFont, size: 15)
+        infoLbl.lineBreakMode = .byCharWrapping
+        infoLbl.textAlignment = .justified
+        infoLbl.text = viewModel.profile.information
+        infoLbl.sizeToFit()
+        
+        backView.frame.size.height = infoLbl.frame.origin.y + infoLbl.frame.size.height + 10
+        
+        backView.backgroundColor = AppColor.primaryWhiteColor
+        infoLbl.center = CGPoint(x: backView.bounds.size.width/2, y: (backView.bounds.size.height)/2 + (aboutTitleLbl.frame.size.height)/2)
+        backView.addSubview(infoLbl)
+        
+        darkView.addSubview(backView)
+        
+        UIView.animate(withDuration: 0.25, animations: {
+            self.view.window?.addSubview(darkView)
+            backView.frame.origin.y = darkView.bounds.size.height - backView.frame.size.height
+        })
+    }
+    
+    @objc func dismissInfoView() {
+        UIView.animate(withDuration: 0.25, animations: {
+            if let view = self.view.window?.viewWithTag(101) {
+                view.alpha = 0
+            }
+        }, completion: {(success) in
+            if let view = self.view.window?.viewWithTag(101) {
+                view.removeFromSuperview()
+            }
+            })
+    }
+    
     //MARK: - ProfileHeaderDelegate Methods -
     
     @objc func reviewBtnClicked() {
@@ -124,7 +178,7 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
     
     @objc func shortlistVendor() {
         UIButton.showLoveLoadingAnimationOnButton(header.shortlistBtn)
-        viewModel.shortlistVendor(vendorID: "274", completion: {(success) in
+        viewModel.shortlistVendor(vendorID: vendorID, completion: {(success) in
             if success {
                 self.header.currentProfile = self.viewModel.profile
                 self.header.updateShortlistBtn()
