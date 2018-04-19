@@ -8,17 +8,26 @@
 
 import UIKit
 
+protocol AboutVendorDelegate: class {
+    func showMoreBtnClicked(_ full : Bool)
+}
 class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
 
     var faqList = [FAQ]()
-    var information : String = ""
+    var information = ""
+    var vendorName = ""
+    weak var delegate : AboutVendorDelegate?
+
     let cellIdentifier = "AboutVendorCell"
     
     var aboutTable = UITableView()
+    var showMoreBtn = UIButton()
+    
+    var showFull = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = AppColor.primaryWhiteColor
+        self.backgroundColor = AppColor.secondaryWhiteColor
         self.layer.shadowColor = AppColor.secondaryBlackColor.cgColor;
         self.layer.shadowOffset = CGSize(width: 0, height: 2)
         self.layer.shadowOpacity = 1
@@ -35,8 +44,19 @@ class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
         aboutTable.delegate = self
         aboutTable.dataSource = self
         aboutTable.separatorStyle = .none
+        aboutTable.isScrollEnabled = false
+        aboutTable.backgroundColor = AppColor.primaryWhiteColor
         aboutTable.register(AboutVendorCell.self, forCellReuseIdentifier: cellIdentifier)
         self.addSubview(aboutTable)
+        
+        showMoreBtn = UIButton(type: .custom)
+        showMoreBtn.backgroundColor = AppColor.secondaryWhiteColor
+        showMoreBtn.setTitle("Read More", for: .normal)
+        showMoreBtn.titleLabel?.font = UIFont.init(name: AppFont.mainFont, size: 18)
+        showMoreBtn.setTitleColor(AppColor.primaryRedColor, for: .normal)
+        showMoreBtn.frame = CGRect(x: 0, y: aboutTable.frame.origin.y + aboutTable.frame.size.height, width: self.bounds.size.width, height: 40)
+        showMoreBtn.addTarget(self, action: #selector(showMoreBtnClicked), for: .touchUpInside)
+        self.addSubview(showMoreBtn)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -49,12 +69,12 @@ class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
         subtitleLbl.textColor = AppColor.primaryBlackColor
         subtitleLbl.font = UIFont(name: AppFont.mainFont, size: 15)
         subtitleLbl.textAlignment = .left
-        subtitleLbl.numberOfLines = 0
+        subtitleLbl.numberOfLines = (indexPath.row == 0) ? 3 : 0
         subtitleLbl.lineBreakMode = .byTruncatingTail
         subtitleLbl.text = (indexPath.row == 0) ? information : faqList[indexPath.row - 1].answer
         subtitleLbl.sizeToFit()
         
-        print("height - \(indexPath.row) - \(subtitleLbl.bounds.size.height + 35)")
+        print("height - \(indexPath.row) - \(subtitleLbl.bounds.size.height + 40)")
         return subtitleLbl.bounds.size.height + 40
     }
     
@@ -62,7 +82,7 @@ class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! AboutVendorCell
         
         if(indexPath.row == 0) {
-            cell.titleLbl.text = "About Vendor"
+            cell.titleLbl.text = "About " + vendorName
             cell.subtitleLbl.text = information
         } else {
             let attrStr = NSMutableAttributedString(string: faqList[indexPath.row - 1].question)
@@ -74,7 +94,6 @@ class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
                 }
             }
             cell.titleLbl.attributedText = attrStr
-            //cell.titleLbl.text = faqList[indexPath.row - 1].question
             cell.subtitleLbl.text = faqList[indexPath.row - 1].answer
         }
         cell.layoutSubviews()
@@ -88,8 +107,28 @@ class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
     
     override func sizeToFit() {
         aboutTable.frame.size.height = aboutTable.contentSize.height
+        
+        if(showFull == false) {
+            var height : CGFloat = 0
+            if(faqList.isEmpty == false) {
+                for index in 1...min(3, faqList.count) {
+                    print(aboutTable.visibleCells.count)
+                    let indexPath = IndexPath(item: index - 1, section: 0)
+                    if let cell = aboutTable.cellForRow(at: indexPath) as? AboutVendorCell {
+                        height += cell.bounds.size.height
+                        print(height)
+                        
+                    }
+                }
+                aboutTable.frame.size.height = height
+            }
+        }
+        showMoreBtn.frame.origin.y = aboutTable.frame.origin.y + aboutTable.frame.size.height
     }
     
-    
-
+    @objc func showMoreBtnClicked() {
+        showFull = !showFull
+        showMoreBtn.setTitle(showFull ? "Read Less" : "Read More", for: .normal)
+        delegate?.showMoreBtnClicked(showFull)
+    }
 }

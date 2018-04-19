@@ -8,7 +8,7 @@ target 'GenieForm' do
   pod 'M13Checkbox'
   pod 'AlamofireImage', '~> 3.3'
   pod 'FontAwesome.swift'
-
+  pod 'TTTAttributedLabel'
 
   # Pods for GenieForm
 

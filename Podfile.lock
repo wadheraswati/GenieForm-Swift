@@ -4,19 +4,22 @@ PODS:
     - Alamofire (~> 4.5)
   - FontAwesome.swift (1.3.2)
   - M13Checkbox (3.2.2)
+  - TTTAttributedLabel (2.0.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
   - AlamofireImage (~> 3.3)
   - FontAwesome.swift
   - M13Checkbox
+  - TTTAttributedLabel
 
 SPEC CHECKSUMS:
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
   AlamofireImage: 2e784dc5d00f04903a52c1d169181469c805c3df
   FontAwesome.swift: b4e4c8ccbbecb12f9b592bc533ff237af3706667
   M13Checkbox: a8c2491cfbbca10797925fd0b9154a782bf40d89
+  TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
-PODFILE CHECKSUM: 5a99422a9b363876813be37f094badaa2a2dcbc9
+PODFILE CHECKSUM: e91f6311455c50dbd80b974cef2604e10b553716
 
 COCOAPODS: 1.4.0

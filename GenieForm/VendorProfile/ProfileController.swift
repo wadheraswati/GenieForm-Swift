@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileController: UIViewController, ProfileHeaderDelegate {
+class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDelegate {
 
     let viewModel : ProfileViewModel = ProfileViewModel()
 
@@ -102,11 +102,18 @@ class ProfileController: UIViewController, ProfileHeaderDelegate {
         
         aboutView = AboutVendor(frame: CGRect(x: 0, y: header.frame.origin.y + header.frame.size.height + 10, width: containerScroll.bounds.size.width, height: 100))
         aboutView.faqList = viewModel.faq
+        aboutView.vendorName = viewModel.profile.name
         aboutView.information = viewModel.profile.information
+        aboutView.delegate = self
         aboutView.load()
         aboutView.sizeToFit()
         containerScroll.addSubview(aboutView)
         self.perform(#selector(viewDidLayoutSubviews), with: nil, afterDelay: 0.5)
+    }
+    
+    //MARK: AboutVendorDelegate Methods -
+    func showMoreBtnClicked(_ full: Bool) {
+        self.viewDidLayoutSubviews()
     }
     
     //MARK: - ProfileHeaderDelegate Methods -
@@ -138,7 +145,7 @@ class ProfileController: UIViewController, ProfileHeaderDelegate {
         
         header.sizeToFit()
         aboutView.sizeToFit()
-        aboutView.frame.size.height = aboutView.aboutTable.frame.size.height
+        aboutView.frame.size.height = aboutView.showMoreBtn.frame.origin.y + aboutView.showMoreBtn.frame.size.height
         
         containerScroll.contentSize = CGSize(width: containerScroll.bounds.size.width, height: (aboutView.frame.origin.y) + (aboutView.frame.size.height) + 15)
     

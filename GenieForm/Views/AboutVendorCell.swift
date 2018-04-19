@@ -15,9 +15,7 @@ class AboutVendorCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        self.backgroundColor = AppColor.primaryCreamColor
-        
+            
         titleLbl = UILabel(frame: CGRect(x: 5, y: 10, width: self.bounds.size.width - 10, height: 25))
         titleLbl.textColor = AppColor.primaryBlackColor
         titleLbl.font = UIFont(name: AppFont.mediumFont, size: 15)
@@ -29,7 +27,7 @@ class AboutVendorCell: UITableViewCell {
         subtitleLbl.textColor = AppColor.primaryBlackColor
         subtitleLbl.font = UIFont(name: AppFont.mainFont, size: 15)
         subtitleLbl.textAlignment = .left
-        subtitleLbl.numberOfLines = 0
+        subtitleLbl.numberOfLines = 3
         subtitleLbl.lineBreakMode = .byTruncatingTail
         self.addSubview(subtitleLbl)
         
