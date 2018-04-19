@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import TTTAttributedLabel
 
 class AboutVendorCell: UITableViewCell {
 
     var titleLbl = UILabel()
-    var subtitleLbl = UILabel()
+    var subtitleLbl = TTTAttributedLabel(frame: .zero)
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -23,7 +24,7 @@ class AboutVendorCell: UITableViewCell {
         titleLbl.numberOfLines = 1
         self.addSubview(titleLbl)
         
-        subtitleLbl = UILabel(frame: CGRect(x: 5, y: titleLbl.frame.origin.y + titleLbl.frame.size.height, width: self.bounds.size.width - 10, height: 25))
+        subtitleLbl = TTTAttributedLabel(frame: CGRect(x: 5, y: titleLbl.frame.origin.y + titleLbl.frame.size.height, width: self.bounds.size.width - 10, height: 25))
         subtitleLbl.textColor = AppColor.primaryBlackColor
         subtitleLbl.font = UIFont(name: AppFont.mainFont, size: 15)
         subtitleLbl.textAlignment = .left
@@ -46,9 +47,7 @@ class AboutVendorCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        titleLbl.frame = CGRect(x: 5, y: 10, width: self.bounds.size.width - 10, height: 25)
-
-        subtitleLbl.sizeToFit()
+        titleLbl.frame = CGRect(x: 5, y: 10, width: self.bounds.size.width - 10, height: 25)        
         subtitleLbl.frame = CGRect(x: 5, y: titleLbl.frame.origin.y + titleLbl.frame.size.height, width: self.bounds.size.width - 10, height: subtitleLbl.bounds.size.height)
     }
 }

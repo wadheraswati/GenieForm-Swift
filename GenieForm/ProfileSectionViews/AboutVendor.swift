@@ -46,6 +46,7 @@ class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
         aboutTable.separatorStyle = .none
         aboutTable.isScrollEnabled = false
         aboutTable.backgroundColor = AppColor.primaryWhiteColor
+        aboutTable.allowsSelection = false
         aboutTable.register(AboutVendorCell.self, forCellReuseIdentifier: cellIdentifier)
         self.addSubview(aboutTable)
         
@@ -72,8 +73,16 @@ class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
         subtitleLbl.numberOfLines = (indexPath.row == 0) ? 3 : 0
         subtitleLbl.lineBreakMode = .byTruncatingTail
         subtitleLbl.text = (indexPath.row == 0) ? information : faqList[indexPath.row - 1].answer
+        if(indexPath.row == 0) {
+            if subtitleLbl.numberOfLines == 3 {
+                let continueText = "Continue Reading"
+                if let value = subtitleLbl.text {
+                    let substring = value.dropLast(value.count - 150)
+                    subtitleLbl.text = String(substring) + "... " + continueText
+                }
+            }
+        }
         subtitleLbl.sizeToFit()
-        
         print("height - \(indexPath.row) - \(subtitleLbl.bounds.size.height + 40)")
         return subtitleLbl.bounds.size.height + 40
     }
@@ -84,6 +93,7 @@ class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
         if(indexPath.row == 0) {
             cell.titleLbl.text = "About " + vendorName
             cell.subtitleLbl.text = information
+            
         } else {
             let attrStr = NSMutableAttributedString(string: faqList[indexPath.row - 1].question)
             attrStr.addAttribute(.foregroundColor, value: AppColor.primaryBlackColor, range: NSRange(location: 0, length: attrStr.length))
@@ -96,6 +106,26 @@ class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
             cell.titleLbl.attributedText = attrStr
             cell.subtitleLbl.text = faqList[indexPath.row - 1].answer
         }
+        
+        cell.subtitleLbl.sizeToFit()
+
+        if(indexPath.row == 0) {
+            if cell.subtitleLbl.numberOfLines == 3 {
+                let continueText = "Continue Reading"
+                if let value = cell.subtitleLbl.text {
+                    let substring = value.dropLast(value.count - 150)
+                    let newStr = String(substring) + "... " + continueText
+                    let attrStr = NSMutableAttributedString(string: newStr)
+                    attrStr.addAttribute(.foregroundColor, value: AppColor.primaryBlackColor, range: NSRange(location: 0, length: attrStr.length))
+                    attrStr.addAttribute(.font, value: UIFont.init(name: AppFont.mainFont, size: 15)!, range: NSRange(location: 0, length: attrStr.length))
+                    attrStr.addAttribute(.foregroundColor, value: AppColor.secondaryBlackColor, range: attrStr.mutableString.range(of: continueText))
+                    attrStr.addAttribute(.font, value: UIFont.init(name: AppFont.mediumFont, size: 15)!, range: attrStr.mutableString.range(of: continueText))
+                    cell.subtitleLbl.attributedText = attrStr
+                }
+            }
+        }
+        
+        cell.subtitleLbl.sizeToFit()
         cell.layoutSubviews()
         
         return cell

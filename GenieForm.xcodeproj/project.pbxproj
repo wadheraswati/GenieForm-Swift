@@ -96,6 +96,7 @@
 		D99A9A262086157E0073D301 /* FontAwesome_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FontAwesome_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9B478E120876ED1002D9B5D /* AboutVendor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutVendor.swift; sourceTree = "<group>"; };
 		D9B478E4208771B7002D9B5D /* AboutVendorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutVendorCell.swift; sourceTree = "<group>"; };
+		D9B478E72088732F002D9B5D /* TTTAttributedLabel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TTTAttributedLabel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9CD9F66205D2DE000B287ED /* GenieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenieViewModel.swift; sourceTree = "<group>"; };
 		D9E4EBD42084736B002D59B1 /* VendorProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorProfile.swift; sourceTree = "<group>"; };
 		D9E4EBD6208477D7002D59B1 /* WMGInfinity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WMGInfinity.swift; sourceTree = "<group>"; };
@@ -136,6 +137,7 @@
 		028206AFC18F8A53C1955B8F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D9B478E72088732F002D9B5D /* TTTAttributedLabel.framework */,
 				D99A9A262086157E0073D301 /* FontAwesome_swift.framework */,
 				D99A9A132084C1670073D301 /* AlamofireImage.framework */,
 				08693DDD7E482BB274EEA11C /* Pods_GenieForm.framework */,
