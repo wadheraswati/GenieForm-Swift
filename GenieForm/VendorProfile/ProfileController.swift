@@ -206,7 +206,9 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
     }
     
     @objc func queryVendor() {
-        
+        let enquiryVC = VendorEnquiryController()
+        enquiryVC.profileVM = viewModel
+        self.navigationController?.pushViewController(enquiryVC, animated: true)
     }
     
     @objc func callVendor() {

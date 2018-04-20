@@ -93,7 +93,7 @@ class FormDatepicker: UIView {
         super.init(frame: frame)
         
         fieldTF = UITextField(frame: CGRect(x: 10, y: 5, width: frame.size.width - 20, height: 40))
-        fieldTF.font = UIFont.systemFont(ofSize: 15)
+        fieldTF.font = UIFont(name: AppFont.mainFont, size: 15)
         fieldTF.textColor = .black
         fieldTF.textAlignment = .left
         fieldTF.keyboardType = .default
@@ -106,9 +106,6 @@ class FormDatepicker: UIView {
         self.addSubview(fieldTF)
     
         datePicker.date = NSDate() as Date
-
-        //self.addSubview(clickBtn)
-        
     }
     
     @objc func showDatePickerInView(_ view : UIView) {
