@@ -18,7 +18,7 @@ class ProfileViewModel {
     var faq = [FAQ]()
     var priceFAQ = [FAQ]()
     var pricing = [Pricing]()
-    
+    var flags = Flags()
     var reviews = [Reviews]()
     var reviewInfo = ReviewsInfo()
     
@@ -45,9 +45,11 @@ class ProfileViewModel {
                         self.albums = try JSONDecoder().decode(AlbumsInfo.self, from: albumsData)
                         print(self.albums)
                         
-                        let videosData = try JSONSerialization.data(withJSONObject: data.value(forKey: "videos")!, options: .prettyPrinted)
-                        self.videos = try JSONDecoder().decode(VideosInfo.self, from: videosData)
-                        print(self.videos)
+                        if (data.value(forKey: "videos") != nil) {
+                            let videosData = try JSONSerialization.data(withJSONObject: data.value(forKey: "videos")!, options: .prettyPrinted)
+                            self.videos = try JSONDecoder().decode(VideosInfo.self, from: videosData)
+                            print(self.videos)
+                        }
                         
                         let faqs = data.value(forKey: "faq") as! NSArray
                         for faq in faqs {
@@ -56,12 +58,14 @@ class ProfileViewModel {
                         }
                         print(self.faq)
                         
-                        let priceFAQs = data.value(forKey: "price_faq") as! NSArray
-                        for priceFAQ in priceFAQs {
-                            let priceFAQData = try JSONSerialization.data(withJSONObject: priceFAQ, options: .prettyPrinted)
-                            self.priceFAQ.append(try JSONDecoder().decode(FAQ.self, from: priceFAQData))
+                        if (data.value(forKey: "price_faq") != nil) {
+                            let priceFAQs = data.value(forKey: "price_faq") as! NSArray
+                            for priceFAQ in priceFAQs {
+                                let priceFAQData = try JSONSerialization.data(withJSONObject: priceFAQ, options: .prettyPrinted)
+                                self.priceFAQ.append(try JSONDecoder().decode(FAQ.self, from: priceFAQData))
+                            }
+                            print(self.priceFAQ)
                         }
-                        print(self.priceFAQ)
                         
                         let pricingArr = data.value(forKey: "pricing") as! NSArray
                         for price in pricingArr {
@@ -69,6 +73,23 @@ class ProfileViewModel {
                             self.pricing.append(try JSONDecoder().decode(Pricing.self, from: pricingData))
                         }
                         print(self.pricing)
+                        
+                        let flagsData = try JSONSerialization.data(withJSONObject: data.value(forKey: "flags")!, options: .prettyPrinted)
+                        self.flags = try JSONDecoder().decode(Flags.self, from: flagsData)
+                        print(self.flags)
+                        
+                        if (data.value(forKey: "concierge_phone") != nil) {
+                            self.profile.concierge_phone = (data.value(forKey: "concierge_phone") as! String)
+                        }
+                        
+                        if (data.value(forKey: "concierge_display_phone") != nil) {
+                            self.profile.concierge_display_phone = (data.value(forKey: "concierge_display_phone") as! String)
+                        }
+                        
+//                        if let conciergeDisplayPhone = try JSONSerialization.data(withJSONObject: data.value(forKey: "concierge_display_phone"), options: .prettyPrinted) {
+//                            profile.concierge_display_phone = conciergeDisplayPhone
+//                        }
+                        
                     }
                     catch {
                         print("json error: \(error)")

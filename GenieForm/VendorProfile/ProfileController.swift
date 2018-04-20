@@ -19,8 +19,9 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
     var portfolioScroll = PortfolioScroller()
     var header = ProfileHeader()
     var aboutView = AboutVendor()
+    var bestPrice = BestPrice()
     
-    let vendorID = "274"
+    let vendorID = "23884"
     
     override func viewDidLoad() {
         
@@ -90,6 +91,14 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         shareBtn.frame.origin.x = containerScroll.frame.size.width - shareBtn.bounds.size.width
         containerScroll.addSubview(shareBtn)
         
+        self.addProfileHeader()
+        self.addAboutView()
+        if viewModel.flags.show_best_deal! > 0 { self.addBestPrice() }
+       
+        self.perform(#selector(viewDidLayoutSubviews), with: nil, afterDelay: 0.5)
+    }
+    
+    func addProfileHeader() {
         header = ProfileHeader(frame: CGRect(x: 0, y: portfolioScroll.frame.origin.y + portfolioScroll.frame.size.height - 50, width: containerScroll.bounds.size.width, height: 100))
         header.currentProfile = viewModel.profile
         header.load()
@@ -98,10 +107,12 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         header.shortlistBtn.addTarget(self, action: #selector(shortlistVendor), for: .touchUpInside)
         header.queryBtn.addTarget(self, action: #selector(queryVendor), for: .touchUpInside)
         header.callBtn.addTarget(self, action: #selector(callVendor), for: .touchUpInside)
-
+        
         header.sizeToFit()
         containerScroll.addSubview(header)
-        
+    }
+    
+    func addAboutView() {
         aboutView = AboutVendor(frame: CGRect(x: 0, y: header.frame.origin.y + header.frame.size.height + 10, width: containerScroll.bounds.size.width, height: 100))
         aboutView.faqList = viewModel.faq
         aboutView.vendorName = viewModel.profile.name
@@ -110,10 +121,18 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         aboutView.load()
         aboutView.sizeToFit()
         containerScroll.addSubview(aboutView)
-        self.perform(#selector(viewDidLayoutSubviews), with: nil, afterDelay: 0.5)
     }
     
-    //MARK: AboutVendorDelegate Methods -
+    func addBestPrice() {
+        bestPrice = BestPrice(frame: CGRect(x: 0, y: aboutView.frame.origin.y + aboutView.frame.size.height + 10, width: containerScroll.bounds.size.width, height: 0))
+        bestPrice.displayPhone = viewModel.profile.concierge_display_phone!
+        bestPrice.loadData()
+        bestPrice.frame.size.height = bestPrice.bestPriceLbl.frame.size.height + 20
+        bestPrice.layoutSubviews()
+        containerScroll.addSubview(bestPrice)
+    }
+    
+    //MARK: - AboutVendorDelegate Methods -
     func showMoreBtnClicked(_ full: Bool) {
         self.viewDidLayoutSubviews()
     }
@@ -139,7 +158,7 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         infoLbl.numberOfLines = 0
         infoLbl.textColor = AppColor.primaryBlackColor
         infoLbl.font = UIFont.init(name: AppFont.mainFont, size: 15)
-        infoLbl.lineBreakMode = .byCharWrapping
+        infoLbl.lineBreakMode = .byWordWrapping
         infoLbl.textAlignment = .justified
         infoLbl.text = viewModel.profile.information
         infoLbl.sizeToFit()
@@ -194,6 +213,7 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         
     }
     
+    //MARK: - UI Update Methods -
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -201,7 +221,8 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         aboutView.sizeToFit()
         aboutView.frame.size.height = aboutView.showMoreBtn.frame.origin.y + aboutView.showMoreBtn.frame.size.height
         
-        containerScroll.contentSize = CGSize(width: containerScroll.bounds.size.width, height: (aboutView.frame.origin.y) + (aboutView.frame.size.height) + 15)
+        bestPrice.frame.origin.y = aboutView.frame.origin.y + aboutView.frame.size.height + 10
+        containerScroll.contentSize = CGSize(width: containerScroll.bounds.size.width, height: (bestPrice.frame.origin.y) + (bestPrice.frame.size.height) + 15)
     
     }
 

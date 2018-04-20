@@ -216,6 +216,8 @@ class ProfileHeader: UIView {
     }
     
     override func sizeToFit() {
+        super.sizeToFit()
+
         self.frame.size.height = ctaView.frame.origin.y + ctaView.frame.size.height
     }
     

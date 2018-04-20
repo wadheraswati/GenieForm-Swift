@@ -47,3 +47,9 @@ struct ReviewImage : Codable {
     var image_id : String
     var image_url : String
 }
+
+struct Sticker : Codable {
+    var sticker_id : String
+    var name : String
+    var sticker_url : String
+}

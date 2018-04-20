@@ -12,6 +12,7 @@ protocol AboutVendorDelegate: class {
     func showMoreBtnClicked(_ full : Bool)
     func showAboutVendor()
 }
+
 class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
 
     var faqList = [FAQ]()
@@ -28,6 +29,7 @@ class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         self.backgroundColor = AppColor.secondaryWhiteColor
         self.layer.shadowColor = AppColor.secondaryBlackColor.cgColor;
         self.layer.shadowOffset = CGSize(width: 0, height: 2)
@@ -71,7 +73,7 @@ class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
         subtitleLbl.font = UIFont(name: AppFont.mainFont, size: 15)
         subtitleLbl.textAlignment = .left
         subtitleLbl.numberOfLines = (indexPath.row == 0) ? 3 : 0
-        subtitleLbl.lineBreakMode = .byCharWrapping
+        subtitleLbl.lineBreakMode = .byWordWrapping
         subtitleLbl.text = (indexPath.row == 0) ? information : faqList[indexPath.row - 1].answer
         if(indexPath.row == 0) {
             if subtitleLbl.numberOfLines == 3 {
@@ -145,6 +147,8 @@ class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     
     override func sizeToFit() {
+        super.sizeToFit()
+        
         aboutTable.frame.size.height = aboutTable.contentSize.height
         
         if(showFull == false) {

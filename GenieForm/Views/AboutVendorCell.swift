@@ -29,7 +29,7 @@ class AboutVendorCell: UITableViewCell {
         subtitleLbl.font = UIFont(name: AppFont.mainFont, size: 15)
         subtitleLbl.textAlignment = .left
         subtitleLbl.numberOfLines = 3
-        subtitleLbl.lineBreakMode = .byCharWrapping
+        subtitleLbl.lineBreakMode = .byWordWrapping
         self.addSubview(subtitleLbl)
         
     }

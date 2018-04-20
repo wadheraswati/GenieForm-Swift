@@ -28,6 +28,13 @@ struct Profile : Codable {
     var send_query_default_message : String?
     var reviewInfo : ReviewsInfo?
     
+    var contact_email : String?
+    var vendor_price_subtext : String?
+    var price_subtitle : String?
+    var mask_number : String?
+    
+    var concierge_phone : String?
+    var concierge_display_phone : String?
     // this init method is created to initialise an object in view model class of this struct
     init() {
         self.id = 0
@@ -43,6 +50,13 @@ struct Profile : Codable {
         self.phone = []
         self.status = 4
         self.shortlisted = 0
+        
+        self.contact_email = ""
+        self.vendor_price_subtext = ""
+        self.price_subtitle = ""
+        self.mask_number = ""
+        self.concierge_phone = ""
+        self.concierge_display_phone = ""
     }
 }
 
@@ -73,13 +87,13 @@ struct AlbumsInfo : Codable {
 }
 
 struct Album : Codable {
-    var id : Int64
+    var id : Double?
     var image_count : Int64
     var title : String
     var default_description : String?
     var description : String?
     var album_link : String
-    var location : String
+    var location : String?
     var cover_pic_url : String
     var section : String
 }
@@ -118,13 +132,39 @@ struct Pricing : Codable {
     var label : String
     var unit : String
     var show_inr : Int
-    var icon : String
+    var icon : String?
 }
 
-struct Sticker : Codable {
-    var sticker_id : String
-    var name : String
-    var sticker_url : String
+
+struct Flags : Codable {
+    var status : Double?
+    var mask_number_enabled : Double?
+    var show_best_deal : Double?
+    var wmg_price_available : Double?
+    var venue_send_enquiry : Double?
+    
+    init() {
+        self.status = 4 //active status
+        self.mask_number_enabled = 0
+        self.show_best_deal = 0
+        self.wmg_price_available = 0
+        self.venue_send_enquiry = 0
+    }
+    
 }
 
+struct Menu : Codable {
+    var id : Double
+    var title : String
+    var price_per_plate : Double
+    var menu_type_id : Double
+}
+
+struct Banquet : Codable {
+    var id : Double
+    var title : String
+    var indoor_outdoor : Double
+    var fixed_capacity : Double
+    var floating_capacity : Double
+}
 
