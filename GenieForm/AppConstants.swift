@@ -37,9 +37,11 @@ struct APIList {
     static let postGenieForm = APIList.baseURL + "v1/booking-lead/add?version=1.1&category_slug=%@&city_slug=%@"
     
     static let getVendorProfile = APIList.baseURL + "v2/vendor/%@?version=1.1&member=%d"
-    static let getVendorReviews = APIList.baseURL + "v1/vendor/%@/reviews?version=1.1&member=%d"
+    static let getVendorReviews = APIList.baseURL + "v1/vendor/%d/reviews?version=1.1&member=%d"
     
     static let shortlistVendor = APIList.baseURL + "v2/vendor_shortlist?version=1.1"
+    
+    static let messageVendor = APIList.baseURL + "v1/send_enquiry?version=1.2"
 }
 
 struct AppFont {

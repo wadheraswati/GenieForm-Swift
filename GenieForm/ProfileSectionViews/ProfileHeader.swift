@@ -19,7 +19,7 @@ class ProfileHeader: UIView {
     
     var reviewBtn = UIButton()
     var shortlistBtn = UIButton()
-    var queryBtn = UIButton()
+    var messageBtn = UIButton()
     var callBtn = UIButton()
     
     override init(frame: CGRect) {
@@ -163,8 +163,8 @@ class ProfileHeader: UIView {
         shortlistBtn = createBtn((currentProfile.shortlisted! > 0) ? "" : "", "Shortlist", CGRect(x: ctaView.bounds.size.width/4, y: 0, width: ctaView.bounds.size.width/4, height: ctaView.bounds.size.height))
         ctaView.addSubview(shortlistBtn)
 
-        queryBtn = createBtn("", "Message", CGRect(x: (ctaView.bounds.size.width/4)*2, y: 0, width: ctaView.bounds.size.width/4, height: ctaView.bounds.size.height))
-        ctaView.addSubview(queryBtn)
+        messageBtn = createBtn("", "Message", CGRect(x: (ctaView.bounds.size.width/4)*2, y: 0, width: ctaView.bounds.size.width/4, height: ctaView.bounds.size.height))
+        ctaView.addSubview(messageBtn)
 
         callBtn = createBtn("", "Call", CGRect(x: (ctaView.bounds.size.width/4)*3, y: 0, width: ctaView.bounds.size.width/4, height: ctaView.bounds.size.height))
         ctaView.addSubview(callBtn)

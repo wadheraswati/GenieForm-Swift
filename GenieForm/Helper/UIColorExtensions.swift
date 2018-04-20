@@ -36,7 +36,6 @@ extension UIColor {
 extension UIButton {
 
     class func showLoveLoadingAnimationOnButton(_ btn : UIButton) {
-        let transform = btn.transform
 
         UIView.animate(withDuration: 0.33, animations: {
             btn.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)

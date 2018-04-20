@@ -85,11 +85,7 @@ class ProfileViewModel {
                         if (data.value(forKey: "concierge_display_phone") != nil) {
                             self.profile.concierge_display_phone = (data.value(forKey: "concierge_display_phone") as! String)
                         }
-                        
-//                        if let conciergeDisplayPhone = try JSONSerialization.data(withJSONObject: data.value(forKey: "concierge_display_phone"), options: .prettyPrinted) {
-//                            profile.concierge_display_phone = conciergeDisplayPhone
-//                        }
-                        
+
                     }
                     catch {
                         print("json error: \(error)")
@@ -99,8 +95,8 @@ class ProfileViewModel {
         })
     }
     
-    func getVendorReviewInfo(vendorID : String, isMember : Bool, completion : @escaping (_ success : Bool) -> ()) {
-        let apiStr = String.init(format: APIList.getVendorReviews, vendorID, isMember ? 1 : 0)
+    func getVendorReviewInfo(isMember : Bool, completion : @escaping (_ success : Bool) -> ()) {
+        let apiStr = String.init(format: APIList.getVendorReviews, profile.id, isMember ? 1 : 0)
         
         apiService.GETAPI(url: apiStr, completion: {(success, result) in
             if(success) {
@@ -128,12 +124,12 @@ class ProfileViewModel {
         })
     }
     
-    func shortlistVendor(vendorID : String, completion : @escaping (_ success : Bool) -> ()) {
-        let apiStr = String.init(format: APIList.shortlistVendor)
+    func shortlistVendor(completion : @escaping (_ success : Bool) -> ()) {
+        let apiStr = APIList.shortlistVendor
         var apiParams : [String : AnyObject] = [:]
         
         apiParams["wedding_id"] = "" as AnyObject
-        apiParams["vendor_id"] = vendorID as AnyObject
+        apiParams["vendor_id"] = profile.id as AnyObject
 
         apiService.POSTAPI(url: apiStr, parameters: apiParams, completion : {(success, result) in
             if(success) {
@@ -143,4 +139,26 @@ class ProfileViewModel {
             completion(success)
         })
     }
+    
+    func messageVendor(_ params : [String : AnyObject], completion : @escaping (_ success : Bool) -> ()) {
+        let apiStr = APIList.messageVendor
+        var apiParams : [String : AnyObject] = [:]
+        
+        apiParams["wedding_id"] = "" as AnyObject
+        apiParams["vendor_id"] = profile.id as AnyObject
+        apiParams.merge(params, uniquingKeysWith: { (first, _) in first })
+        
+        apiService.POSTAPI(url: apiStr, parameters: apiParams, completion: {(success, result)
+            in
+            if(success) {
+                print(result.value!)
+                let response = result.value as! NSDictionary
+                if let data = response.value(forKey: "data") {
+                    self.profile.inbox_thread_id = (data as! NSDictionary).value(forKey: "inbox_thread_id") as? String
+                }
+            }
+            completion(success)
+        })
+    }
+    
 }

@@ -1,5 +1,5 @@
 //
-//  VendorEnquiryController.swift
+//  MessageVendorDelegate.swift
 //  GenieForm
 //
 //  Created by Swati Wadhera on 20/04/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class VendorEnquiryController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
+class MessageVendorController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
 
     var containerScroll = UIScrollView()
     var submitBtn = UIButton()
@@ -30,6 +30,7 @@ class VendorEnquiryController: UIViewController, UITextFieldDelegate, UITextView
         submitBtn.backgroundColor = AppColor.primaryRedColor
         submitBtn.titleLabel?.font = UIFont.init(name: AppFont.mediumFont, size: 16)
         submitBtn.frame = CGRect(x: 0, y: self.view.bounds.size.height - 40, width: self.view.bounds.size.width, height: 40)
+        submitBtn.addTarget(self, action: #selector(sendQuery), for: .touchUpInside)
         self.view.addSubview(submitBtn)
         
         containerScroll = UIScrollView(frame: CGRect(x: 0, y: y, width: self.view.bounds.size.width, height: self.view.bounds.size.height - y - submitBtn.frame.size.height))
@@ -77,6 +78,7 @@ class VendorEnquiryController: UIViewController, UITextFieldDelegate, UITextView
         dateTF.fieldTF.frame.size.width = width
         dateTF.datePicker.datePickerMode = .date
         dateTF.fieldTF.delegate = self
+        dateTF.fieldTF.tag = 100
         dateTF.fieldTF.backgroundColor = AppColor.secondaryWhiteColor
         dateTF.fieldTF.placeholder = "24 Aug, 2018"
         containerScroll.addSubview(dateTF)
@@ -97,10 +99,11 @@ class VendorEnquiryController: UIViewController, UITextFieldDelegate, UITextView
         
         let msgTV = UITextView(frame: CGRect(x: x, y: y, width: width, height: containerScroll.bounds.size.height - y - 10))
         msgTV.textColor = AppColor.primaryBlackColor
-        msgTV.font = UIFont.init(name: AppFont.mainFont, size: 14)
+        msgTV.font = UIFont.init(name: AppFont.mainFont, size: 15)
         msgTV.textAlignment = .left
         msgTV.text = profileVM.profile.send_query_default_message!
         msgTV.delegate = self
+        msgTV.tag = 101
         msgTV.autocorrectionType = .no
         msgTV.backgroundColor = AppColor.secondaryWhiteColor
         msgTV.layer.borderColor = AppColor.textFieldBorderColor.cgColor
@@ -136,6 +139,48 @@ class VendorEnquiryController: UIViewController, UITextFieldDelegate, UITextView
         let view = textField.superview as? FormDatepicker
         view?.showDatePickerInView(self.view)
         return false;
+    }
+    
+    //MARK: - Action Methods -
+    @objc func sendQuery() {
+        if validate() {
+            
+            let dateTF = containerScroll.viewWithTag(100) as! UITextField
+            let msgTV = containerScroll.viewWithTag(101) as! UITextView
+
+            let params : [String : AnyObject] = ["function_date" : dateTF.text as AnyObject,            "requirements" : msgTV.text as AnyObject]
+            
+            profileVM.messageVendor(params, completion: {(success) in
+                if success {
+                    //TODO: Add success popup here
+                    self.navigationController?.popViewController(animated: true)
+                }
+            })
+        }
+    }
+    
+    func validate() -> Bool {
+        
+        var valid = true
+        var errorMsg = ""
+        
+        let dateTF = containerScroll.viewWithTag(100) as! UITextField
+        let msgTV = containerScroll.viewWithTag(101) as! UITextView
+
+        if dateTF.text?.count == 0 {
+            valid = false
+            errorMsg = "Please mention your event date"
+        } else if msgTV.text?.count == 0 {
+            valid = false
+            errorMsg = "Please mention your requirements"
+        } else if (msgTV.text?.count)! < 100 {
+            valid = false
+            errorMsg = "Message should be of minimum 100 characters"
+        }
+        
+        print(errorMsg)
+        
+        return valid
     }
 
     override func didReceiveMemoryWarning() {

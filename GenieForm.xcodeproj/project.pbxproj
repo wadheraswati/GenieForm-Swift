@@ -32,7 +32,7 @@
 		D9B478E220876ED1002D9B5D /* AboutVendor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B478E120876ED1002D9B5D /* AboutVendor.swift */; };
 		D9B478E5208771B7002D9B5D /* AboutVendorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B478E4208771B7002D9B5D /* AboutVendorCell.swift */; };
 		D9B478E92088B498002D9B5D /* BestPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B478E82088B498002D9B5D /* BestPrice.swift */; };
-		D9B478EB2089AAD8002D9B5D /* VendorEnquiryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B478EA2089AAD8002D9B5D /* VendorEnquiryController.swift */; };
+		D9B478EB2089AAD8002D9B5D /* MessageVendorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B478EA2089AAD8002D9B5D /* MessageVendorController.swift */; };
 		D9CD9F67205D2DE000B287ED /* GenieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CD9F66205D2DE000B287ED /* GenieViewModel.swift */; };
 		D9E4EBD52084736B002D59B1 /* VendorProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E4EBD42084736B002D59B1 /* VendorProfile.swift */; };
 		D9E4EBD7208477D7002D59B1 /* WMGInfinity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E4EBD6208477D7002D59B1 /* WMGInfinity.swift */; };
@@ -100,7 +100,7 @@
 		D9B478E4208771B7002D9B5D /* AboutVendorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutVendorCell.swift; sourceTree = "<group>"; };
 		D9B478E72088732F002D9B5D /* TTTAttributedLabel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TTTAttributedLabel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9B478E82088B498002D9B5D /* BestPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestPrice.swift; sourceTree = "<group>"; };
-		D9B478EA2089AAD8002D9B5D /* VendorEnquiryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorEnquiryController.swift; sourceTree = "<group>"; };
+		D9B478EA2089AAD8002D9B5D /* MessageVendorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageVendorController.swift; sourceTree = "<group>"; };
 		D9CD9F66205D2DE000B287ED /* GenieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenieViewModel.swift; sourceTree = "<group>"; };
 		D9E4EBD42084736B002D59B1 /* VendorProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorProfile.swift; sourceTree = "<group>"; };
 		D9E4EBD6208477D7002D59B1 /* WMGInfinity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WMGInfinity.swift; sourceTree = "<group>"; };
@@ -169,7 +169,7 @@
 			children = (
 				D94364B6208467680023507E /* ProfileViewModel.swift */,
 				D94364B0208464180023507E /* ProfileController.swift */,
-				D9B478EA2089AAD8002D9B5D /* VendorEnquiryController.swift */,
+				D9B478EA2089AAD8002D9B5D /* MessageVendorController.swift */,
 			);
 			path = VendorProfile;
 			sourceTree = "<group>";
@@ -633,7 +633,7 @@
 				D9E4EBD7208477D7002D59B1 /* WMGInfinity.swift in Sources */,
 				D9703B3F205CDB42004C9C3E /* AppDelegate.swift in Sources */,
 				D9F021D6205FA2210092250D /* FormField.swift in Sources */,
-				D9B478EB2089AAD8002D9B5D /* VendorEnquiryController.swift in Sources */,
+				D9B478EB2089AAD8002D9B5D /* MessageVendorController.swift in Sources */,
 				D9F021D3205FA1240092250D /* SelectionCell.swift in Sources */,
 				D9B478E5208771B7002D9B5D /* AboutVendorCell.swift in Sources */,
 				D94364B7208467680023507E /* ProfileViewModel.swift in Sources */,

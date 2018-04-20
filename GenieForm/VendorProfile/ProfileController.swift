@@ -50,7 +50,7 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         })
     }
     func getVendorReviews() {
-        viewModel.getVendorReviewInfo(vendorID : vendorID, isMember : false, completion: {(success) in
+        viewModel.getVendorReviewInfo(isMember : false, completion: {(success) in
             if(success) {
                 self.header.currentProfile = self.viewModel.profile
                 self.header.updateReviewBox()
@@ -105,7 +105,7 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         
         header.reviewBtn.addTarget(self, action: #selector(reviewBtnClicked), for: .touchUpInside)
         header.shortlistBtn.addTarget(self, action: #selector(shortlistVendor), for: .touchUpInside)
-        header.queryBtn.addTarget(self, action: #selector(queryVendor), for: .touchUpInside)
+        header.messageBtn.addTarget(self, action: #selector(messageVendor), for: .touchUpInside)
         header.callBtn.addTarget(self, action: #selector(callVendor), for: .touchUpInside)
         
         header.sizeToFit()
@@ -197,7 +197,7 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
     
     @objc func shortlistVendor() {
         UIButton.showLoveLoadingAnimationOnButton(header.shortlistBtn)
-        viewModel.shortlistVendor(vendorID: vendorID, completion: {(success) in
+        viewModel.shortlistVendor(completion: {(success) in
             if success {
                 self.header.currentProfile = self.viewModel.profile
                 self.header.updateShortlistBtn()
@@ -205,10 +205,12 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         })
     }
     
-    @objc func queryVendor() {
-        let enquiryVC = VendorEnquiryController()
-        enquiryVC.profileVM = viewModel
-        self.navigationController?.pushViewController(enquiryVC, animated: true)
+    @objc func messageVendor() {
+        
+        //TODO: Add check for opening inbox thread if inbox_thread_id key is available
+        let msgVendorVC = MessageVendorController()
+        msgVendorVC.profileVM = viewModel
+        self.navigationController?.pushViewController(msgVendorVC, animated: true)
     }
     
     @objc func callVendor() {
