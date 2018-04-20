@@ -148,7 +148,7 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
 
         let aboutTitleLbl = UILabel(frame: CGRect(x: 0, y: 5, width: backView.bounds.size.width, height: 20))
         aboutTitleLbl.text = "About " + viewModel.profile.name
-        aboutTitleLbl.font = UIFont.init(name: AppFont.mediumFont, size: 15)
+        aboutTitleLbl.font = UIFont.init(name: AppFont.mediumFont, size: 6)
         aboutTitleLbl.textColor = AppColor.primaryBlackColor
         aboutTitleLbl.textAlignment = .center
         aboutTitleLbl.lineBreakMode = .byTruncatingTail
@@ -210,7 +210,58 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
     }
     
     @objc func callVendor() {
+        let darkView = UIView(frame: (self.view.window?.bounds)!)
+        darkView.backgroundColor = AppColor.secondaryBlackColor.withAlphaComponent(0.5)
+        darkView.tag = 101
+        darkView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissInfoView)))
         
+        let backView = UIView(frame: CGRect(x: 0, y: darkView.bounds.size.height, width: darkView.bounds.size.width, height: darkView.bounds.size.height))
+        
+        let callTitleLbl = UILabel(frame: CGRect(x: 0, y: 5, width: backView.bounds.size.width, height: 20))
+        callTitleLbl.text = "Call " + viewModel.profile.name
+        callTitleLbl.font = UIFont.init(name: AppFont.mediumFont, size: 16)
+        callTitleLbl.textColor = AppColor.primaryBlackColor
+        callTitleLbl.textAlignment = .center
+        callTitleLbl.lineBreakMode = .byTruncatingTail
+        backView.addSubview(callTitleLbl)
+        
+        var y = CGFloat(callTitleLbl.frame.origin.y + callTitleLbl.frame.size.height + 10)
+        for phone in viewModel.profile.phone {
+            
+            let infoBtn = UIButton(type: .custom)
+            infoBtn.frame = CGRect(x: 10, y: y, width: backView.bounds.size.width - 20, height: 20)
+            infoBtn.setTitleColor(AppColor.primaryBlackColor, for: .normal)
+            infoBtn.titleLabel?.font = UIFont.init(name: AppFont.mainFont, size: 15)
+            infoBtn.contentHorizontalAlignment = .left
+            infoBtn.setTitle(phone, for: .normal)
+            infoBtn.tag = viewModel.profile.phone.index(of: phone)!
+            infoBtn.addTarget(self, action: #selector(callNumberClicked(_:)), for: .touchUpInside)
+            backView.addSubview(infoBtn)
+
+            y += infoBtn.frame.size.height + 10
+        }
+        
+        backView.frame.size.height = y + 10
+        backView.backgroundColor = AppColor.primaryWhiteColor
+        
+        darkView.addSubview(backView)
+        
+        UIView.animate(withDuration: 0.25, animations: {
+            self.view.window?.addSubview(darkView)
+            backView.frame.origin.y = darkView.bounds.size.height - backView.frame.size.height
+        })
+    }
+    
+    @objc func callNumberClicked(_ sender : UIButton) {
+        dismissInfoView()
+        if let url = URL(string: "tel://\(viewModel.profile.phone[sender.tag])") {
+            if #available(iOS 10, *) {
+                UIApplication.shared.open(url, options: [:], completionHandler:
+                    nil)
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+        }
     }
     
     //MARK: - UI Update Methods -
