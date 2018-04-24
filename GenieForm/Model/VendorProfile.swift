@@ -129,7 +129,7 @@ struct FAQ : Codable {
 
 struct Pricing : Codable {
     var price : String
-    var label : String
+    var label : String?
     var unit : String
     var show_inr : Int
     var icon : String?

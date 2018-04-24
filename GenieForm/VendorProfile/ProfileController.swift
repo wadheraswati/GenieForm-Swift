@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDelegate {
+class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDelegate, VendorPricingDelegate {
 
     let viewModel : ProfileViewModel = ProfileViewModel()
 
@@ -20,6 +20,7 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
     var header = ProfileHeader()
     var aboutView = AboutVendor()
     var bestPrice = BestPrice()
+    var vendorPricing = VendorPricing()
     
     let vendorID = "23884"
     
@@ -40,12 +41,16 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         viewModel.getVendorProfile(vendorID: vendorID, isMember: false, completion: {(success) in
             if(success) {
                 let y = (self.navigationController?.navigationBar.bounds.size.height)! + 20
-                self.containerScroll = UIScrollView(frame: CGRect(x: 10, y: y, width: self.view.bounds.size.width - 20, height: self.view.bounds.size.height - y))
+                
+                self.containerScroll = UIScrollView(frame: CGRect(x: 10, y: y, width: self.view.bounds.size.width - 20, height: self.view.bounds.size.height - y - self.vendorPricing.frame.size.height))
                 self.containerScroll.clipsToBounds = false
                 self.view.addSubview(self.containerScroll)
+               
+                self.getVendorReviews()
                 self.initPortfolioScroller()
                 self.initUI()
-                self.getVendorReviews()
+                
+                self.addPricingSection()
             }
         })
     }
@@ -61,9 +66,24 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
     
     // MARK: UI Methods
     func initPortfolioScroller() {
+        
         portfolioScroll = PortfolioScroller(frame: CGRect(x: -10, y: 0, width: self.view.bounds.size.width, height: (self.view.bounds.size.width * 3/4)))
         portfolioScroll.loadImages(images: viewModel.portfolio)
         containerScroll.addSubview(portfolioScroll)
+        
+    }
+    
+    func addPricingSection() {
+        
+        vendorPricing = VendorPricing(frame: CGRect(x: 0, y: self.view.bounds.size.height - 60, width: self.view.bounds.size.width, height: 60))
+        vendorPricing.pricing = viewModel.pricing
+        vendorPricing.loadData()
+        vendorPricing.delegate = self
+        vendorPricing.layoutSubviews()
+        self.view.addSubview(vendorPricing)
+        
+        // updating containerscroll view frame
+        containerScroll.frame = CGRect(x: containerScroll.frame.origin.x, y: containerScroll.frame.origin.y, width: self.view.bounds.size.width - 20, height:containerScroll.frame.size.height - vendorPricing.frame.size.height)
     }
     
     func initUI() {
@@ -208,9 +228,15 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
     @objc func messageVendor() {
         
         //TODO: Add check for opening inbox thread if inbox_thread_id key is available
-        let msgVendorVC = MessageVendorController()
-        msgVendorVC.profileVM = viewModel
-        self.navigationController?.pushViewController(msgVendorVC, animated: true)
+        if viewModel.profile.category_id == 10 {
+            let msgVendorVC = MessageVenueController()
+            msgVendorVC.profileVM = viewModel
+            self.navigationController?.pushViewController(msgVendorVC, animated: true)
+        } else {
+            let msgVendorVC = MessageVendorController()
+            msgVendorVC.profileVM = viewModel
+            self.navigationController?.pushViewController(msgVendorVC, animated: true)
+        }
     }
     
     @objc func callVendor() {

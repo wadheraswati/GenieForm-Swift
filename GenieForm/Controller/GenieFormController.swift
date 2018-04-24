@@ -110,10 +110,7 @@ class GenieFormController: UIViewController, UITextFieldDelegate, FormSelectionL
         textField.resignFirstResponder()
         return true
     }
-    
-    public func textFieldDidEndEditing(_ textField: UITextField) {
-        
-    }
+  
     
     //MARK: - Validation Methods -
 
@@ -212,7 +209,7 @@ class GenieFormController: UIViewController, UITextFieldDelegate, FormSelectionL
         }
     }
     
-    // MARK - FormSelectionListDelegate Methods -
+    // MARK: - FormSelectionListDelegate Methods -
     func completedSelection(_ values: [Options], _ textField : UITextField) {
         print("selected options - \(values)")
         var index = 0

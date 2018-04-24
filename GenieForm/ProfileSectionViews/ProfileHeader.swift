@@ -160,7 +160,12 @@ class ProfileHeader: UIView {
         reviewBtn.tag = 100
         ctaView.addSubview(reviewBtn)
         
-        shortlistBtn = createBtn((currentProfile.shortlisted! > 0) ? "" : "", "Shortlist", CGRect(x: ctaView.bounds.size.width/4, y: 0, width: ctaView.bounds.size.width/4, height: ctaView.bounds.size.height))
+        if let shortlisted = currentProfile.shortlisted {
+            shortlistBtn = createBtn((shortlisted > 0) ? "" : "", (shortlisted > 0) ? "Shortlisted" : "Shortlist", CGRect(x: ctaView.bounds.size.width/4, y: 0, width: ctaView.bounds.size.width/4, height: ctaView.bounds.size.height))
+        } else {
+            shortlistBtn = createBtn("", "Shortlist", CGRect(x: ctaView.bounds.size.width/4, y: 0, width: ctaView.bounds.size.width/4, height: ctaView.bounds.size.height))
+        }
+        
         ctaView.addSubview(shortlistBtn)
 
         messageBtn = createBtn("", "Message", CGRect(x: (ctaView.bounds.size.width/4)*2, y: 0, width: ctaView.bounds.size.width/4, height: ctaView.bounds.size.height))

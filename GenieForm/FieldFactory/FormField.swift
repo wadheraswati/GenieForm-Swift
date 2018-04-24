@@ -170,6 +170,8 @@ class FormSelectionList: UIView, UITableViewDataSource, UITableViewDelegate, UIG
     
     weak var delegate : FormSelectionListDelegate?
 
+    var tempSelectionList : [String] = [String]()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -193,6 +195,13 @@ class FormSelectionList: UIView, UITableViewDataSource, UITableViewDelegate, UIG
 
     @objc func showSelectionView(_ view : UIView) {
         
+        tempSelectionList.removeAll()
+        for option in values {
+            if (fieldTF.text?.contains(option.display_name))! {
+                tempSelectionList.append(option.display_name)
+            }
+        }
+        
         view.endEditing(true)
         
         darkView.frame = view.bounds
@@ -200,11 +209,15 @@ class FormSelectionList: UIView, UITableViewDataSource, UITableViewDelegate, UIG
         darkView.tag = 100
         darkView.backgroundColor = UIColor(white: 0, alpha: 0.75)
         darkView.isUserInteractionEnabled = true
+        view.window?.addSubview(darkView)
+        
+        let touchView = UIView(frame: darkView.bounds)
+        touchView.isUserInteractionEnabled = true
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissSelector(_:)))
         gestureRecognizer.delegate = self
         gestureRecognizer.cancelsTouchesInView = false
-        darkView.addGestureRecognizer(gestureRecognizer)
-        view.window?.addSubview(darkView)
+        touchView.addGestureRecognizer(gestureRecognizer)
+        darkView.addSubview(touchView)
         
         tableView.frame = CGRect(x: 0.0, y: darkView.bounds.size.height - CGFloat(self.values.count * 40), width: darkView.bounds.size.width, height: CGFloat(self.values.count * 40))
         if(tableView.frame.origin.y < view.bounds.size.height/2) { // checking so that tableview does not go out of bounds
@@ -237,9 +250,9 @@ class FormSelectionList: UIView, UITableViewDataSource, UITableViewDelegate, UIG
     
     
     @objc func dismissSelector(_ sender : AnyObject) {
-        if(multiSelect){
-            self.finishedSelection(sender)
-        }
+//        if(multiSelect){
+//            self.finishedSelection(sender)
+//        }
         darkView.removeFromSuperview()
     }
     
@@ -248,8 +261,7 @@ class FormSelectionList: UIView, UITableViewDataSource, UITableViewDelegate, UIG
         var selectedValues : [Options] = [Options]()
         var valueStr : String = ""
         for value in self.values {
-            let cell = tableView.cellForRow(at: IndexPath(row: row, section: 0)) as? SelectionCell
-            if(cell?.checkbox.checkState == M13Checkbox.CheckState.checked) {
+            if(tempSelectionList.contains(value.display_name)) {
                 selectedValues.append(value)
                 valueStr = valueStr.appendingFormat("%@, ", value.display_name)
             }
@@ -257,16 +269,25 @@ class FormSelectionList: UIView, UITableViewDataSource, UITableViewDelegate, UIG
             row += 1
         }
         if(valueStr.hasSuffix(", ")) {
-            let finalStr = valueStr.prefix(valueStr.count - 2)
-            self.fieldTF.text = String(finalStr)
+            valueStr = String(valueStr.prefix(valueStr.count - 2))
         }
+        
+        self.fieldTF.text = String(valueStr)
         delegate?.completedSelection(selectedValues, fieldTF)
+        self.dismissSelector(sender)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: self.selectionCellIdentifier, for: indexPath) as! SelectionCell
         cell.titleLbl.text = self.values[indexPath.row].display_name
+        
+        if(tempSelectionList.contains(cell.titleLbl.text!)) {
+            cell.checkbox.setCheckState(M13Checkbox.CheckState.checked, animated: false)
+        } else {
+            cell.checkbox.setCheckState(M13Checkbox.CheckState.unchecked, animated: false)
+        }
+        
         if(cell.titleLbl.text == self.fieldTF.text || cell.checkbox.checkState == M13Checkbox.CheckState.checked) {
             cell.titleLbl.textColor = AppColor.primaryRedColor
         } else {
@@ -275,7 +296,6 @@ class FormSelectionList: UIView, UITableViewDataSource, UITableViewDelegate, UIG
         
         cell.multiselect = self.multiSelect
         cell.checkbox.isUserInteractionEnabled = false
-        //cell.checkbox.addTarget(self, action: Selector("checkboxTapped:"), for: UIControlEvents.touchUpInside)
         cell.layoutSubviews()
         return cell
     }
@@ -295,8 +315,11 @@ class FormSelectionList: UIView, UITableViewDataSource, UITableViewDelegate, UIG
         if(multiSelect) {
             cell?.checkbox.toggleCheckState()
             if(cell?.checkbox.checkState == M13Checkbox.CheckState.checked) {
+                tempSelectionList.append(self.values[indexPath.row].display_name)
                 cell?.titleLbl.textColor = AppColor.primaryRedColor
             } else {
+                
+                tempSelectionList = tempSelectionList.filter{$0 != self.values[indexPath.row].display_name}
                 cell?.titleLbl.textColor = AppColor.primaryBlackColor
             }
         } else {

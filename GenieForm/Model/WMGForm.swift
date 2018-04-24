@@ -97,6 +97,12 @@ struct Options : Codable {
         case name
     }
     
+    init() {
+        self.id = 0
+        self.display_name = ""
+        self.name = ""
+    }
+    
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         do {

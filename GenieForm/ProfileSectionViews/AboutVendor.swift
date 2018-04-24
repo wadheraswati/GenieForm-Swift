@@ -85,7 +85,6 @@ class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
             }
         }
         subtitleLbl.sizeToFit()
-        print("height - \(indexPath.row) - \(subtitleLbl.bounds.size.height + 40)")
         return subtitleLbl.bounds.size.height + 40
     }
     
