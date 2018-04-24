@@ -30,7 +30,7 @@ class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.backgroundColor = AppColor.secondaryWhiteColor
+        self.backgroundColor = AppColor.invisibleLightColor
         self.layer.shadowColor = AppColor.secondaryBlackColor.cgColor;
         self.layer.shadowOffset = CGSize(width: 0, height: 2)
         self.layer.shadowOpacity = 1
@@ -42,7 +42,7 @@ class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func load() {
+    func loadData() {
         aboutTable = UITableView(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: 50), style: .plain)
         aboutTable.delegate = self
         aboutTable.dataSource = self
@@ -154,12 +154,9 @@ class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
             var height : CGFloat = 0
             if(faqList.isEmpty == false) {
                 for index in 1...min(3, faqList.count) {
-                    print(aboutTable.visibleCells.count)
                     let indexPath = IndexPath(item: index - 1, section: 0)
                     if let cell = aboutTable.cellForRow(at: indexPath) as? AboutVendorCell {
-                        height += cell.bounds.size.height
-                        print(height)
-                        
+                        height += cell.bounds.size.height                        
                     }
                 }
                 aboutTable.frame.size.height = height

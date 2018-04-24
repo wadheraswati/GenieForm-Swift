@@ -16,7 +16,7 @@ struct Profile : Codable {
     var membership_id : Int
     var information : String
     var city : String
-    var love_count : Int
+    //var love_count : Int
     var vendor_price : String
     var locality_name : String
     var phone : [String]
@@ -44,7 +44,7 @@ struct Profile : Codable {
         self.membership_id = 0
         self.information = ""
         self.city = ""
-        self.love_count = 0
+        //self.love_count = 0
         self.vendor_price = ""
         self.locality_name = ""
         self.phone = []
@@ -139,7 +139,7 @@ struct Pricing : Codable {
 struct Flags : Codable {
     var status : Double?
     var mask_number_enabled : Double?
-    var show_best_deal : Double?
+    var show_best_deal : Double? = 0
     var wmg_price_available : Double?
     var venue_send_enquiry : Double?
     
@@ -151,20 +151,5 @@ struct Flags : Codable {
         self.venue_send_enquiry = 0
     }
     
-}
-
-struct Menu : Codable {
-    var id : Double
-    var title : String
-    var price_per_plate : Double
-    var menu_type_id : Double
-}
-
-struct Banquet : Codable {
-    var id : Double
-    var title : String
-    var indoor_outdoor : Double
-    var fixed_capacity : Double
-    var floating_capacity : Double
 }
 

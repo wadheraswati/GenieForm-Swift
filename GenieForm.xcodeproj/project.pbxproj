@@ -11,6 +11,10 @@
 		A301E49E293A6CF9E0953A0A /* Pods_GenieFormUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1639BA797CEA9A3A8ECF5A3 /* Pods_GenieFormUITests.framework */; };
 		C7DD3C7A788D04F5F4ECADBA /* Pods_GenieFormTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45D82B0C1B2952BEEA21FFBA /* Pods_GenieFormTests.framework */; };
 		D918A181208F0E03001A2A85 /* VendorPricing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D918A180208F0E03001A2A85 /* VendorPricing.swift */; };
+		D918A183208F34D1001A2A85 /* VenueAreaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D918A182208F34D1001A2A85 /* VenueAreaCell.swift */; };
+		D918A185208F34FE001A2A85 /* VenueAreas.swift in Sources */ = {isa = PBXBuildFile; fileRef = D918A184208F34FE001A2A85 /* VenueAreas.swift */; };
+		D918A187208F3558001A2A85 /* VenueInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D918A186208F3558001A2A85 /* VenueInfo.swift */; };
+		D918A189208F3A9F001A2A85 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D918A188208F3A9F001A2A85 /* SectionHeaderView.swift */; };
 		D94364B1208464180023507E /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94364B0208464180023507E /* ProfileController.swift */; };
 		D94364B3208464F80023507E /* PortfolioScroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94364B2208464F80023507E /* PortfolioScroller.swift */; };
 		D94364B7208467680023507E /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94364B6208467680023507E /* ProfileViewModel.swift */; };
@@ -72,6 +76,10 @@
 		C1639BA797CEA9A3A8ECF5A3 /* Pods_GenieFormUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GenieFormUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C167B39802C55FF494C9C966 /* Pods-GenieFormUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GenieFormUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GenieFormUITests/Pods-GenieFormUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D918A180208F0E03001A2A85 /* VendorPricing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorPricing.swift; sourceTree = "<group>"; };
+		D918A182208F34D1001A2A85 /* VenueAreaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueAreaCell.swift; sourceTree = "<group>"; };
+		D918A184208F34FE001A2A85 /* VenueAreas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueAreas.swift; sourceTree = "<group>"; };
+		D918A186208F3558001A2A85 /* VenueInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueInfo.swift; sourceTree = "<group>"; };
+		D918A188208F3A9F001A2A85 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		D94364B0208464180023507E /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		D94364B2208464F80023507E /* PortfolioScroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioScroller.swift; sourceTree = "<group>"; };
 		D94364B6208467680023507E /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -248,6 +256,7 @@
 				D9E4EBD42084736B002D59B1 /* VendorProfile.swift */,
 				D9E4EBD6208477D7002D59B1 /* WMGInfinity.swift */,
 				D99A9A232085DAC40073D301 /* ReviewInfo.swift */,
+				D918A186208F3558001A2A85 /* VenueInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -289,6 +298,7 @@
 				D9B478E120876ED1002D9B5D /* AboutVendor.swift */,
 				D9B478E82088B498002D9B5D /* BestPrice.swift */,
 				D918A180208F0E03001A2A85 /* VendorPricing.swift */,
+				D918A184208F34FE001A2A85 /* VenueAreas.swift */,
 			);
 			path = ProfileSectionViews;
 			sourceTree = "<group>";
@@ -306,6 +316,8 @@
 			children = (
 				D9F021D2205FA1240092250D /* SelectionCell.swift */,
 				D9B478E4208771B7002D9B5D /* AboutVendorCell.swift */,
+				D918A182208F34D1001A2A85 /* VenueAreaCell.swift */,
+				D918A188208F3A9F001A2A85 /* SectionHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -634,8 +646,10 @@
 			files = (
 				D9B478E92088B498002D9B5D /* BestPrice.swift in Sources */,
 				D9703B41205CDB42004C9C3E /* GenieFormController.swift in Sources */,
+				D918A185208F34FE001A2A85 /* VenueAreas.swift in Sources */,
 				D9703B71205D05C9004C9C3E /* WMGForm.swift in Sources */,
 				D9F021E3205FB7F10092250D /* UIColorExtensions.swift in Sources */,
+				D918A183208F34D1001A2A85 /* VenueAreaCell.swift in Sources */,
 				D918A181208F0E03001A2A85 /* VendorPricing.swift in Sources */,
 				D9E4EBD7208477D7002D59B1 /* WMGInfinity.swift in Sources */,
 				D9703B3F205CDB42004C9C3E /* AppDelegate.swift in Sources */,
@@ -645,8 +659,10 @@
 				D9B478E5208771B7002D9B5D /* AboutVendorCell.swift in Sources */,
 				D94364B7208467680023507E /* ProfileViewModel.swift in Sources */,
 				D99A9A222085B0BA0073D301 /* ProfileHeader.swift in Sources */,
+				D918A189208F3A9F001A2A85 /* SectionHeaderView.swift in Sources */,
 				D99A9A242085DAC40073D301 /* ReviewInfo.swift in Sources */,
 				D9703B74205D149A004C9C3E /* WMGService.swift in Sources */,
+				D918A187208F3558001A2A85 /* VenueInfo.swift in Sources */,
 				D94364B1208464180023507E /* ProfileController.swift in Sources */,
 				D9F021E5205FB8BA0092250D /* AppConstants.swift in Sources */,
 				D9E4EBD52084736B002D59B1 /* VendorProfile.swift in Sources */,
@@ -812,7 +828,7 @@
 			baseConfigurationReference = 2ED576D94C0BA05A02F54E74 /* Pods-GenieForm.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BASE_URL = "https://admin.wedmegood.com/api/";
+				BASE_URL = "https://developmentwow.wedmegood.com/api/";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R3N9B3ER78;
 				INFOPLIST_FILE = GenieForm/Info.plist;

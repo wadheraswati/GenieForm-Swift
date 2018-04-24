@@ -14,8 +14,8 @@ struct ReviewsInfo : Codable {
     var vendor_rating : String
     var reviews_count : Int
     var is_reviewed : Int
-    var last_review_update : Int64
-    var category_has_sticker : Int
+    var last_review_update : Int64?
+    var category_has_sticker : Int?
     
     init() {
         self.vendor_id = ""

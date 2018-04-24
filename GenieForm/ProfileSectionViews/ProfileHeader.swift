@@ -32,7 +32,7 @@ class ProfileHeader: UIView {
         self.layer.masksToBounds = false
     }
     
-    func load() {
+    func loadData() {
         
         var y : CGFloat = 10
         let categoryImgV = UIImageView(frame: CGRect(x: 0, y: 0, width: 44, height: 44))

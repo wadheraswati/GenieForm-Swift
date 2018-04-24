@@ -21,6 +21,7 @@ class ProfileViewModel {
     var flags = Flags()
     var reviews = [Reviews]()
     var reviewInfo = ReviewsInfo()
+    var areas = [Area]()
     
     func getVendorProfile(vendorID : String, isMember : Bool, completion : @escaping (_ success : Bool) -> ()) {
         let apiStr = String.init(format: APIList.getVendorProfile, vendorID, isMember ? 1 : 0)
@@ -74,6 +75,13 @@ class ProfileViewModel {
                         }
                         print(self.pricing)
                         
+                        let areaArr = data.value(forKey: "banquet") as! NSArray
+                        for area in areaArr {
+                            let areaData = try JSONSerialization.data(withJSONObject: area, options: .prettyPrinted)
+                            self.areas.append(try JSONDecoder().decode(Area.self, from: areaData))
+                        }
+                        print(self.areas)
+                        
                         let flagsData = try JSONSerialization.data(withJSONObject: data.value(forKey: "flags")!, options: .prettyPrinted)
                         self.flags = try JSONDecoder().decode(Flags.self, from: flagsData)
                         print(self.flags)
@@ -108,11 +116,14 @@ class ProfileViewModel {
                     self.reviewInfo = try JSONDecoder().decode(ReviewsInfo.self, from: reviewInfoData)
                     print(self.reviewInfo)
                     
-                    let reviews = data.value(forKey: "reviews") as! NSArray
-                    for review in reviews {
-                        let reviewData = try JSONSerialization.data(withJSONObject: review, options: .prettyPrinted)
-                        self.reviews.append(try JSONDecoder().decode(Reviews.self, from: reviewData))
+                    if(data.value(forKey: "reviews") != nil) {
+                        let reviews = data.value(forKey: "reviews") as! NSArray
+                        for review in reviews {
+                            let reviewData = try JSONSerialization.data(withJSONObject: review, options: .prettyPrinted)
+                            self.reviews.append(try JSONDecoder().decode(Reviews.self, from: reviewData))
+                        }
                     }
+                    
                     print(self.reviews)
                     self.profile.reviewInfo = self.reviewInfo
                 }

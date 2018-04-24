@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDelegate, VendorPricingDelegate {
+class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDelegate, VendorPricingDelegate, VenueAreasDelegate {
 
     let viewModel : ProfileViewModel = ProfileViewModel()
 
@@ -21,8 +21,9 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
     var aboutView = AboutVendor()
     var bestPrice = BestPrice()
     var vendorPricing = VendorPricing()
+    var areasView = VenueAreas()
     
-    let vendorID = "23884"
+    let vendorID = "23057"
     
     override func viewDidLoad() {
         
@@ -113,15 +114,34 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         
         self.addProfileHeader()
         self.addAboutView()
-        if viewModel.flags.show_best_deal! > 0 { self.addBestPrice() }
+
+        if viewModel.flags.show_best_deal != nil {
+            if viewModel.flags.show_best_deal == 1 { self.addBestPrice() }
+        }
+        
+        if viewModel.areas.count > 0 { self.addAreasView() }
        
         self.perform(#selector(viewDidLayoutSubviews), with: nil, afterDelay: 0.5)
+    }
+    
+    func addAreasView() {
+        areasView = VenueAreas(frame: CGRect(x: 0, y: aboutView.frame.origin.y + aboutView.frame.size.height, width: containerScroll.bounds.size.width, height: 150))
+        areasView.areas = viewModel.areas
+        areasView.delegate = self
+        areasView.loadData()
+        areasView.sizeToFit()
+        containerScroll.addSubview(areasView)
+    }
+    
+    //MARK: - VenueAreasDelegate -
+    func showMoreBtnClicked(_ full : Bool) {
+        self.viewDidLayoutSubviews()
     }
     
     func addProfileHeader() {
         header = ProfileHeader(frame: CGRect(x: 0, y: portfolioScroll.frame.origin.y + portfolioScroll.frame.size.height - 50, width: containerScroll.bounds.size.width, height: 100))
         header.currentProfile = viewModel.profile
-        header.load()
+        header.loadData()
         
         header.reviewBtn.addTarget(self, action: #selector(reviewBtnClicked), for: .touchUpInside)
         header.shortlistBtn.addTarget(self, action: #selector(shortlistVendor), for: .touchUpInside)
@@ -138,7 +158,7 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         aboutView.vendorName = viewModel.profile.name
         aboutView.information = viewModel.profile.information
         aboutView.delegate = self
-        aboutView.load()
+        aboutView.loadData()
         aboutView.sizeToFit()
         containerScroll.addSubview(aboutView)
     }
@@ -153,9 +173,9 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
     }
     
     //MARK: - AboutVendorDelegate Methods -
-    func showMoreBtnClicked(_ full: Bool) {
-        self.viewDidLayoutSubviews()
-    }
+//    func showMoreBtnClicked(_ full: Bool) {
+//        self.viewDidLayoutSubviews()
+//    }
     
     func showAboutVendor() {
         
@@ -303,7 +323,11 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         aboutView.frame.size.height = aboutView.showMoreBtn.frame.origin.y + aboutView.showMoreBtn.frame.size.height
         
         bestPrice.frame.origin.y = aboutView.frame.origin.y + aboutView.frame.size.height + 10
-        containerScroll.contentSize = CGSize(width: containerScroll.bounds.size.width, height: (bestPrice.frame.origin.y) + (bestPrice.frame.size.height) + 15)
+        areasView.sizeToFit()
+        areasView.frame.origin.y = bestPrice.frame.origin.y + bestPrice.frame.size.height + 10
+        areasView.frame.size.height = areasView.showMoreBtn.frame.origin.y + areasView.showMoreBtn.frame.size.height
+
+        containerScroll.contentSize = CGSize(width: containerScroll.bounds.size.width, height: (areasView.frame.origin.y) + (areasView.frame.size.height) + 15)
     
     }
 
