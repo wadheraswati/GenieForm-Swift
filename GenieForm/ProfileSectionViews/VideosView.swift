@@ -38,7 +38,7 @@ class VideosView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, 
     func loadData() {
     
     let headingView = SectionHeaderView(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: 30))
-    headingView.headingLbl.text = "Videos (\(Int(count))"
+    headingView.headingLbl.text = "Videos (\(Int(count)))"
     self.addSubview(headingView)
     
     let flowLayout = UICollectionViewFlowLayout()
