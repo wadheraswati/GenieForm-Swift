@@ -22,6 +22,7 @@ class ProfileViewModel {
     var reviews = [Reviews]()
     var reviewInfo = ReviewsInfo()
     var areas = [Area]()
+    var menuFiles = [MenuFiles]()
     
     var shareURL : String!
 
@@ -102,7 +103,15 @@ class ProfileViewModel {
                             let seoData = data.value(forKey: "seoData") as! NSDictionary
                             self.shareURL = seoData.value(forKey: "canonical_url") as! String
                         }
-
+                        
+                        if data.value(forKey: "menu_files") != nil {
+                            let menuArr = data.value(forKey: "menu_files") as! NSArray
+                            for menu in menuArr {
+                                let menuFileData = try JSONSerialization.data(withJSONObject:menu, options: .prettyPrinted)
+                                self.menuFiles.append(try JSONDecoder().decode(MenuFiles.self, from: menuFileData))
+                            }
+                            print(self.menuFiles)
+                        }
                     }
                     catch {
                         print("json error: \(error)")

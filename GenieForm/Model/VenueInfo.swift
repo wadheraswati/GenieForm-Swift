@@ -22,3 +22,10 @@ struct Area : Codable {
     var fixed_capacity : Double
     var floating_capacity : Double
 }
+
+struct MenuFiles : Codable {
+    var id : Int
+    var filename : String
+    var menu_url : String
+    var ext : String
+}

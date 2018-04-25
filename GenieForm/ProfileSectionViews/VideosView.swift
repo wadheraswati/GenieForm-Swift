@@ -38,7 +38,7 @@ class VideosView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, 
     func loadData() {
         
         let headingView = SectionHeaderView(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: 30))
-        headingView.headingLbl.text = "Videos (\(Int(count)))"
+        headingView.headingLbl.text = "Videos (\(count))"
         self.addSubview(headingView)
         
         let flowLayout = UICollectionViewFlowLayout()
@@ -55,7 +55,7 @@ class VideosView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, 
         videoCollection.isScrollEnabled = false
         self.addSubview(videoCollection)
         
-        let remaining = Int(count) - min(4, Int(count))
+        let remaining = count - min(4, count)
         showMoreBtn = UIButton(type: .custom)
         showMoreBtn.backgroundColor = AppColor.secondaryWhiteColor
         showMoreBtn.setTitle("View \(remaining) More", for: .normal)
