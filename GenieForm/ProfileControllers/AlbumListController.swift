@@ -102,7 +102,7 @@ class AlbumListController: UIViewController, UICollectionViewDelegate, UICollect
     
     // MARK: - Action Methods -
     @objc func shareAlbum() {
-        
+        UIButton.share(viewModel.shareURL, self)
     }
 
     override func didReceiveMemoryWarning() {

@@ -16,7 +16,8 @@ class VideoListViewModel: NSObject {
     var profile = VideoProfile()
 
     var memberID : Int = 0
-    
+    var shareURL : String!
+
     func fetchVideos(completion : @escaping (_ success : Bool) -> ()) {
         let apiStr = String.init(format: APIList.albumList, memberID)
         
@@ -36,6 +37,11 @@ class VideoListViewModel: NSObject {
                     let profileData = try JSONSerialization.data(withJSONObject: data.value(forKey: "profile")!, options: .prettyPrinted)
                     self.profile = try JSONDecoder().decode(VideoProfile.self, from: profileData)
                     print(self.profile)
+                    
+                    if data.value(forKey: "seoData") != nil {
+                        let seoData = data.value(forKey: "seoData") as! NSDictionary
+                        self.shareURL = seoData.value(forKey: "canonical_url") as! String
+                    }
                 }
                 catch {
                     print("json error: \(error)")

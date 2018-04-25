@@ -49,6 +49,11 @@ extension UIButton {
             })
         })
     }
+    
+    class func share(_ shareStr : String, _ controller : UIViewController) {
+        let activityViewController = UIActivityViewController(activityItems: [shareStr], applicationActivities: nil)
+        controller.present(activityViewController, animated: true, completion: nil)
+    }
 }
 
 

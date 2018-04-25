@@ -40,7 +40,7 @@ class VideoListController: UIViewController, UICollectionViewDelegate, UICollect
         
         let y = (self.navigationController?.navigationBar.bounds.size.height)! + 40
         
-        let titleLbl = UILabel(frame: CGRect(x: 5, y: y, width: self.view.bounds.size.width - 10, height: 0))
+        let titleLbl = UILabel(frame: CGRect(x: 10, y: y, width: self.view.bounds.size.width - 20, height: 0))
         titleLbl.textColor = AppColor.primaryBlackColor
         titleLbl.font = UIFont.init(name: AppFont.heavyFont, size: 20)
         titleLbl.textAlignment = .left
@@ -50,7 +50,7 @@ class VideoListController: UIViewController, UICollectionViewDelegate, UICollect
         titleLbl.sizeToFit()
         self.view.addSubview(titleLbl)
         
-        let subtitleLbl = UILabel(frame: CGRect(x: 5, y: titleLbl.frame.origin.y + titleLbl.bounds.size.height + 5, width: self.view.bounds.size.width - 10, height: 0))
+        let subtitleLbl = UILabel(frame: CGRect(x: 10, y: titleLbl.frame.origin.y + titleLbl.bounds.size.height + 5, width: self.view.bounds.size.width - 20, height: 0))
         subtitleLbl.textColor = AppColor.secondaryBlackColor
         subtitleLbl.font = UIFont.init(name: AppFont.heavyFont, size: 16)
         subtitleLbl.textAlignment = .left
@@ -100,7 +100,7 @@ class VideoListController: UIViewController, UICollectionViewDelegate, UICollect
     
     // MARK: - Action Methods -
     @objc func shareVideos() {
-        
+        UIButton.share(viewModel.shareURL, self)
     }
     
     override func didReceiveMemoryWarning() {

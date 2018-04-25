@@ -16,6 +16,7 @@ class AlbumListViewModel {
     
     var profile = AlbumProfile()
     var memberID : Int = 0
+    var shareURL : String!
     
     func fetchAlbums(completion : @escaping (_ success : Bool) -> ()) {
         let apiStr = String.init(format: APIList.albumList, memberID)
@@ -36,6 +37,11 @@ class AlbumListViewModel {
                     let profileData = try JSONSerialization.data(withJSONObject: data.value(forKey: "profile")!, options: .prettyPrinted)
                     self.profile = try JSONDecoder().decode(AlbumProfile.self, from: profileData)
                     print(self.profile)
+                    
+                    if data.value(forKey: "seoData") != nil {
+                        let seoData = data.value(forKey: "seoData") as! NSDictionary
+                        self.shareURL = seoData.value(forKey: "canonical_url") as! String
+                    }
 
                 }
                 catch {

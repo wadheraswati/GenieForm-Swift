@@ -23,6 +23,8 @@ class ProfileViewModel {
     var reviewInfo = ReviewsInfo()
     var areas = [Area]()
     
+    var shareURL : String!
+
     func getVendorProfile(vendorID : String, isMember : Bool, completion : @escaping (_ success : Bool) -> ()) {
         let apiStr = String.init(format: APIList.getVendorProfile, vendorID, isMember ? 1 : 0)
 
@@ -94,6 +96,11 @@ class ProfileViewModel {
                         
                         if (data.value(forKey: "concierge_display_phone") != nil) {
                             self.profile.concierge_display_phone = (data.value(forKey: "concierge_display_phone") as! String)
+                        }
+                        
+                        if data.value(forKey: "seoData") != nil {
+                            let seoData = data.value(forKey: "seoData") as! NSDictionary
+                            self.shareURL = seoData.value(forKey: "canonical_url") as! String
                         }
 
                     }

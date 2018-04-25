@@ -112,6 +112,7 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         shareBtn.sizeToFit()
         shareBtn.frame.origin.y = portfolioScroll.frame.origin.y + 10
         shareBtn.frame.origin.x = containerScroll.frame.size.width - shareBtn.bounds.size.width
+        shareBtn.addTarget(self, action: #selector(shareVendor), for: .touchUpInside)
         containerScroll.addSubview(shareBtn)
         
         addProfileHeader()
@@ -352,6 +353,12 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
                 UIApplication.shared.openURL(url)
             }
         }
+    }
+    
+    //MARK: - Action Methods -
+    
+    @objc func shareVendor(_ sender : UIButton) {
+        UIButton.share(viewModel.shareURL, self)
     }
     
     //MARK: - UI Update Methods -
