@@ -22,6 +22,7 @@ class AlbumsView : UIView, UICollectionViewDelegate, UICollectionViewDataSource,
     var showMoreBtn = UIButton()
     
     var showFull : Bool = false
+    var count : Double = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,7 +38,7 @@ class AlbumsView : UIView, UICollectionViewDelegate, UICollectionViewDataSource,
     func loadData() {
         
         let headingView = SectionHeaderView(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: 30))
-        headingView.headingLbl.text = "Albums (\(albums.count))"
+        headingView.headingLbl.text = "Albums (\(Int(count)))"
         self.addSubview(headingView)
         
         let flowLayout = UICollectionViewFlowLayout()
@@ -53,7 +54,7 @@ class AlbumsView : UIView, UICollectionViewDelegate, UICollectionViewDataSource,
         albumCollection.isScrollEnabled = false
         self.addSubview(albumCollection)
         
-        let remaining = albums.count - min(4, albums.count)
+        let remaining = Int(count) - min(4, Int(count))
         showMoreBtn = UIButton(type: .custom)
         showMoreBtn.backgroundColor = AppColor.secondaryWhiteColor
         showMoreBtn.setTitle("View \(remaining) More", for: .normal)

@@ -99,7 +99,7 @@ struct Album : Codable {
 }
 
 struct VideosInfo : Codable {
-    var videos_count : Int
+    var videos_count : Double
     var video_array : [Video]
     
     init () {

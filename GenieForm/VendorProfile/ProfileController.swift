@@ -179,6 +179,7 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
     func addAlbumsView() {
         albumsView = AlbumsView(frame: CGRect(x: 0, y: header.frame.origin.y + header.frame.size.height + 10, width: containerScroll.bounds.size.width, height: 100))
         albumsView.albums = viewModel.albums.images
+        albumsView.count = viewModel.albums.albums_count
         albumsView.delegate = self
         albumsView.loadData()
         albumsView.sizeToFit()
@@ -188,6 +189,7 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
     func addVideosView() {
         videosView = VideosView(frame: CGRect(x: 0, y: header.frame.origin.y + header.frame.size.height + 10, width: containerScroll.bounds.size.width, height: 100))
         videosView.videos = viewModel.videos.video_array
+        videosView.count = viewModel.videos.videos_count
         videosView.delegate = self
         videosView.loadData()
         videosView.sizeToFit()
@@ -349,12 +351,12 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         bestPrice.frame.origin.y = aboutView.frame.origin.y + aboutView.frame.size.height + (bestPrice.frame.size.height == 0 ? 0 : 10)
        
         areasView.sizeToFit()
-        areasView.frame.origin.y = bestPrice.frame.origin.y + bestPrice.frame.size.height + 10
         areasView.frame.size.height = areasView.showMoreBtn.frame.origin.y + areasView.showMoreBtn.frame.size.height
+        areasView.frame.origin.y = bestPrice.frame.origin.y + bestPrice.frame.size.height + (areasView.frame.size.height > 0 ? 10 : 0)
         
         albumsView.sizeToFit()
-        albumsView.frame.origin.y = areasView.frame.origin.y + areasView.frame.size.height + 10
         albumsView.frame.size.height = albumsView.showMoreBtn.frame.origin.y + albumsView.showMoreBtn.frame.size.height
+        albumsView.frame.origin.y = areasView.frame.origin.y + areasView.frame.size.height + (albumsView.frame.size.height > 0 ? 10 : 0)
         
         videosView.sizeToFit()
         videosView.frame.origin.y = albumsView.frame.origin.y + albumsView.frame.size.height + 10
