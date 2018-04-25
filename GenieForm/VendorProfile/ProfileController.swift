@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDelegate, VendorPricingDelegate, VenueAreasDelegate, AlbumsViewDelegate, VideosViewDelegate {
+class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDelegate, VendorPricingDelegate, VenueAreasDelegate, AlbumsViewDelegate, VideosViewDelegate, MenuFilesViewDelegate {
 
     let viewModel = ProfileViewModel()
 
@@ -24,8 +24,9 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
     var areasView = VenueAreas()
     var albumsView = AlbumsView()
     var videosView = VideosView()
+    var menuFilesView = MenuFilesView()
     
-    let vendorID = "26345"
+    let vendorID = "1994"
     
     override func viewDidLoad() {
         
@@ -131,6 +132,9 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         if viewModel.videos.video_array.count > 0 {
             if viewModel.videos.videos_count > 0 { addVideosView() }
         }
+        
+        if viewModel.menuFiles.count > 0 { addMenuFilesView() }
+        
         self.perform(#selector(viewDidLayoutSubviews), with: nil, afterDelay: 0.5)
     }
     
@@ -195,6 +199,15 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         videosView.loadData()
         videosView.sizeToFit()
         containerScroll.addSubview(videosView)
+    }
+    
+    func addMenuFilesView() {
+        menuFilesView = MenuFilesView(frame: CGRect(x: 0, y: header.frame.origin.y + header.frame.size.height + 10, width: containerScroll.bounds.size.width, height: 100))
+        menuFilesView.menuFiles = viewModel.menuFiles
+        menuFilesView.delegate = self
+        menuFilesView.loadData()
+        menuFilesView.sizeToFit()
+        containerScroll.addSubview(menuFilesView)
     }
     
     //MARK: - AboutVendorDelegate -
@@ -267,6 +280,13 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         let videosVC = VideoListController()
         videosVC.viewModel.memberID = viewModel.profile.member_id
         self.navigationController?.pushViewController(videosVC, animated: true)
+    }
+    
+    //MARK: - MenuFilesDelegate -
+    func showMenuFiles() {
+        let menuFilesVC = MenuFilesController()
+        menuFilesVC.viewModel = viewModel
+        self.navigationController?.pushViewController(menuFilesVC, animated: true)
     }
     
     //MARK: - ProfileHeaderDelegate Methods -
@@ -383,8 +403,12 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         videosView.sizeToFit()
         videosView.frame.size.height = videosView.showMoreBtn.frame.origin.y + videosView.showMoreBtn.frame.size.height
         videosView.frame.origin.y = albumsView.frame.origin.y + albumsView.frame.size.height + (videosView.frame.size.height > 0 ? 10 : 0)
+        
+        menuFilesView.sizeToFit()
+        menuFilesView.frame.size.height = menuFilesView.showMoreBtn.frame.origin.y + menuFilesView.showMoreBtn.frame.size.height
+        menuFilesView.frame.origin.y = videosView.frame.origin.y + videosView.frame.size.height + (menuFilesView.frame.size.height > 0 ? 10 : 0)
 
-        containerScroll.contentSize = CGSize(width: containerScroll.bounds.size.width, height: (videosView.frame.origin.y) + (videosView.frame.size.height) + 15)
+        containerScroll.contentSize = CGSize(width: containerScroll.bounds.size.width, height: (menuFilesView.frame.origin.y) + (menuFilesView.frame.size.height) + 15)
     
     }
 

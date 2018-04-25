@@ -79,8 +79,11 @@ class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
             if subtitleLbl.numberOfLines == 3 {
                 let continueText = "Continue Reading"
                 if let value = subtitleLbl.text {
-                    let substring = value.dropLast(value.count - 150)
-                    subtitleLbl.text = String(substring) + "... " + continueText
+                    if value.count > 150 {
+                        let substring = value.dropLast(value.count - 150)
+                        subtitleLbl.text = String(substring) + "... " + continueText
+                    } else {
+                        subtitleLbl.text = value }
                 }
             }
         }
@@ -119,8 +122,11 @@ class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
             if cell.subtitleLbl.numberOfLines == 3 {
                 let continueText = "Continue Reading"
                 if let value = cell.subtitleLbl.text {
-                    let substring = value.dropLast(value.count - 150)
-                    let newStr = String(substring) + "... " + continueText
+                    var newStr = value
+                    if value.count > 150 {
+                        let substring = value.dropLast(value.count - 150)
+                        newStr = String(substring) + "... " + continueText
+                    }
                     let attrStr = NSMutableAttributedString(string: newStr)
                     attrStr.addAttribute(.foregroundColor, value: AppColor.primaryBlackColor, range: NSRange(location: 0, length: attrStr.length))
                     attrStr.addAttribute(.font, value: UIFont.init(name: AppFont.mainFont, size: 15)!, range: NSRange(location: 0, length: attrStr.length))
@@ -139,8 +145,9 @@ class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if(indexPath.row == 0) {
-            delegate?.showAboutVendor()
-
+            if information.count > 150 {
+                delegate?.showAboutVendor()
+            }
             // show about vendor text full
         }
     }

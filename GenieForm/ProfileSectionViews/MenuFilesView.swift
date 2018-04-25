@@ -8,16 +8,16 @@
 
 import UIKit
 
-protocol MenusViewDelegate : class {
+protocol MenuFilesViewDelegate : class {
     func showMenuFiles()
 }
 
-class MenusView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class MenuFilesView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var menuCollection : UICollectionView!
     var menuFiles = [MenuFiles]()
     
-    weak var delegate : MenusViewDelegate?
+    weak var delegate : MenuFilesViewDelegate?
     var showMoreBtn = UIButton()
     
     var count : Int = 0
@@ -61,7 +61,7 @@ class MenusView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, U
         showMoreBtn.setTitle("View \(remaining) More", for: .normal)
         showMoreBtn.titleLabel?.font = UIFont.init(name: AppFont.mainFont, size: 16)
         showMoreBtn.setTitleColor(AppColor.primaryRedColor, for: .normal)
-        showMoreBtn.frame = CGRect(x: 0, y: videoCollection.frame.origin.y + videoCollection.frame.size.height, width: self.bounds.size.width, height: (remaining > 0 ? 40 : 0))
+        showMoreBtn.frame = CGRect(x: 0, y: menuCollection.frame.origin.y + menuCollection.frame.size.height, width: self.bounds.size.width, height: (remaining > 0 ? 40 : 0))
         showMoreBtn.isHidden = remaining > 0 ? false : true
         showMoreBtn.addTarget(self, action: #selector(showMoreBtnClicked), for: .touchUpInside)
         self.addSubview(showMoreBtn)
@@ -83,7 +83,8 @@ class MenusView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, U
         cell.imgCountLbl.isHidden = true
         cell.imgCountImgV.isHidden = true
         
-        cell.gridImgV.af_setImage(withURL: URL(string:menu.menu_url.replacingOccurrences(of: "%%", with: "400"))!)
+        cell.gridImgV.loadImageUsingCache(withUrl: menu.menu_url)
+        //cell.gridImgV.af_setImage(withURL: URL(string:menu.menu_url.replacingOccurrences(of: "%%", with: "400"))!)
         
         cell.layoutSubviews()
         
