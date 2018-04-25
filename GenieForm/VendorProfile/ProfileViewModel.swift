@@ -75,10 +75,12 @@ class ProfileViewModel {
                         }
                         print(self.pricing)
                         
-                        let areaArr = data.value(forKey: "banquet") as! NSArray
-                        for area in areaArr {
-                            let areaData = try JSONSerialization.data(withJSONObject: area, options: .prettyPrinted)
-                            self.areas.append(try JSONDecoder().decode(Area.self, from: areaData))
+                        if (data.value(forKey: "banquet") != nil) {
+                            let areaArr = data.value(forKey: "banquet") as! NSArray
+                            for area in areaArr {
+                                let areaData = try JSONSerialization.data(withJSONObject: area, options: .prettyPrinted)
+                                self.areas.append(try JSONDecoder().decode(Area.self, from: areaData))
+                            }
                         }
                         print(self.areas)
                         

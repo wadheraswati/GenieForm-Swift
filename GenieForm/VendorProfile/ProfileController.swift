@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDelegate, VendorPricingDelegate, VenueAreasDelegate {
+class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDelegate, VendorPricingDelegate, VenueAreasDelegate, AlbumsViewDelegate, VideosViewDelegate {
 
     let viewModel : ProfileViewModel = ProfileViewModel()
 
@@ -22,8 +22,10 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
     var bestPrice = BestPrice()
     var vendorPricing = VendorPricing()
     var areasView = VenueAreas()
+    var albumsView = AlbumsView()
+    var videosView = VideosView()
     
-    let vendorID = "23057"
+    let vendorID = "26345"
     
     override func viewDidLoad() {
         
@@ -65,7 +67,7 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         
     }
     
-    // MARK: UI Methods
+    // MARK: - UI Methods -
     func initPortfolioScroller() {
         
         portfolioScroll = PortfolioScroller(frame: CGRect(x: -10, y: 0, width: self.view.bounds.size.width, height: (self.view.bounds.size.width * 3/4)))
@@ -112,15 +114,22 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         shareBtn.frame.origin.x = containerScroll.frame.size.width - shareBtn.bounds.size.width
         containerScroll.addSubview(shareBtn)
         
-        self.addProfileHeader()
-        self.addAboutView()
+        addProfileHeader()
+        addAboutView()
 
         if viewModel.flags.show_best_deal != nil {
-            if viewModel.flags.show_best_deal == 1 { self.addBestPrice() }
+            if viewModel.flags.show_best_deal == 1 { addBestPrice() }
         }
         
-        if viewModel.areas.count > 0 { self.addAreasView() }
+        if viewModel.areas.count > 0 { addAreasView() }
+        
+        if viewModel.albums.images.count > 0 {
+            if viewModel.albums.albums_count > 0 { addAlbumsView() }
+        }
        
+        if viewModel.videos.video_array.count > 0 {
+            if viewModel.videos.videos_count > 0 { addVideosView() }
+        }
         self.perform(#selector(viewDidLayoutSubviews), with: nil, afterDelay: 0.5)
     }
     
@@ -131,11 +140,6 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         areasView.loadData()
         areasView.sizeToFit()
         containerScroll.addSubview(areasView)
-    }
-    
-    //MARK: - VenueAreasDelegate -
-    func showMoreBtnClicked(_ full : Bool) {
-        self.viewDidLayoutSubviews()
     }
     
     func addProfileHeader() {
@@ -172,11 +176,25 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         containerScroll.addSubview(bestPrice)
     }
     
-    //MARK: - AboutVendorDelegate Methods -
-//    func showMoreBtnClicked(_ full: Bool) {
-//        self.viewDidLayoutSubviews()
-//    }
+    func addAlbumsView() {
+        albumsView = AlbumsView(frame: CGRect(x: 0, y: header.frame.origin.y + header.frame.size.height + 10, width: containerScroll.bounds.size.width, height: 100))
+        albumsView.albums = viewModel.albums.images
+        albumsView.delegate = self
+        albumsView.loadData()
+        albumsView.sizeToFit()
+        containerScroll.addSubview(albumsView)
+    }
     
+    func addVideosView() {
+        videosView = VideosView(frame: CGRect(x: 0, y: header.frame.origin.y + header.frame.size.height + 10, width: containerScroll.bounds.size.width, height: 100))
+        videosView.videos = viewModel.videos.video_array
+        videosView.delegate = self
+        videosView.loadData()
+        videosView.sizeToFit()
+        containerScroll.addSubview(videosView)
+    }
+    
+    //MARK: - AboutVendorDelegate -
     func showAboutVendor() {
         
         let darkView = UIView(frame: (self.view.window?.bounds)!)
@@ -185,7 +203,7 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         darkView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissInfoView)))
         
         let backView = UIView(frame: CGRect(x: 0, y: darkView.bounds.size.height, width: darkView.bounds.size.width, height: darkView.bounds.size.height))
-
+        
         let aboutTitleLbl = UILabel(frame: CGRect(x: 0, y: 5, width: backView.bounds.size.width, height: 20))
         aboutTitleLbl.text = "About " + viewModel.profile.name
         aboutTitleLbl.font = UIFont.init(name: AppFont.mediumFont, size: 6)
@@ -226,7 +244,12 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
             if let view = self.view.window?.viewWithTag(101) {
                 view.removeFromSuperview()
             }
-            })
+        })
+    }
+
+    //MARK: - VenueAreasDelegate -
+    func showMoreBtnClicked(_ full : Bool) {
+        self.viewDidLayoutSubviews()
     }
     
     //MARK: - ProfileHeaderDelegate Methods -
@@ -319,15 +342,25 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         super.viewDidLayoutSubviews()
         
         header.sizeToFit()
+        
         aboutView.sizeToFit()
         aboutView.frame.size.height = aboutView.showMoreBtn.frame.origin.y + aboutView.showMoreBtn.frame.size.height
         
-        bestPrice.frame.origin.y = aboutView.frame.origin.y + aboutView.frame.size.height + 10
+        bestPrice.frame.origin.y = aboutView.frame.origin.y + aboutView.frame.size.height + (bestPrice.frame.size.height == 0 ? 0 : 10)
+       
         areasView.sizeToFit()
         areasView.frame.origin.y = bestPrice.frame.origin.y + bestPrice.frame.size.height + 10
         areasView.frame.size.height = areasView.showMoreBtn.frame.origin.y + areasView.showMoreBtn.frame.size.height
+        
+        albumsView.sizeToFit()
+        albumsView.frame.origin.y = areasView.frame.origin.y + areasView.frame.size.height + 10
+        albumsView.frame.size.height = albumsView.showMoreBtn.frame.origin.y + albumsView.showMoreBtn.frame.size.height
+        
+        videosView.sizeToFit()
+        videosView.frame.origin.y = albumsView.frame.origin.y + albumsView.frame.size.height + 10
+        videosView.frame.size.height = videosView.showMoreBtn.frame.origin.y + videosView.showMoreBtn.frame.size.height
 
-        containerScroll.contentSize = CGSize(width: containerScroll.bounds.size.width, height: (areasView.frame.origin.y) + (areasView.frame.size.height) + 15)
+        containerScroll.contentSize = CGSize(width: containerScroll.bounds.size.width, height: (videosView.frame.origin.y) + (videosView.frame.size.height) + 15)
     
     }
 

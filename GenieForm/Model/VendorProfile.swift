@@ -77,7 +77,7 @@ struct Images : Codable {
 }
 
 struct AlbumsInfo : Codable {
-    var albums_count : Int
+    var albums_count : Double
     var images : [Album]
     
     init() {

@@ -70,7 +70,8 @@ class VendorPricing: UIView {
             attrStr.addAttribute(.foregroundColor, value: AppColor.primaryRedColor, range: NSRange(location: 0, length: attrStr.length))
             attrStr.addAttribute(.font, value: UIFont.init(name: AppFont.heavyFont, size: 15)!, range: attrStr.mutableString.range(of: "\(pricingObj.price)"))
             attrStr.addAttribute(.foregroundColor, value: AppColor.primaryBlackColor, range: attrStr.mutableString.range(of: "\(pricingObj.label ?? "")"))
-            attrStr.addAttribute(.strikethroughStyle, value: 2, range: attrStr.mutableString.range(of: "\(pricingObj.price)"))
+            // TODO: Ask for striking logic
+            // attrStr.addAttribute(.strikethroughStyle, value: 2, range: attrStr.mutableString.range(of: "\(pricingObj.price)"))
 //            attrStr.addAttribute(.baselineOffset, value: 0, range: attrStr.mutableString.range(of: "\(pricingObj.price)"))
 //
             priceLbl.attributedText = attrStr

@@ -39,7 +39,7 @@ class VenueAreas: UIView, UITableViewDelegate, UITableViewDataSource {
         headingView.headingLbl.text = "Areas Available (\(areas.count))"
         self.addSubview(headingView)
         
-        areaTableView = UITableView(frame: CGRect(x: 0, y: 30, width: self.bounds.size.width , height: 50), style: .plain)
+        areaTableView = UITableView(frame: CGRect(x: 0, y: headingView.frame.origin.y + headingView.frame.size.height, width: self.bounds.size.width , height: 50), style: .plain)
         areaTableView.backgroundColor = AppColor.secondaryWhiteColor
         areaTableView.delegate = self
         areaTableView.dataSource = self
