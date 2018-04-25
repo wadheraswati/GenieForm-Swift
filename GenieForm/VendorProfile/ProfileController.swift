@@ -25,7 +25,7 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
     var albumsView = AlbumsView()
     var videosView = VideosView()
     
-    let vendorID = "1722"
+    let vendorID = "26345"
     
     override func viewDidLoad() {
         
@@ -374,8 +374,8 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         albumsView.frame.origin.y = areasView.frame.origin.y + areasView.frame.size.height + (albumsView.frame.size.height > 0 ? 10 : 0)
         
         videosView.sizeToFit()
-        videosView.frame.origin.y = albumsView.frame.origin.y + albumsView.frame.size.height + 10
         videosView.frame.size.height = videosView.showMoreBtn.frame.origin.y + videosView.showMoreBtn.frame.size.height
+        videosView.frame.origin.y = albumsView.frame.origin.y + albumsView.frame.size.height + (videosView.frame.size.height > 0 ? 10 : 0)
 
         containerScroll.contentSize = CGSize(width: containerScroll.bounds.size.width, height: (videosView.frame.origin.y) + (videosView.frame.size.height) + 15)
     

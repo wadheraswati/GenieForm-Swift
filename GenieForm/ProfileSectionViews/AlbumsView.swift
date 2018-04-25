@@ -98,8 +98,7 @@ class AlbumsView : UIView, UICollectionViewDelegate, UICollectionViewDataSource,
             albumCollection.frame.size.height = albumCollection.contentSize.height
             
             let rows = CGFloat((min(4, albums.count))/2 + (min(4, albums.count))%2)
-            albumCollection.frame.size.height = rows * ((self.bounds.size.width - 15)/2) + 15
-            
+            albumCollection.frame.size.height = rows * ((self.bounds.size.width - 15)/2) + (rows == 1 ? 10 : 15)
             showMoreBtn.frame.origin.y = albumCollection.frame.origin.y + albumCollection.frame.size.height
         }
     }
