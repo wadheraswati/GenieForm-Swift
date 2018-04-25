@@ -42,8 +42,9 @@ struct APIList {
     static let shortlistVendor = APIList.baseURL + "v2/vendor_shortlist?version=1.1"
     
     static let messageVendor = APIList.baseURL + "v1/send_enquiry?version=1.2"
-    
     static let messageVenue = APIList.baseURL + "v1/transaction/bookvenue?version=1.1&vendor_id=%d"
+    
+    static let albumList = APIList.baseURL + "v1/vendor_albums/%d?version=1.1&nocache=1&isSlug=1"
 }
 
 struct AppFont {
@@ -59,7 +60,7 @@ struct AppMessage {
 }
 
 struct AppConstants {
-    enum MembershipType : Int {
+    enum MembershipType : Double {
         case HandPicked = 1
         case Featured = 2
         case Basic = 3

@@ -12,16 +12,16 @@ struct Profile : Codable {
     var id : Int
     var name : String
     var member_id : Int
-    var category_id : Int
-    var membership_id : Int
+    var category_id : Double
+    var membership_id : Double
     var information : String
     var city : String
-    //var love_count : Int
+    //var love_count : Double
     var vendor_price : String
     var locality_name : String
     var phone : [String]
     var address : [Address]?
-    var status : Int?
+    var status : Double?
     var managed_by_wmg : Double?
     var shortlisted : Double?
     var inbox_thread_id : String?
@@ -61,7 +61,7 @@ struct Profile : Codable {
 }
 
 struct Address : Codable {
-    var id : Int
+    var id : Double
     var latitude : String
     var longitude : String
     var display_address : String
@@ -70,14 +70,14 @@ struct Address : Codable {
 }
 
 struct Images : Codable {
-    var image_id : Int
-    var image_width : Int
-    var image_height : Int
+    var image_id : Double
+    var image_width : Double
+    var image_height : Double
     var image_url : String
 }
 
 struct AlbumsInfo : Codable {
-    var albums_count : Double
+    var albums_count : Int
     var images : [Album]
     
     init() {
@@ -88,8 +88,9 @@ struct AlbumsInfo : Codable {
 
 struct Album : Codable {
     var id : Double?
-    var image_count : Int64
-    var title : String
+    var image_count : Int
+    var title : String?
+    var project_name : String?
     var default_description : String?
     var description : String?
     var album_link : String
@@ -99,17 +100,17 @@ struct Album : Codable {
 }
 
 struct VideosInfo : Codable {
-    var videos_count : Double
+    var videos_count : Int
     var video_array : [Video]
     
-    init () {
+    init() {
         self.videos_count = 0
         self.video_array = []
     }
 }
 
 struct Video : Codable {
-    var id : Int
+    var id : Double
     var video_link : String
     var video_title : String
     var video_image : String
@@ -120,18 +121,18 @@ struct FAQ : Codable {
     var question : String
     var answer : String
     var highlight_text : Double?
-    var span : Int
+    var span : Double
     
     var unit : String?
-    var show_inr : Int?
-    var fade : Int?
+    var show_inr : Double?
+    var fade : Double?
 }
 
 struct Pricing : Codable {
     var price : String
     var label : String?
     var unit : String
-    var show_inr : Int
+    var show_inr : Double
     var icon : String?
 }
 

@@ -177,9 +177,16 @@ class ProfileHeader: UIView {
     
     func updateReviewBox() {
         
-        let rating = String.init(format: " ★ %@ ",(currentProfile.reviewInfo?.vendor_rating) ?? "0.0")
-        let reviewCount = Double((currentProfile.reviewInfo?.reviews_count)!)
-        let reviews : String = (reviewCount > 0) ? (String.init(format: "%d Review%@", Int(reviewCount), (reviewCount) > 1 ? "s" : "")) : "No Reviews"
+        var ratingText : Float = 0
+        if let rating = currentProfile.reviewInfo?.vendor_rating {
+            if let ratingNumber = NumberFormatter().number(from: rating) {
+                ratingText = ratingNumber.floatValue
+            }
+        }
+        
+        let rating = String.init(format: " ★ %.1f ", ratingText)
+        let reviewCount = (currentProfile.reviewInfo?.reviews_count)!
+        let reviews : String = (reviewCount > 0) ? (String.init(format: "%d Review%@", reviewCount, (reviewCount) > 1 ? "s" : "")) : "No Reviews"
         
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center

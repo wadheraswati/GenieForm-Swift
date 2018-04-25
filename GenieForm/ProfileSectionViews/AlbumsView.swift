@@ -10,7 +10,7 @@ import UIKit
 import AlamofireImage
 
 protocol AlbumsViewDelegate : class {
-    func showMoreBtnClicked(_ full : Bool)
+    func showAlbums()
 }
 
 class AlbumsView : UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -22,7 +22,7 @@ class AlbumsView : UIView, UICollectionViewDelegate, UICollectionViewDataSource,
     var showMoreBtn = UIButton()
     
     var showFull : Bool = false
-    var count : Double = 0
+    var count : Int = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -77,8 +77,8 @@ class AlbumsView : UIView, UICollectionViewDelegate, UICollectionViewDataSource,
         
         let album = albums[indexPath.row]
         cell.imgCountLbl.text = "\(album.image_count)"
-        cell.titleLbl.text = "\(album.title)"
-        cell.subtitleLbl.text = "\(album.location ?? "")"
+        cell.titleLbl.text = album.title ?? ""
+        cell.subtitleLbl.text = album.location ?? ""
         
         cell.gridImgV.af_setImage(withURL: URL(string:  album.cover_pic_url.replacingOccurrences(of: "%%", with: "400"))!)
         cell.layoutSubviews()
@@ -105,9 +105,7 @@ class AlbumsView : UIView, UICollectionViewDelegate, UICollectionViewDataSource,
     }
     
     @objc func showMoreBtnClicked() {
-        showFull = !showFull
-        showMoreBtn.setTitle(showFull ? "Show Less" : "Show More", for: .normal)
-        delegate?.showMoreBtnClicked(showFull)
+        delegate?.showAlbums()
     }
 
     required init?(coder aDecoder: NSCoder) {

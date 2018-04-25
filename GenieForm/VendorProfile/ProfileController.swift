@@ -10,7 +10,7 @@ import UIKit
 
 class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDelegate, VendorPricingDelegate, VenueAreasDelegate, AlbumsViewDelegate, VideosViewDelegate {
 
-    let viewModel : ProfileViewModel = ProfileViewModel()
+    let viewModel = ProfileViewModel()
 
     // main scrollView
     var containerScroll = UIScrollView()
@@ -25,7 +25,7 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
     var albumsView = AlbumsView()
     var videosView = VideosView()
     
-    let vendorID = "26345"
+    let vendorID = "1722"
     
     override func viewDidLoad() {
         
@@ -254,6 +254,20 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         self.viewDidLayoutSubviews()
     }
     
+    //MARK: - AlbumsViewDelegate -
+    func showAlbums() {
+        let albumsVC = AlbumListController()
+        albumsVC.viewModel.memberID = viewModel.profile.member_id
+        self.navigationController?.pushViewController(albumsVC, animated: true)
+    }
+    
+    //MARK: - VideosViewDelegate -
+    func showVideos() {
+        let videosVC = VideoListController()
+        videosVC.viewModel.memberID = viewModel.profile.member_id
+        self.navigationController?.pushViewController(videosVC, animated: true)
+    }
+    
     //MARK: - ProfileHeaderDelegate Methods -
     
     @objc func reviewBtnClicked() {
@@ -270,9 +284,9 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         })
     }
     
+    //TODO: Add check for opening inbox thread if inbox_thread_id key is available
     @objc func messageVendor() {
         
-        //TODO: Add check for opening inbox thread if inbox_thread_id key is available
         if viewModel.profile.category_id == 10 {
             let msgVendorVC = MessageVenueController()
             msgVendorVC.profileVM = viewModel
@@ -284,6 +298,7 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         }
     }
     
+    //TODO: Add call lead API
     @objc func callVendor() {
         let darkView = UIView(frame: (self.view.window?.bounds)!)
         darkView.backgroundColor = AppColor.secondaryBlackColor.withAlphaComponent(0.5)
