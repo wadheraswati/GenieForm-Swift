@@ -198,13 +198,12 @@ class ProfileViewModel {
         apiParams["vendor_id"] = profile.id as AnyObject
         apiParams["requirement_json"] = requirement as AnyObject
         
-        apiService.POSTAPI(url: apiStr, parameters: apiParams, completion: {(success, result)
-            in
+        apiService.POSTAPI(url: apiStr, parameters: apiParams, completion: {(success, result) in
             if(success) {
                 print(result.value!)
                 let response = result.value as! NSDictionary
                 if let data = response.value(forKey: "data") {
-                    self.profile.inbox_thread_id = (data as! NSDictionary).value(forKey: "inbox_thread_id") as? String
+                    self.profile.inbox_thread_id = data as? String
                 }
             }
             completion(success)

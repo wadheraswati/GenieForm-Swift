@@ -97,6 +97,12 @@ struct Options : Codable {
         case name
     }
     
+    init(id : Int, display_name : String, name : String) {
+        self.id = id
+        self.display_name = display_name
+        self.name = name
+    }
+    
     init() {
         self.id = 0
         self.display_name = ""

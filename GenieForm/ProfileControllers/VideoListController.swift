@@ -99,7 +99,7 @@ class VideoListController: UIViewController, UICollectionViewDelegate, UICollect
     
     // MARK: - Action Methods -
     @objc func shareVideos() {
-        UIButton.share(viewModel.shareURL, self)
+        Helper.share(viewModel.shareURL, self)
     }
     
     override func didReceiveMemoryWarning() {

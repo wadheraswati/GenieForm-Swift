@@ -143,7 +143,7 @@ class GenieFormController: UIViewController, UITextFieldDelegate, FormSelectionL
                     let pass = try validateRegex(validation.reg_ex!, textField)
                     if !pass {
                         highlightTextField(textField)
-                        self.showAlertWithMessage(validation.error)
+                        self.present(Helper.showAlertWithMessage(validation.error, _title: "WMG Genie", options: ["Okay"]), animated: true, completion: nil)
                         return false
                     }
                 } catch {
@@ -170,12 +170,6 @@ class GenieFormController: UIViewController, UITextFieldDelegate, FormSelectionL
         _ = try NSRegularExpression(pattern: regex, options: [.caseInsensitive])
         let test = NSPredicate(format:"SELF MATCHES %@", regex)
         return test.evaluate(with: textField.text)
-    }
-    
-    func showAlertWithMessage(_ msg : String) {
-        let alert = UIAlertController.init(title: "WMG Genie", message: msg, preferredStyle: .alert)
-        alert.addAction(UIAlertAction.init(title: "Ok", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
     }
     
     //MARK: - Actions -

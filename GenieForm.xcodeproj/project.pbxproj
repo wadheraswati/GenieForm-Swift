@@ -18,6 +18,8 @@
 		D94364B1208464180023507E /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94364B0208464180023507E /* ProfileController.swift */; };
 		D94364B3208464F80023507E /* PortfolioScroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94364B2208464F80023507E /* PortfolioScroller.swift */; };
 		D94364B7208467680023507E /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94364B6208467680023507E /* ProfileViewModel.swift */; };
+		D946C08320920A54004E91F7 /* MsgVenueSuccessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D946C08220920A54004E91F7 /* MsgVenueSuccessController.swift */; };
+		D946C0852092120E004E91F7 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D946C0842092120E004E91F7 /* Helper.swift */; };
 		D9703B3F205CDB42004C9C3E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9703B3E205CDB42004C9C3E /* AppDelegate.swift */; };
 		D9703B41205CDB42004C9C3E /* GenieFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9703B40205CDB42004C9C3E /* GenieFormController.swift */; };
 		D9703B46205CDB42004C9C3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9703B45205CDB42004C9C3E /* Assets.xcassets */; };
@@ -93,6 +95,8 @@
 		D94364B2208464F80023507E /* PortfolioScroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioScroller.swift; sourceTree = "<group>"; };
 		D94364B6208467680023507E /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		D946C0802091F3B8004E91F7 /* SkyFloatingLabelTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SkyFloatingLabelTextField.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D946C08220920A54004E91F7 /* MsgVenueSuccessController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MsgVenueSuccessController.swift; sourceTree = "<group>"; };
+		D946C0842092120E004E91F7 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		D9703B3B205CDB42004C9C3E /* GenieForm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenieForm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9703B3E205CDB42004C9C3E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9703B40205CDB42004C9C3E /* GenieFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenieFormController.swift; sourceTree = "<group>"; };
@@ -205,6 +209,15 @@
 				D9A85A912090A50A000C9DEE /* VideoListViewModel.swift */,
 			);
 			path = VendorProfile;
+			sourceTree = "<group>";
+		};
+		D946C0812092099E004E91F7 /* VenueEnquiry */ = {
+			isa = PBXGroup;
+			children = (
+				D97AB076208DF133002C24EA /* MessageVenueController.swift */,
+				D946C08220920A54004E91F7 /* MsgVenueSuccessController.swift */,
+			);
+			path = VenueEnquiry;
 			sourceTree = "<group>";
 		};
 		D9703B32205CDB42004C9C3E = {
@@ -359,6 +372,7 @@
 			isa = PBXGroup;
 			children = (
 				D9F021E2205FB7F10092250D /* UIColorExtensions.swift */,
+				D946C0842092120E004E91F7 /* Helper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -366,10 +380,10 @@
 		D9F218252090679B00891D2B /* ProfileControllers */ = {
 			isa = PBXGroup;
 			children = (
+				D946C0812092099E004E91F7 /* VenueEnquiry */,
 				D9F21826209067B000891D2B /* AlbumListController.swift */,
 				D9F21828209067BE00891D2B /* VideoListController.swift */,
 				D9B478EA2089AAD8002D9B5D /* MessageVendorController.swift */,
-				D97AB076208DF133002C24EA /* MessageVenueController.swift */,
 				D9A85A952090F117000C9DEE /* MenuFilesController.swift */,
 			);
 			path = ProfileControllers;
@@ -692,6 +706,7 @@
 				D9A85A942090E491000C9DEE /* MenuFilesView.swift in Sources */,
 				D9F021E3205FB7F10092250D /* UIColorExtensions.swift in Sources */,
 				D9F21827209067B000891D2B /* AlbumListController.swift in Sources */,
+				D946C08320920A54004E91F7 /* MsgVenueSuccessController.swift in Sources */,
 				D918A183208F34D1001A2A85 /* VenueAreaCell.swift in Sources */,
 				D918A181208F0E03001A2A85 /* VendorPricing.swift in Sources */,
 				D9E4EBD7208477D7002D59B1 /* WMGInfinity.swift in Sources */,
@@ -706,6 +721,7 @@
 				D94364B7208467680023507E /* ProfileViewModel.swift in Sources */,
 				D99A9A222085B0BA0073D301 /* ProfileHeader.swift in Sources */,
 				D918A189208F3A9F001A2A85 /* SectionHeaderView.swift in Sources */,
+				D946C0852092120E004E91F7 /* Helper.swift in Sources */,
 				D99A9A242085DAC40073D301 /* ReviewInfo.swift in Sources */,
 				D9F21824208FA64500891D2B /* VideosView.swift in Sources */,
 				D9A85A922090A50A000C9DEE /* VideoListViewModel.swift in Sources */,

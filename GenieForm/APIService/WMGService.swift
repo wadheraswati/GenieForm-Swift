@@ -23,7 +23,7 @@ open class WMGService : UIViewController, WMGServiceProtocol {
     }
     
     func appendToken(_ url : String) -> String {
-        let str = String.init(format: "%@&token=%@", url, "5acf4845ea4db5.37603490")
+        let str = String.init(format: "%@&token=%@", url, "5a9d26d4208bc8.49448623")
         return str
     }
     

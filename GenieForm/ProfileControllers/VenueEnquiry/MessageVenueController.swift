@@ -8,22 +8,26 @@
 
 import UIKit
 
+public enum MenuType : String {
+    case veg = "Veg Menu"
+    case nonveg = "Non Veg Menu"
+}
+
 class MessageVenueController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, FormSelectionListDelegate {
 
     var submitBtn = UIButton()
     var tableView = UITableView()
     var profileVM = ProfileViewModel()
     
-    var menuOptions = [Options]()
+    var menuOptions = [Options(id: MenuType.veg.hashValue, display_name: MenuType.veg.rawValue, name: MenuType.veg.rawValue), Options(id: MenuType.nonveg.hashValue, display_name: MenuType.nonveg.rawValue, name: MenuType.nonveg.rawValue)]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "Send Message"
-        self.view.backgroundColor = AppColor.primaryWhiteColor
+        self.view.backgroundColor = AppColor.secondaryWhiteColor
         
-        let y = (self.navigationController?.navigationBar.bounds.size.height)! + 40
-        self.navigationController?.navigationBar.tintColor = AppColor.primaryBlackColor
+        let y = (self.navigationController?.navigationBar.bounds.size.height)! + 20
         
         submitBtn = UIButton(type: .custom)
         submitBtn.setTitle("Check availability & prices", for: .normal)
@@ -35,7 +39,7 @@ class MessageVenueController: UIViewController, UITableViewDelegate, UITableView
         submitBtn.addTarget(self, action: #selector(sendQuery), for: .touchUpInside)
         self.view.addSubview(submitBtn)
         
-        let headingLbl = UILabel(frame: CGRect(x: 10, y: y, width: self.view.bounds.size.width - 20, height: 0))
+        let headingLbl = UILabel(frame: CGRect(x: 10, y: y + 10, width: self.view.bounds.size.width - 20, height: 0))
         headingLbl.text = "Fill out the form with your details and the vendor will get in touch with you"
         headingLbl.textColor = AppColor.primaryRedColor
         headingLbl.textAlignment = .center
@@ -46,27 +50,17 @@ class MessageVenueController: UIViewController, UITableViewDelegate, UITableView
         headingLbl.center = CGPoint(x: self.view.bounds.size.width/2, y: headingLbl.center.y)
         self.view.addSubview(headingLbl)
         
-        tableView = UITableView(frame: CGRect(x: 10, y: headingLbl.frame.origin.y + headingLbl.bounds.size.height + 20, width: self.view.bounds.size.width - 20, height: self.view.bounds.size.height - submitBtn.frame.size.height - headingLbl.bounds.size.height - y - 40) , style: .plain)
+        tableView = UITableView(frame: CGRect(x: 10, y: headingLbl.frame.origin.y + headingLbl.bounds.size.height + 20, width: self.view.bounds.size.width - 20, height: self.view.bounds.size.height - submitBtn.frame.size.height - headingLbl.bounds.size.height - headingLbl.frame.origin.y - 40) , style: .plain)
+        tableView.backgroundColor = AppColor.secondaryWhiteColor
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 60
+        tableView.rowHeight = 70
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellIdentifier")
         tableView.separatorStyle = .none
         self.view.addSubview(tableView)
         
-        // initialise menu options for drop down in FormSelectionList
-        var vegMenuOption = Options()
-        vegMenuOption.id = 1
-        vegMenuOption.display_name = "Veg Menu"
-        vegMenuOption.name = "veg-menu"
-        menuOptions.append(vegMenuOption)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
 
-        var nonvegMenuOption = Options()
-        nonvegMenuOption.id = 2
-        nonvegMenuOption.display_name = "Non Veg Menu"
-        nonvegMenuOption.name = "non-veg-menu"
-        menuOptions.append(nonvegMenuOption)
-        
         // Do any additional setup after loading the view.
     }
     
@@ -77,7 +71,8 @@ class MessageVenueController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellIdentifier", for: indexPath)
-
+        cell.backgroundColor = AppColor.invisibleLightColor
+        
         cell.selectionStyle = .none
         switch indexPath.row + 1 {
         case 1:
@@ -110,6 +105,7 @@ class MessageVenueController: UIViewController, UITableViewDelegate, UITableView
                 view.tag = (indexPath.row + 1)*100
                 cell.addSubview(view)
             }
+            view.fieldTF.keyboardType = .numbersAndPunctuation
             view.fieldTF.tag = indexPath.row + 1
             view.fieldTF.placeholder = "No. of guests (minimum 50)"
             view.fieldTF.delegate = self
@@ -121,6 +117,7 @@ class MessageVenueController: UIViewController, UITableViewDelegate, UITableView
                 view.tag = (indexPath.row + 1)*100
                 cell.addSubview(view)
             }
+            view.fieldTF.keyboardType = .numbersAndPunctuation
             view.fieldTF.tag = indexPath.row + 1
             view.fieldTF.placeholder = "No. of rooms required"
             view.fieldTF.delegate = self
@@ -147,16 +144,23 @@ class MessageVenueController: UIViewController, UITableViewDelegate, UITableView
         return cell
     }
     
+    
+    
     // MARK: - Keyboard Notifications -
+    
     @objc func keyboardWillShow(_ notification : NSNotification) {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            tableView.frame.size.height -= keyboardSize.height
+            tableView.frame.size.height -= keyboardSize.height - 50
         }
     }
     
     @objc func keyboardWillHide(_ notification : NSNotification) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            tableView.frame.size.height += keyboardSize.height
+            tableView.frame.size.height += keyboardSize.height - 50
         }
     }
     
@@ -218,7 +222,9 @@ class MessageVenueController: UIViewController, UITableViewDelegate, UITableView
             let requirement = "{\"requirement\":{\"mobile\":\"\(mobileTF.text ?? "")\",\"people\":\"\(guestTF.text ?? "0")\",\"rooms_required\":\"\(roomsTF.text ?? "0")\",\"function_date\":\"\(dateTF.text ?? "")\",\"veg_selected\":\(vegSelected),\"nonveg_selected\":\(nonvegSelected)}}"
             
             profileVM.messageVenue(requirement, completion: {(success) in
-                
+                let msgVenueSuccessVC = MsgVenueSuccessController()
+                msgVenueSuccessVC.profileVM = self.profileVM
+                self.navigationController?.pushViewController(msgVenueSuccessVC, animated: true)
             })
         }
     }
@@ -233,12 +239,12 @@ class MessageVenueController: UIViewController, UITableViewDelegate, UITableView
         if dateTF.text?.count == 0 {
             validate = false
             error = "Please enter a function date"
-            highlightTextField(dateTF)
+            Helper.highlightTextField(dateTF)
         } else {
             do {
-                let pass = try validateMobileNumber(mobileTF.text!)
+                let pass = try Validate.validateMobileNumber(mobileTF.text!)
                 if !pass {
-                    highlightTextField(mobileTF)
+                    Helper.highlightTextField(mobileTF)
                     error = "Please enter a valid mobile number"
                     validate = false
                 }
@@ -249,37 +255,13 @@ class MessageVenueController: UIViewController, UITableViewDelegate, UITableView
         }
         
         if validate == false {
-            self.showAlertWithMessage(error)
+            self.present(Helper.showAlertWithMessage(error, _title: "Send Message", options: ["Okay"]), animated: true, completion: nil)
         }
         
         return validate
     }
     
-    func validateMobileNumber(_ text : String) throws -> Bool {
-        if text.count == 0 { return false }
-
-        let regex = "([+]?1+[-]?)?+([(]?+([0-9]{3})?+[)]?)?+[-]?+[0-9]{3}+[-]?+[0-9]{4}"
-        _ = try NSRegularExpression(pattern: regex, options: [.caseInsensitive])
-        let test = NSPredicate(format:"SELF MATCHES %@", regex)
-        return test.evaluate(with: text)
-    }
     
-    func highlightTextField(_ textField : UITextField) {
-        UIView.animate(withDuration: 0.15, animations: { () -> Void in
-            textField.backgroundColor = AppColor.validationErrorColor
-        }, completion: { (finished) -> Void in
-            // ....
-            UIView.animate(withDuration: 0.15, delay: 1.0, options: .curveEaseOut, animations: {() -> Void in
-                textField.backgroundColor = AppColor.invisibleLightColor
-            }, completion: nil)
-        })
-    }
-
-    func showAlertWithMessage(_ msg : String) {
-        let alert = UIAlertController.init(title: "Send Message", message: msg, preferredStyle: .alert)
-        alert.addAction(UIAlertAction.init(title: "Ok", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

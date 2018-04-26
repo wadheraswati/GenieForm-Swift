@@ -44,7 +44,7 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
     func initAPIData() {
         viewModel.getVendorProfile(vendorID: vendorID, isMember: false, completion: {(success) in
             if(success) {
-                
+            
                 self.containerScroll = UIScrollView(frame: CGRect(x: 10, y: 0, width: self.view.bounds.size.width - 20, height: self.view.bounds.size.height - self.vendorPricing.frame.size.height))
                 self.containerScroll.clipsToBounds = false
                 self.view.addSubview(self.containerScroll)
@@ -399,7 +399,7 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
     //MARK: - Action Methods -
     
     @objc func shareVendor(_ sender : UIButton) {
-        UIButton.share(viewModel.shareURL, self)
+        Helper.share(viewModel.shareURL, self)
     }
     
     //MARK: - UI Update Methods -

@@ -298,8 +298,12 @@ class FormSelectionList: UIView, UITableViewDataSource, UITableViewDelegate, UIG
         let cell = tableView.dequeueReusableCell(withIdentifier: self.selectionCellIdentifier, for: indexPath) as! SelectionCell
         cell.titleLbl.text = self.values[indexPath.row].display_name
         
-        if(tempSelectionList.contains(cell.titleLbl.text!)) {
-            cell.checkbox.setCheckState(M13Checkbox.CheckState.checked, animated: false)
+        if multiSelect {
+            if(tempSelectionList.contains(cell.titleLbl.text!)) {
+                cell.checkbox.setCheckState(M13Checkbox.CheckState.checked, animated: false)
+            } else {
+                cell.checkbox.setCheckState(M13Checkbox.CheckState.unchecked, animated: false)
+            }
         } else {
             cell.checkbox.setCheckState(M13Checkbox.CheckState.unchecked, animated: false)
         }
@@ -343,6 +347,12 @@ class FormSelectionList: UIView, UITableViewDataSource, UITableViewDelegate, UIG
             delegate?.selectedValue(fieldTF)
             self.dismissSelector(cell!)
         }
+    }
+    
+    func array(_ array : [String], containsString : String) -> Bool {
+        let matchingStrings = array.filter { $0 == containsString }
+        let containsString = !matchingStrings.isEmpty
+        return containsString
     }
     
     required init?(coder aDecoder: NSCoder) {
