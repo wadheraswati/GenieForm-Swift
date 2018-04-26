@@ -81,6 +81,7 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         
         vendorPricing = VendorPricing(frame: CGRect(x: 0, y: self.view.bounds.size.height - 60, width: self.view.bounds.size.width, height: 60))
         vendorPricing.pricing = viewModel.pricing
+        vendorPricing.faqList = viewModel.priceFAQ
         vendorPricing.loadData()
         vendorPricing.delegate = self
         vendorPricing.layoutSubviews()
@@ -287,6 +288,25 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         let menuFilesVC = MenuFilesController()
         menuFilesVC.viewModel = viewModel
         self.navigationController?.pushViewController(menuFilesVC, animated: true)
+    }
+    
+    //MARK: - PricingDelegate -
+    func showHideFaq() {
+        if vendorPricing.showFAQ {
+            vendorPricing.showFAQ = false
+            vendorPricing.faqTableView.isHidden = false
+            UIView.animate(withDuration: 0.5, animations: {
+                self.vendorPricing.frame.size.height = self.vendorPricing.faqTableView.frame.origin.y + self.vendorPricing.faqTableView.frame.size.height
+                self.vendorPricing.frame.origin.y = self.view.bounds.size.height - self.vendorPricing.frame.size.height
+            })
+        } else {
+            vendorPricing.showFAQ = true
+            vendorPricing.faqTableView.isHidden = true
+            UIView.animate(withDuration: 0.5, animations: {
+            self.vendorPricing.frame.size.height = 60
+                self.vendorPricing.frame.origin.y = self.view.bounds.size.height - 60
+            })
+        }
     }
     
     //MARK: - ProfileHeaderDelegate Methods -

@@ -112,7 +112,7 @@ class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
             cell.subtitleLbl.text = faqList[indexPath.row - 1].answer
             cell.subtitleLbl.textColor = AppColor.secondaryBlackColor
             if let fade = faqList[indexPath.row - 1].fade {
-                cell.subtitleLbl.alpha = (fade == 0) ? 1 : 0.5
+                //cell.subtitleLbl.alpha = (fade == 0) ? 1 : 0.5
             }
         }
         
@@ -166,7 +166,7 @@ class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
                         height += cell.bounds.size.height                        
                     }
                 }
-                aboutTable.frame.size.height = height
+                aboutTable.frame.size.height = height + 5
             }
         }
         showMoreBtn.frame.origin.y = aboutTable.frame.origin.y + aboutTable.frame.size.height

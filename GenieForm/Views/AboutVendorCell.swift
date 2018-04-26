@@ -17,7 +17,7 @@ class AboutVendorCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
             
-        titleLbl = UILabel(frame: CGRect(x: 5, y: 10, width: self.bounds.size.width - 10, height: 25))
+        titleLbl = UILabel(frame: CGRect(x: 5, y: 0, width: self.bounds.size.width - 10, height: 25))
         titleLbl.textColor = AppColor.primaryBlackColor
         titleLbl.font = UIFont(name: AppFont.mediumFont, size: 15)
         titleLbl.textAlignment = .left
@@ -25,7 +25,7 @@ class AboutVendorCell: UITableViewCell {
         self.addSubview(titleLbl)
         
         subtitleLbl = TTTAttributedLabel(frame: CGRect(x: 5, y: titleLbl.frame.origin.y + titleLbl.frame.size.height, width: self.bounds.size.width - 10, height: 25))
-        subtitleLbl.textColor = AppColor.primaryBlackColor
+        subtitleLbl.textColor = AppColor.secondaryBlackColor
         subtitleLbl.font = UIFont(name: AppFont.mainFont, size: 15)
         subtitleLbl.textAlignment = .left
         subtitleLbl.numberOfLines = 3
@@ -47,7 +47,7 @@ class AboutVendorCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        titleLbl.frame = CGRect(x: 5, y: 10, width: self.bounds.size.width - 10, height: 25)        
+        titleLbl.frame = CGRect(x: 5, y: 0, width: self.bounds.size.width - 10, height: 25)        
         subtitleLbl.frame = CGRect(x: 5, y: titleLbl.frame.origin.y + titleLbl.frame.size.height, width: self.bounds.size.width - 10, height: subtitleLbl.bounds.size.height)
     }
 }

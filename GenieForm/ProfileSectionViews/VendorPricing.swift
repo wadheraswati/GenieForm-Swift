@@ -11,15 +11,20 @@ import UIKit
 protocol VendorPricingDelegate : class {
     func messageVendor()
     func callVendor()
+    func showHideFaq()
 }
 
-class VendorPricing: UIView {
+class VendorPricing: UIView, UITableViewDelegate, UITableViewDataSource {
 
     var pricing = [Pricing]()
+    var faqList = [FAQ]()
     
     var backView = UIView()
+    var faqTableView = UITableView()
     
     weak var delegate : VendorPricingDelegate?
+    
+    var showFAQ = true
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -86,6 +91,45 @@ class VendorPricing: UIView {
         
         backView.frame = CGRect(x: backView.frame.origin.x, y: backView.frame.origin.y, width: backView.frame.size.width, height: y)
         backView.center = CGPoint(x: backView.center.x, y: self.bounds.size.height/2)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showHideFaq))
+        self.isUserInteractionEnabled = true
+        self.addGestureRecognizer(tapGesture)
+        
+        self.addPricingFAQ()
+    }
+    
+    @objc func showHideFaq() {
+        faqTableView.frame.size.height = faqTableView.contentSize.height + 10
+        delegate?.showHideFaq()
+    }
+    
+    func addPricingFAQ() {
+        
+        faqTableView = UITableView(frame: CGRect(x: 5, y: backView.frame.origin.y + backView.frame.size.height, width: self.bounds.size.width - 10, height: 50), style: .plain)
+        faqTableView.delegate = self
+        faqTableView.dataSource = self
+        faqTableView.separatorStyle = .none
+        faqTableView.rowHeight = 50
+        faqTableView.isScrollEnabled = false
+        faqTableView.register(AboutVendorCell.self, forCellReuseIdentifier: "faqCell")
+        self.addSubview(faqTableView)
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return faqList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "faqCell") as! AboutVendorCell
+        cell.selectionStyle = .none
+        
+        let faq = faqList[indexPath.row]
+        
+        cell.titleLbl.text = faq.question//.lowercased().capitalized
+        cell.subtitleLbl.text = faq.answer + " \(faq.unit ?? "")"
+        
+        return cell
     }
     
     @objc func messageVendorBtnClicked() {
