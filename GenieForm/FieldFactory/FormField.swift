@@ -29,6 +29,7 @@ class FormTextField: UIView {
         fieldTF.leftViewMode = .always
         fieldTF.selectedLineColor = AppColor.primaryBlackColor
         fieldTF.selectedTitleColor = AppColor.primaryRedColor
+        fieldTF.titleFormatter = { $0 }
         self.addSubview(fieldTF)
     }
     
@@ -56,6 +57,7 @@ class FormMobileNumber: UIView {
         fieldTF.leftViewMode = .always
         fieldTF.selectedLineColor = AppColor.primaryBlackColor
         fieldTF.selectedTitleColor = AppColor.primaryRedColor
+        fieldTF.titleFormatter = { $0 }
         self.addSubview(fieldTF)
     }
     
@@ -83,6 +85,7 @@ class FormEmail: UIView {
         fieldTF.leftViewMode = .always
         fieldTF.selectedLineColor = AppColor.primaryBlackColor
         fieldTF.selectedTitleColor = AppColor.primaryRedColor
+        fieldTF.titleFormatter = { $0 }
         self.addSubview(fieldTF)
     }
     
@@ -112,6 +115,7 @@ class FormDatepicker: UIView {
         fieldTF.leftViewMode = .always
         fieldTF.selectedLineColor = AppColor.primaryBlackColor
         fieldTF.selectedTitleColor = AppColor.primaryRedColor
+        fieldTF.titleFormatter = { $0 }
         self.addSubview(fieldTF)
     
         datePicker.date = NSDate() as Date
@@ -196,6 +200,7 @@ class FormSelectionList: UIView, UITableViewDataSource, UITableViewDelegate, UIG
         fieldTF.leftViewMode = .always
         fieldTF.selectedLineColor = AppColor.primaryBlackColor
         fieldTF.selectedTitleColor = AppColor.primaryRedColor
+        fieldTF.titleFormatter = { $0 }
         self.addSubview(fieldTF)
         
         let clickBtn = UIButton(type: .custom)
