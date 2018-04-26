@@ -9,6 +9,7 @@ target 'GenieForm' do
   pod 'AlamofireImage', '~> 3.3'
   pod 'FontAwesome.swift'
   pod 'TTTAttributedLabel'
+  pod 'SkyFloatingLabelTextField', '~> 3.0'
 
   # Pods for GenieForm
 

@@ -33,7 +33,7 @@ struct AppColor {
 struct APIList {
     static let baseURL = Bundle.main.object(forInfoDictionaryKey: "BASE_URL") as! String
     
-    static let getGenieForm = APIList.baseURL + "v1/form/genie?category_slug=%@&city_slug=%@"
+    static let getGenieForm = APIList.baseURL + "v1/form/genie?category_slug=%@"
     static let postGenieForm = APIList.baseURL + "v1/booking-lead/add?version=1.1&category_slug=%@&city_slug=%@"
     
     static let getVendorProfile = APIList.baseURL + "v2/vendor/%@?version=1.1&member=%d"

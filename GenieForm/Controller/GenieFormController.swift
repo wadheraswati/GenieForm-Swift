@@ -234,7 +234,7 @@ class GenieFormController: UIViewController, UITextFieldDelegate, FormSelectionL
         
         var y : CGFloat = 0.0
         let width : CGFloat = self.view.bounds.size.width
-        let height : CGFloat = 50.0
+        let height : CGFloat = 60.0
         var tag : Int = 0
         for form in viewModel.Fields {
             tag += 1
@@ -245,11 +245,14 @@ class GenieFormController: UIViewController, UITextFieldDelegate, FormSelectionL
                 currentTF.fieldTF.delegate = self
                 currentTF.fieldTF.tag = tag
                 currentTF.fieldTF.placeholder = form.display_name
+                currentTF.fieldTF.title = form.display_name
+                currentTF.fieldTF.titleLabel.text = currentTF.fieldTF.title?.lowercased()
                 formScroll.addSubview(currentTF)
             case .Email:
                 let fieldFrame = CGRect(x: 0.0, y: y, width: width, height: height)
                 let currentTF : FormEmail = FormEmail(frame: fieldFrame)
                 currentTF.fieldTF.placeholder = form.display_name
+                currentTF.fieldTF.title = form.display_name
                 currentTF.fieldTF.delegate = self
                 currentTF.fieldTF.tag = tag
                 formScroll.addSubview(currentTF)
@@ -257,6 +260,7 @@ class GenieFormController: UIViewController, UITextFieldDelegate, FormSelectionL
                 let fieldFrame = CGRect(x: 0.0, y: y, width: width, height: height)
                 let currentTF : FormMobileNumber = FormMobileNumber(frame: fieldFrame)
                 currentTF.fieldTF.placeholder = form.display_name
+                currentTF.fieldTF.title = form.display_name
                 currentTF.fieldTF.delegate = self
                 currentTF.fieldTF.tag = tag
                 formScroll.addSubview(currentTF)
@@ -267,6 +271,7 @@ class GenieFormController: UIViewController, UITextFieldDelegate, FormSelectionL
                 currentTF.fieldTF.delegate = self
                 currentTF.fieldTF.tag = tag
                 currentTF.fieldTF.placeholder = form.display_name
+                currentTF.fieldTF.title = form.display_name
                 formScroll.addSubview(currentTF)
             case .TimePicker:
                 let fieldFrame = CGRect(x: 0.0, y: y, width: width, height: height)
@@ -275,6 +280,7 @@ class GenieFormController: UIViewController, UITextFieldDelegate, FormSelectionL
                 currentTF.fieldTF.delegate = self
                 currentTF.fieldTF.tag = tag
                 currentTF.fieldTF.placeholder = form.display_name
+                currentTF.fieldTF.title = form.display_name
                 formScroll.addSubview(currentTF)
             case .DateTimePicker:
                 let fieldFrame = CGRect(x: 0.0, y: y, width: width, height: height)
@@ -283,6 +289,7 @@ class GenieFormController: UIViewController, UITextFieldDelegate, FormSelectionL
                 currentTF.fieldTF.delegate = self
                 currentTF.fieldTF.tag = tag
                 currentTF.fieldTF.placeholder = form.display_name
+                currentTF.fieldTF.title = form.display_name
                 formScroll.addSubview(currentTF)
             case .SingleSelect:
                 let fieldFrame = CGRect(x: 0.0, y: y, width: width, height: height)
@@ -292,6 +299,7 @@ class GenieFormController: UIViewController, UITextFieldDelegate, FormSelectionL
                 currentTF.fieldTF.delegate = self
                 currentTF.values = form.options!
                 currentTF.fieldTF.placeholder = form.display_name
+                currentTF.fieldTF.title = form.display_name
                 currentTF.delegate = self
                 formScroll.addSubview(currentTF)
             case .MultiSelect:
@@ -302,12 +310,13 @@ class GenieFormController: UIViewController, UITextFieldDelegate, FormSelectionL
                 currentTF.fieldTF.delegate = self
                 currentTF.values = form.options!
                 currentTF.fieldTF.placeholder = form.display_name
+                currentTF.fieldTF.title = form.display_name
                 currentTF.delegate = self
                 formScroll.addSubview(currentTF)
             default:
                 print("add nothing")
             }
-            y = (formScroll.subviews.last?.frame.size.height)! + y
+            y = (formScroll.subviews.last?.frame.size.height)! + y + 10
         }
         formScroll.contentSize = CGSize(width: formScroll.contentSize.width, height: y)
     }

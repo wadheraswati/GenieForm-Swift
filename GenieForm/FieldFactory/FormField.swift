@@ -8,24 +8,27 @@
 
 import UIKit
 import M13Checkbox
+import SkyFloatingLabelTextField
 
 class FormTextField: UIView {
     
-    var fieldTF = UITextField()
+    var fieldTF = SkyFloatingLabelTextField()
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        fieldTF = UITextField(frame: CGRect(x: 10, y: 5, width: frame.size.width - 20, height: 40))
+        fieldTF = SkyFloatingLabelTextField(frame: CGRect(x: 10, y: 5, width: frame.size.width - 20, height: self.frame.size.height - 10))
         fieldTF.font = UIFont.systemFont(ofSize: 15)
         fieldTF.textColor = .black
         fieldTF.textAlignment = .left
         fieldTF.keyboardType = .default
         fieldTF.layer.borderColor = AppColor.textFieldBorderColor.cgColor
-        fieldTF.layer.borderWidth = 1
+        //fieldTF.layer.borderWidth = 1
         let view = UIView()
         view.frame = CGRect(x: 0, y: 0, width: 5, height: 5)
-        fieldTF.leftView = view
+        //fieldTF.leftView = view
         fieldTF.leftViewMode = .always
+        fieldTF.selectedLineColor = AppColor.primaryBlackColor
+        fieldTF.selectedTitleColor = AppColor.primaryRedColor
         self.addSubview(fieldTF)
     }
     
@@ -36,21 +39,23 @@ class FormTextField: UIView {
 
 class FormMobileNumber: UIView {
     
-    var fieldTF = UITextField()
+    var fieldTF = SkyFloatingLabelTextField()
     override init(frame: CGRect) {
         super.init(frame: frame)
     
-        fieldTF = UITextField(frame: CGRect(x: 10, y: 5, width: frame.size.width - 20, height: 40))
+        fieldTF = SkyFloatingLabelTextField(frame: CGRect(x: 10, y: 5, width: frame.size.width - 20, height: self.frame.size.height - 10))
         fieldTF.font = UIFont.systemFont(ofSize: 15)
         fieldTF.textColor = .black
         fieldTF.textAlignment = .left
         fieldTF.layer.borderColor = AppColor.textFieldBorderColor.cgColor
-        fieldTF.layer.borderWidth = 1
+        //fieldTF.layer.borderWidth = 1
         fieldTF.keyboardType = .numbersAndPunctuation
         let view = UIView()
         view.frame = CGRect(x: 0, y: 0, width: 5, height: 5)
-        fieldTF.leftView = view
+        //fieldTF.leftView = view
         fieldTF.leftViewMode = .always
+        fieldTF.selectedLineColor = AppColor.primaryBlackColor
+        fieldTF.selectedTitleColor = AppColor.primaryRedColor
         self.addSubview(fieldTF)
     }
     
@@ -61,21 +66,23 @@ class FormMobileNumber: UIView {
 
 class FormEmail: UIView {
     
-    var fieldTF = UITextField()
+    var fieldTF = SkyFloatingLabelTextField()
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        fieldTF = UITextField(frame: CGRect(x: 10, y: 5, width: frame.size.width - 20, height: 40))
+        fieldTF = SkyFloatingLabelTextField(frame: CGRect(x: 10, y: 5, width: frame.size.width - 20, height: self.frame.size.height - 10))
         fieldTF.font = UIFont.systemFont(ofSize: 15)
         fieldTF.textColor = .black
         fieldTF.textAlignment = .left
         fieldTF.keyboardType = .emailAddress
         fieldTF.layer.borderColor = AppColor.textFieldBorderColor.cgColor
-        fieldTF.layer.borderWidth = 1
+        //fieldTF.layer.borderWidth = 1
         let view = UIView()
         view.frame = CGRect(x: 0, y: 0, width: 5, height: 5)
-        fieldTF.leftView = view
+        //fieldTF.leftView = view
         fieldTF.leftViewMode = .always
+        fieldTF.selectedLineColor = AppColor.primaryBlackColor
+        fieldTF.selectedTitleColor = AppColor.primaryRedColor
         self.addSubview(fieldTF)
     }
     
@@ -86,23 +93,25 @@ class FormEmail: UIView {
 
 class FormDatepicker: UIView {
     
-    var fieldTF = UITextField()
+    var fieldTF = SkyFloatingLabelTextField()
     var datePicker = UIDatePicker()
     var darkView = UIView()
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        fieldTF = UITextField(frame: CGRect(x: 10, y: 5, width: frame.size.width - 20, height: 40))
+        fieldTF = SkyFloatingLabelTextField(frame: CGRect(x: 10, y: 5, width: frame.size.width - 20, height: self.frame.size.height - 10))
         fieldTF.font = UIFont(name: AppFont.mainFont, size: 15)
         fieldTF.textColor = .black
         fieldTF.textAlignment = .left
         fieldTF.keyboardType = .default
         fieldTF.layer.borderColor = AppColor.textFieldBorderColor.cgColor
-        fieldTF.layer.borderWidth = 1
+        //fieldTF.layer.borderWidth = 1
         let view = UIView()
         view.frame = CGRect(x: 0, y: 0, width: 5, height: 5)
-        fieldTF.leftView = view
+        //fieldTF.leftView = view
         fieldTF.leftViewMode = .always
+        fieldTF.selectedLineColor = AppColor.primaryBlackColor
+        fieldTF.selectedTitleColor = AppColor.primaryRedColor
         self.addSubview(fieldTF)
     
         datePicker.date = NSDate() as Date
@@ -159,7 +168,7 @@ protocol FormSelectionListDelegate: class {
 
 class FormSelectionList: UIView, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate {
     
-    let fieldTF = UITextField()
+    var fieldTF = SkyFloatingLabelTextField()
     var values : [Options] = [Options]()
     let tableView = UITableView()
 
@@ -175,16 +184,18 @@ class FormSelectionList: UIView, UITableViewDataSource, UITableViewDelegate, UIG
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        fieldTF.frame = CGRect(x: 10, y: 5, width: frame.size.width - 20, height: 40)
+        fieldTF = SkyFloatingLabelTextField(frame: CGRect(x: 10, y: 5, width: frame.size.width - 20, height: self.frame.size.height - 10))
         fieldTF.font = UIFont.systemFont(ofSize: 15)
         fieldTF.textColor = .black
         fieldTF.textAlignment = .left
         fieldTF.layer.borderColor = AppColor.textFieldBorderColor.cgColor
-        fieldTF.layer.borderWidth = 1
+        //fieldTF.layer.borderWidth = 1
         let view = UIView()
         view.frame = CGRect(x: 0, y: 0, width: 5, height: 5)
-        fieldTF.leftView = view
+        //fieldTF.leftView = view
         fieldTF.leftViewMode = .always
+        fieldTF.selectedLineColor = AppColor.primaryBlackColor
+        fieldTF.selectedTitleColor = AppColor.primaryRedColor
         self.addSubview(fieldTF)
         
         let clickBtn = UIButton(type: .custom)

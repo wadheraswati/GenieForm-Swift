@@ -92,6 +92,7 @@
 		D94364B0208464180023507E /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		D94364B2208464F80023507E /* PortfolioScroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioScroller.swift; sourceTree = "<group>"; };
 		D94364B6208467680023507E /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		D946C0802091F3B8004E91F7 /* SkyFloatingLabelTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SkyFloatingLabelTextField.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9703B3B205CDB42004C9C3E /* GenieForm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenieForm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9703B3E205CDB42004C9C3E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9703B40205CDB42004C9C3E /* GenieFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenieFormController.swift; sourceTree = "<group>"; };
@@ -171,6 +172,7 @@
 		028206AFC18F8A53C1955B8F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D946C0802091F3B8004E91F7 /* SkyFloatingLabelTextField.framework */,
 				D9B478E72088732F002D9B5D /* TTTAttributedLabel.framework */,
 				D99A9A262086157E0073D301 /* FontAwesome_swift.framework */,
 				D99A9A132084C1670073D301 /* AlamofireImage.framework */,
@@ -543,6 +545,7 @@
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/FontAwesome.swift/FontAwesome_swift.framework",
 				"${BUILT_PRODUCTS_DIR}/M13Checkbox/M13Checkbox.framework",
+				"${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -551,6 +554,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FontAwesome_swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/M13Checkbox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTTAttributedLabel.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

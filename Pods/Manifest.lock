@@ -4,6 +4,7 @@ PODS:
     - Alamofire (~> 4.5)
   - FontAwesome.swift (1.3.2)
   - M13Checkbox (3.2.2)
+  - SkyFloatingLabelTextField (3.4.0)
   - TTTAttributedLabel (2.0.0)
 
 DEPENDENCIES:
@@ -11,6 +12,7 @@ DEPENDENCIES:
   - AlamofireImage (~> 3.3)
   - FontAwesome.swift
   - M13Checkbox
+  - SkyFloatingLabelTextField (~> 3.0)
   - TTTAttributedLabel
 
 SPEC CHECKSUMS:
@@ -18,8 +20,9 @@ SPEC CHECKSUMS:
   AlamofireImage: 2e784dc5d00f04903a52c1d169181469c805c3df
   FontAwesome.swift: b4e4c8ccbbecb12f9b592bc533ff237af3706667
   M13Checkbox: a8c2491cfbbca10797925fd0b9154a782bf40d89
+  SkyFloatingLabelTextField: 703aa1420b697392b1e7dba25571180dde018477
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
-PODFILE CHECKSUM: e91f6311455c50dbd80b974cef2604e10b553716
+PODFILE CHECKSUM: e83008ca55ad5e0b5186b014958cea39339f1a6e
 
 COCOAPODS: 1.4.0

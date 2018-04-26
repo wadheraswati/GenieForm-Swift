@@ -14,7 +14,7 @@ class GenieViewModel {
     var Fields : [WMGForm] = [WMGForm]()
     
     func getFormData(completion : @escaping (_ success : Bool) -> ()) {
-        apiService.GETAPI(url: "form/genie?category_slug=wedding-venues&city_slug=delhi-ncr", completion: {(success, result) in
+        apiService.GETAPI(url: String.init(format: APIList.getGenieForm, "wedding-venues"), completion: {(success, result) in
             if(success) {
                 let apiResponse = result.value as! NSDictionary
                 let data = apiResponse.value(forKey: "data") as! NSArray
