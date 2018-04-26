@@ -90,7 +90,6 @@ class VenueAreas: UIView, UITableViewDelegate, UITableViewDataSource {
                     let indexPath = IndexPath(item: index - 1, section: 0)
                     if let cell = areaTableView.cellForRow(at: indexPath) as? VenueAreaCell {
                         height += cell.bounds.size.height
-                        print(height)
                     }
                 }
                 areaTableView.frame.size.height = height // header height

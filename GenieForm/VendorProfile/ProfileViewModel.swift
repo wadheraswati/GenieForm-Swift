@@ -36,23 +36,23 @@ class ProfileViewModel {
                     do {
                         let profileData = try JSONSerialization.data(withJSONObject: data.value(forKey: "profile")!, options: .prettyPrinted)
                         self.profile = try JSONDecoder().decode(Profile.self, from: profileData)
-                        print(self.profile)
+                        //print(self.profile)
                         
                         let images = data.value(forKey: "images") as! NSArray
                         for image in images {
                             let imageData = try JSONSerialization.data(withJSONObject: image, options: .prettyPrinted)
                             self.portfolio.append(try JSONDecoder().decode(Images.self, from: imageData))
                         }
-                        print(self.portfolio)
+                        //print(self.portfolio)
 
                         let albumsData = try JSONSerialization.data(withJSONObject: data.value(forKey: "albums")!, options: .prettyPrinted)
                         self.albums = try JSONDecoder().decode(AlbumsInfo.self, from: albumsData)
-                        print(self.albums)
+                        //print(self.albums)
                         
                         if (data.value(forKey: "videos") != nil) {
                             let videosData = try JSONSerialization.data(withJSONObject: data.value(forKey: "videos")!, options: .prettyPrinted)
                             self.videos = try JSONDecoder().decode(VideosInfo.self, from: videosData)
-                            print(self.videos)
+                            //print(self.videos)
                         }
                         
                         let faqs = data.value(forKey: "faq") as! NSArray
@@ -60,7 +60,7 @@ class ProfileViewModel {
                             let faqData = try JSONSerialization.data(withJSONObject: faq, options: .prettyPrinted)
                             self.faq.append(try JSONDecoder().decode(FAQ.self, from: faqData))
                         }
-                        print(self.faq)
+                        //print(self.faq)
                         
                         if (data.value(forKey: "price_faq") != nil) {
                             let priceFAQs = data.value(forKey: "price_faq") as! NSArray
@@ -68,7 +68,7 @@ class ProfileViewModel {
                                 let priceFAQData = try JSONSerialization.data(withJSONObject: priceFAQ, options: .prettyPrinted)
                                 self.priceFAQ.append(try JSONDecoder().decode(FAQ.self, from: priceFAQData))
                             }
-                            print(self.priceFAQ)
+                            //print(self.priceFAQ)
                         }
                         
                         let pricingArr = data.value(forKey: "pricing") as! NSArray
@@ -76,7 +76,7 @@ class ProfileViewModel {
                             let pricingData = try JSONSerialization.data(withJSONObject: price, options: .prettyPrinted)
                             self.pricing.append(try JSONDecoder().decode(Pricing.self, from: pricingData))
                         }
-                        print(self.pricing)
+                        //print(self.pricing)
                         
                         if (data.value(forKey: "banquet") != nil) {
                             let areaArr = data.value(forKey: "banquet") as! NSArray
@@ -85,11 +85,11 @@ class ProfileViewModel {
                                 self.areas.append(try JSONDecoder().decode(Area.self, from: areaData))
                             }
                         }
-                        print(self.areas)
+                        //print(self.areas)
                         
                         let flagsData = try JSONSerialization.data(withJSONObject: data.value(forKey: "flags")!, options: .prettyPrinted)
                         self.flags = try JSONDecoder().decode(Flags.self, from: flagsData)
-                        print(self.flags)
+                        //print(self.flags)
                         
                         if (data.value(forKey: "concierge_phone") != nil) {
                             self.profile.concierge_phone = (data.value(forKey: "concierge_phone") as! String)
@@ -110,7 +110,7 @@ class ProfileViewModel {
                                 let menuFileData = try JSONSerialization.data(withJSONObject:menu, options: .prettyPrinted)
                                 self.menuFiles.append(try JSONDecoder().decode(MenuFiles.self, from: menuFileData))
                             }
-                            print(self.menuFiles)
+                            //print(self.menuFiles)
                         }
                     }
                     catch {
@@ -132,7 +132,7 @@ class ProfileViewModel {
                     
                     let reviewInfoData = try JSONSerialization.data(withJSONObject: data.value(forKey: "profile")!, options: .prettyPrinted)
                     self.reviewInfo = try JSONDecoder().decode(ReviewsInfo.self, from: reviewInfoData)
-                    print(self.reviewInfo)
+                    //print(self.reviewInfo)
                     
                     if(data.value(forKey: "reviews") != nil) {
                         let reviews = data.value(forKey: "reviews") as! NSArray
@@ -142,7 +142,7 @@ class ProfileViewModel {
                         }
                     }
                     
-                    print(self.reviews)
+                    //print(self.reviews)
                     self.profile.reviewInfo = self.reviewInfo
                 }
                 catch {

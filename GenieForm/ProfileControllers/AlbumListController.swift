@@ -66,7 +66,6 @@ class AlbumListController: UIViewController, UICollectionViewDelegate, UICollect
         flowLayout.minimumInteritemSpacing = 5
         flowLayout.scrollDirection = .vertical
         
-        print(self.view.bounds.size.height)
         albumCollection = UICollectionView(frame: CGRect(x: 5, y: subtitleLbl.frame.origin.y + subtitleLbl.frame.size.height + 20, width: self.view.bounds.size.width - 10, height: self.view.bounds.size.height - (subtitleLbl.frame.origin.y + subtitleLbl.frame.size.height) - 40) , collectionViewLayout: flowLayout)
         albumCollection.delegate = self
         albumCollection.dataSource = self

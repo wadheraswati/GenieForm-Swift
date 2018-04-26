@@ -211,7 +211,7 @@ class GenieFormController: UIViewController, UITextFieldDelegate, FormSelectionL
     
     // MARK: - FormSelectionListDelegate Methods -
     func completedSelection(_ values: [Options], _ textField : UITextField) {
-        print("selected options - \(values)")
+        //print("selected options - \(values)")
         var index = 0
         for option in values{
             let key : String =  String.init(format: "%@[%d]", viewModel.Fields[textField.tag - 1].name, index)

@@ -49,23 +49,12 @@ class MenuFilesController: UIViewController, UICollectionViewDelegate, UICollect
         titleLbl.sizeToFit()
         self.view.addSubview(titleLbl)
         
-//        let subtitleLbl = UILabel(frame: CGRect(x: 5, y: titleLbl.frame.origin.y + titleLbl.bounds.size.height + 5, width: self.view.bounds.size.width - 10, height: 0))
-//        subtitleLbl.textColor = AppColor.secondaryBlackColor
-//        subtitleLbl.font = UIFont.init(name: AppFont.heavyFont, size: 16)
-//        subtitleLbl.textAlignment = .left
-//        subtitleLbl.numberOfLines = 0
-//        subtitleLbl.lineBreakMode = .byWordWrapping
-//        subtitleLbl.text = "(\(viewModel.profile.categ), \(viewModel.profile.base_city))"
-//        subtitleLbl.sizeToFit()
-//        self.view.addSubview(subtitleLbl)
-        
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         flowLayout.minimumLineSpacing = 5
         flowLayout.minimumInteritemSpacing = 5
         flowLayout.scrollDirection = .vertical
         
-        print(self.view.bounds.size.height)
         menuCollection = UICollectionView(frame: CGRect(x: 5, y: titleLbl.frame.origin.y + titleLbl.frame.size.height + 20, width: self.view.bounds.size.width - 10, height: self.view.bounds.size.height - (titleLbl.frame.origin.y + titleLbl.frame.size.height) - 40) , collectionViewLayout: flowLayout)
         menuCollection.delegate = self
         menuCollection.dataSource = self
@@ -89,15 +78,6 @@ class MenuFilesController: UIViewController, UICollectionViewDelegate, UICollect
         cell.subtitleLbl.isHidden = true
         cell.imgCountLbl.isHidden = true
         cell.imgCountImgV.isHidden = true
-//        do {
-//            print(menu.menu_url)
-//            let data = try Data(contentsOf: URL(string: menu.menu_url)!)
-//            cell.gridImgV.image = UIImage.init(data: data)
-//            print(data)
-//        }
-//        catch {
-//            print(error)
-//        }
         
         cell.gridImgV.loadImageUsingCache(withUrl: menu.menu_url)
 

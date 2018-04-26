@@ -25,6 +25,7 @@ class VendorPricing: UIView, UITableViewDelegate, UITableViewDataSource {
     weak var delegate : VendorPricingDelegate?
     
     var showFAQ = true
+    var dragBtn = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -93,27 +94,98 @@ class VendorPricing: UIView, UITableViewDelegate, UITableViewDataSource {
         backView.center = CGPoint(x: backView.center.x, y: self.bounds.size.height/2)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showHideFaq))
+       
+        let swipeUpGesture = UISwipeGestureRecognizer(target: self, action: #selector(showHideFaqSwiped))
+        swipeUpGesture.direction = .down
+        self.addGestureRecognizer(swipeUpGesture)
+
         self.isUserInteractionEnabled = true
         self.addGestureRecognizer(tapGesture)
         
         self.addPricingFAQ()
+        
+        dragBtn = UIButton(type: .custom)
+        dragBtn.setTitle("", for: .normal)
+        dragBtn.setTitleColor(AppColor.primaryRedColor, for: .normal)
+        dragBtn.titleLabel?.font = UIFont.init(name: AppFont.googleFont, size: 15)
+        dragBtn.backgroundColor = AppColor.primaryWhiteColor
+        dragBtn.frame.size.height = 20
+        dragBtn.frame.size.width = 20
+        dragBtn.center = CGPoint(x: self.bounds.size.width/2, y: 0)
+        dragBtn.layer.borderColor = AppColor.primaryRedColor.cgColor
+        dragBtn.layer.borderWidth = 0.5
+        dragBtn.layer.cornerRadius = dragBtn.bounds.size.width/2
+        dragBtn.addTarget(self, action: #selector(showHideFaq), for: .touchUpInside)
+        self.addSubview(dragBtn)
+    }
+    
+    @objc func showHideFaqSwiped(_ sender : UIGestureRecognizer) {
+        self.removeGestureRecognizer(sender)
+        
+        if showFAQ {
+            let swipeDownGesture = UISwipeGestureRecognizer(target: self, action: #selector(showHideFaqSwiped))
+            swipeDownGesture.direction = .down
+            self.addGestureRecognizer(swipeDownGesture)
+            dragBtn.setTitle("", for: .normal)
+        } else {
+            dragBtn.setTitle("", for: .normal)
+            let swipeUpGesture = UISwipeGestureRecognizer(target: self, action: #selector(showHideFaqSwiped))
+            swipeUpGesture.direction = .down
+            self.addGestureRecognizer(swipeUpGesture)
+        }
+        
+        faqTableView.frame.size.height = faqTableView.contentSize.height + 10
+        delegate?.showHideFaq()
     }
     
     @objc func showHideFaq() {
+        for recognizer in self.gestureRecognizers! {
+            if recognizer.isKind(of: UISwipeGestureRecognizer.self) {
+                self.removeGestureRecognizer(recognizer) } }
+        
+        if showFAQ {
+            let swipeDownGesture = UISwipeGestureRecognizer(target: self, action: #selector(showHideFaqSwiped))
+            swipeDownGesture.direction = .down
+            self.addGestureRecognizer(swipeDownGesture)
+            dragBtn.setTitle("", for: .normal)
+        } else {
+            dragBtn.setTitle("", for: .normal)
+            let swipeUpGesture = UISwipeGestureRecognizer(target: self, action: #selector(showHideFaqSwiped))
+            swipeUpGesture.direction = .down
+            self.addGestureRecognizer(swipeUpGesture)
+        }
+        
         faqTableView.frame.size.height = faqTableView.contentSize.height + 10
         delegate?.showHideFaq()
     }
     
     func addPricingFAQ() {
         
-        faqTableView = UITableView(frame: CGRect(x: 5, y: backView.frame.origin.y + backView.frame.size.height, width: self.bounds.size.width - 10, height: 50), style: .plain)
+        faqTableView = UITableView(frame: CGRect(x: 5, y: backView.frame.origin.y + backView.frame.size.height + 10, width: self.bounds.size.width - 10, height: 50), style: .plain)
         faqTableView.delegate = self
         faqTableView.dataSource = self
         faqTableView.separatorStyle = .none
         faqTableView.rowHeight = 50
+        faqTableView.sectionHeaderHeight = 40
         faqTableView.isScrollEnabled = false
         faqTableView.register(AboutVendorCell.self, forCellReuseIdentifier: "faqCell")
+        faqTableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: "faqHeader")
         self.addSubview(faqTableView)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "faqHeader")
+      
+        view!.frame = CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 30)
+        
+        let lbl = UILabel(frame: CGRect(x: 5, y: 5, width: view!.frame.size.width - 10, height: 30))
+        lbl.text = "Pricing Details"
+        lbl.textColor = AppColor.primaryBlackColor
+        lbl.font = UIFont.init(name: AppFont.heavyFont, size: 15)
+        lbl.textAlignment = .left
+        view?.addSubview(lbl)
+        
+        return view
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

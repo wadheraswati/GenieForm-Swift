@@ -301,10 +301,12 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
             })
         } else {
             vendorPricing.showFAQ = true
-            vendorPricing.faqTableView.isHidden = true
             UIView.animate(withDuration: 0.5, animations: {
-            self.vendorPricing.frame.size.height = 60
+                self.vendorPricing.frame.size.height = 60
                 self.vendorPricing.frame.origin.y = self.view.bounds.size.height - 60
+
+            }, completion: {success in
+                self.vendorPricing.faqTableView.isHidden = true
             })
         }
     }

@@ -43,7 +43,7 @@ class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     
     func loadData() {
-        aboutTable = UITableView(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: 50), style: .plain)
+        aboutTable = UITableView(frame: CGRect(x: 0, y: 10, width: self.bounds.size.width, height: 50), style: .plain)
         aboutTable.delegate = self
         aboutTable.dataSource = self
         aboutTable.separatorStyle = .none
@@ -112,7 +112,7 @@ class AboutVendor: UIView, UITableViewDelegate, UITableViewDataSource {
             cell.subtitleLbl.text = faqList[indexPath.row - 1].answer
             cell.subtitleLbl.textColor = AppColor.secondaryBlackColor
             if let fade = faqList[indexPath.row - 1].fade {
-                //cell.subtitleLbl.alpha = (fade == 0) ? 1 : 0.5
+                cell.subtitleLbl.alpha = (fade == 0) ? 1 : 0.5
             }
         }
         
