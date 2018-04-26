@@ -46,22 +46,34 @@ class VendorPricing: UIView, UITableViewDelegate, UITableViewDataSource {
         
         let messageVendorBtn = UIButton(type: .custom)
         messageVendorBtn.setTitle("", for: .normal)
-        messageVendorBtn.titleLabel?.font = UIFont.init(name: AppFont.googleFont, size: 30)
-        messageVendorBtn.setTitleColor(AppColor.primaryRedColor, for: .normal)
+        messageVendorBtn.contentVerticalAlignment = .center
+        messageVendorBtn.contentHorizontalAlignment = .center
+        messageVendorBtn.backgroundColor = AppColor.primaryRedColor
+        messageVendorBtn.titleLabel?.font = UIFont.init(name: AppFont.googleFont, size: 25)
+        //messageVendorBtn.tintColor = AppColor.primaryRedColor
+        messageVendorBtn.setTitleColor(AppColor.primaryWhiteColor, for: .normal)
         messageVendorBtn.sizeToFit()
+        messageVendorBtn.frame.size.height = messageVendorBtn.bounds.size.height
+        messageVendorBtn.frame.size.width = messageVendorBtn.bounds.size.width + 10
         messageVendorBtn.addTarget(self, action: #selector(messageVendorBtnClicked), for: .touchUpInside)
         messageVendorBtn.frame = CGRect(x: backView.bounds.size.width - messageVendorBtn.bounds.size.width - 10, y: 0, width: messageVendorBtn.bounds.size.width, height: messageVendorBtn.bounds.size.height)
         messageVendorBtn.center = CGPoint(x: messageVendorBtn.center.x, y: backView.bounds.size.height/2)
+        messageVendorBtn.layer.cornerRadius = 2
         self.addSubview(messageVendorBtn)
         
         let callBtn = UIButton(type: .custom)
         callBtn.setTitle("", for: .normal)
-        callBtn.titleLabel?.font = UIFont.init(name: AppFont.googleFont, size: 30)
-        callBtn.setTitleColor(AppColor.primaryGreenColor, for: .normal)
+        callBtn.contentVerticalAlignment = .center
+        callBtn.contentHorizontalAlignment = .center
+        callBtn.backgroundColor = AppColor.primaryGreenColor
+        callBtn.titleLabel?.font = UIFont.init(name: AppFont.googleFont, size: 25)
+        callBtn.setTitleColor(AppColor.primaryWhiteColor, for: .normal)
         callBtn.sizeToFit()
+        callBtn.frame.size.width = callBtn.bounds.size.width + 10
         callBtn.addTarget(self, action: #selector(callBtnClicked), for: .touchUpInside)
         callBtn.frame = CGRect(x: messageVendorBtn.frame.origin.x - callBtn.bounds.size.width - 10, y: 0, width: callBtn.bounds.size.width, height: callBtn.bounds.size.height)
         callBtn.center = CGPoint(x: callBtn.center.x, y: backView.bounds.size.height/2)
+        callBtn.layer.cornerRadius = 2
         self.addSubview(callBtn)
         
         let x = CGFloat(5)

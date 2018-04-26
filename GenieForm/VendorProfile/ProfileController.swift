@@ -32,7 +32,7 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         
         self.view.backgroundColor = AppColor.secondaryWhiteColor
         self.navigationItem.title = "Profile"
-        
+        self.edgesForExtendedLayout = []
         initAPIData()
         
         super.viewDidLoad()
@@ -44,9 +44,8 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
     func initAPIData() {
         viewModel.getVendorProfile(vendorID: vendorID, isMember: false, completion: {(success) in
             if(success) {
-                let y = (self.navigationController?.navigationBar.bounds.size.height)! + 20
                 
-                self.containerScroll = UIScrollView(frame: CGRect(x: 10, y: y, width: self.view.bounds.size.width - 20, height: self.view.bounds.size.height - y - self.vendorPricing.frame.size.height))
+                self.containerScroll = UIScrollView(frame: CGRect(x: 10, y: 0, width: self.view.bounds.size.width - 20, height: self.view.bounds.size.height - self.vendorPricing.frame.size.height))
                 self.containerScroll.clipsToBounds = false
                 self.view.addSubview(self.containerScroll)
                
