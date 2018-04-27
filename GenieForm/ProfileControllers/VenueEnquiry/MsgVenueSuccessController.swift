@@ -27,11 +27,12 @@ class MsgVenueSuccessController: UIViewController, UITableViewDelegate, UITableV
 
     var submitBtn = UIButton()
     var tableView = UITableView()
-    var profileVM = ProfileViewModel()
-    
+    var viewModel = MsgVendorViewModel()
+
     var bestPrice = BestPrice()
+    var requirement : String = ""
     
-    var functionTypeValues = [Options(id: FunctionType.prewedding.hashValue, display_name: FunctionType.prewedding.rawValue, name: FunctionType.prewedding.rawValue), Options(id: FunctionType.wedding.hashValue, display_name: FunctionType.wedding.rawValue, name: FunctionType.wedding.rawValue)]
+    var functionTypeValues = [Options(id: FunctionType.prewedding.hashValue, display_name: FunctionType.prewedding.rawValue, name: (FunctionType.prewedding.rawValue.lowercased().replacingOccurrences(of: " ", with: "-"))), Options(id: FunctionType.wedding.hashValue, display_name: FunctionType.wedding.rawValue, name: FunctionType.wedding.rawValue)]
     
     var functionTimeValues = [Options(id: FunctionTime.day.hashValue, display_name: FunctionTime.day.rawValue, name: FunctionTime.day.rawValue), Options(id: FunctionTime.evening.hashValue, display_name: FunctionTime.evening.rawValue, name: FunctionTime.evening.rawValue)]
     
@@ -58,7 +59,7 @@ class MsgVenueSuccessController: UIViewController, UITableViewDelegate, UITableV
         headingLbl.text = "Thanks for submitting your details"
         headingLbl.textColor = AppColor.primaryGreenColor
         headingLbl.textAlignment = .center
-        headingLbl.font = UIFont.init(name: AppFont.mainFont, size: 20)
+        headingLbl.font = UIFont.init(name: AppFont.heavyFont, size: 20)
         headingLbl.numberOfLines = 0
         headingLbl.lineBreakMode = .byWordWrapping
         headingLbl.sizeToFit()
@@ -76,16 +77,17 @@ class MsgVenueSuccessController: UIViewController, UITableViewDelegate, UITableV
         subheadingLbl.center = CGPoint(x: self.view.bounds.size.width/2, y: subheadingLbl.center.y)
         self.view.addSubview(subheadingLbl)
         
-        bestPrice = BestPrice(frame: CGRect(x: 10, y: subheadingLbl.frame.origin.y + subheadingLbl.frame.size.height + 10, width: self.view.bounds.size.width - 20, height: 0))
-        bestPrice.displayPhone = profileVM.profile.concierge_display_phone!
+        //TODO: Take user to venue concierge from this
+        bestPrice = BestPrice(frame: CGRect(x: 10, y: subheadingLbl.frame.origin.y + subheadingLbl.frame.size.height + 20, width: self.view.bounds.size.width - 20, height: 0))
+        bestPrice.displayPhone = viewModel.profile.concierge_display_phone!
         bestPrice.loadData()
         bestPrice.frame.size.height = bestPrice.bestPriceLbl.frame.size.height + 20
         bestPrice.layoutSubviews()
         self.view.addSubview(bestPrice)
         
-        tableView = UITableView(frame: CGRect(x: 10, y: bestPrice.frame.origin.y + bestPrice.bounds.size.height + 20, width: self.view.bounds.size.width - 20, height: self.view.bounds.size.height - submitBtn.frame.size.height - bestPrice.bounds.size.height - bestPrice.frame.origin.y - 40) , style: .plain)
+        tableView = UITableView(frame: CGRect(x: 10, y: bestPrice.frame.origin.y + bestPrice.frame.size.height + 20, width: self.view.bounds.size.width - 20, height: self.view.bounds.size.height - submitBtn.frame.size.height - bestPrice.bounds.size.height - bestPrice.frame.origin.y - 40) , style: .plain)
         tableView.backgroundColor = AppColor.secondaryWhiteColor
-
+        tableView.isScrollEnabled = false
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 70
@@ -165,15 +167,28 @@ class MsgVenueSuccessController: UIViewController, UITableViewDelegate, UITableV
         return false
     }
     
-    func sendQuery() {
+    @objc func sendQuery() {
         
-        let requirement = "{\"requirement\":{\"function_type\":\"%@\",\"timeValue\":\"%@\",\"alcohol\":\"%@\"}}"
+        let typeTF = tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.viewWithTag(1) as! UITextField
+        let timeTF = tableView.cellForRow(at: IndexPath(row: 1, section: 0))?.viewWithTag(2) as! UITextField
+        let alcoholTF = tableView.cellForRow(at: IndexPath(row: 2, section: 0))?.viewWithTag(3) as! UITextField
+
+        let typeStr = (typeTF.text ?? "").apiJsonValue()
+        let timeStr = (timeTF.text ?? "").apiJsonValue()
+        let alcoholStr = (alcoholTF.text ?? "").apiJsonValue()
+
+        let updatedRequirement = requirement + "," + "\"function_type\":\"\(typeStr)\",\"timeValue\":\"\(timeStr)\",\"alcohol\":\"\(alcoholStr)\""
         
-        profileVM.updateMessageVenue(requirement, completion: {(success) in
-            let msgVenueSuccessVC = MsgVenueSuccessController()
-            msgVenueSuccessVC.profileVM = self.profileVM
-            self.navigationController?.pushViewController(msgVenueSuccessVC, animated: true)
+        viewModel.updateMessageVenue(updatedRequirement, completion: {(success) in
+            if success {
+                //TODO: Show success popup
+                self.goBack()
+            }
         })
+    }
+    
+    func goBack() {
+        self.navigationController?.popToViewController((self.navigationController?.viewControllers[(self.navigationController?.viewControllers.count)! - 3])!, animated: true)
     }
     
 //    func validate() -> Bool {
@@ -183,10 +198,9 @@ class MsgVenueSuccessController: UIViewController, UITableViewDelegate, UITableV
 //    }
     
     override func viewDidLayoutSubviews() {
-        bestPrice.frame.origin.y = bestPrice.frame.origin.y + (bestPrice.frame.size.height == 0 ? 0 : 10)
         
-        tableView.frame.origin.y = bestPrice.frame.origin.y + bestPrice.frame.size.height + 20
-        tableView.frame.size.height = self.view.bounds.size.height - submitBtn.frame.size.height - bestPrice.bounds.size.height - bestPrice.frame.origin.y - 40
+        tableView.frame.origin.y = bestPrice.frame.origin.y + bestPrice.frame.size.height + 30
+        tableView.frame.size.height = self.view.bounds.size.height - submitBtn.frame.size.height - bestPrice.frame.size.height - bestPrice.frame.origin.y - 40
     }
 
     override func didReceiveMemoryWarning() {

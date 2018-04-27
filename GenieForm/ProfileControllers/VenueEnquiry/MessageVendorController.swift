@@ -12,8 +12,8 @@ class MessageVendorController: UIViewController, UITextFieldDelegate, UITextView
 
     var containerScroll = UIScrollView()
     var submitBtn = UIButton()
-    var profileVM = ProfileViewModel()
-    
+    var viewModel = MsgVendorViewModel()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -101,7 +101,7 @@ class MessageVendorController: UIViewController, UITextFieldDelegate, UITextView
         msgTV.textColor = AppColor.primaryBlackColor
         msgTV.font = UIFont.init(name: AppFont.mainFont, size: 15)
         msgTV.textAlignment = .left
-        msgTV.text = profileVM.profile.send_query_default_message!
+        msgTV.text = viewModel.profile.send_query_default_message!
         msgTV.delegate = self
         msgTV.tag = 101
         msgTV.autocorrectionType = .no
@@ -148,9 +148,9 @@ class MessageVendorController: UIViewController, UITextFieldDelegate, UITextView
             let dateTF = containerScroll.viewWithTag(100) as! UITextField
             let msgTV = containerScroll.viewWithTag(101) as! UITextView
 
-            let params : [String : AnyObject] = ["function_date" : dateTF.text as AnyObject,            "requirements" : msgTV.text as AnyObject]
+            let params : [String : AnyObject] = ["function_date" : dateTF.text as AnyObject, "requirements" : msgTV.text as AnyObject]
             
-            profileVM.messageVendor(params, completion: {(success) in
+            viewModel.messageVendor(params, completion: {(success) in
                 if success {
                     //TODO: Add success popup here
                     self.navigationController?.popViewController(animated: true)

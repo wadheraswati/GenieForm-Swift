@@ -17,7 +17,7 @@ class MessageVenueController: UIViewController, UITableViewDelegate, UITableView
 
     var submitBtn = UIButton()
     var tableView = UITableView()
-    var profileVM = ProfileViewModel()
+    var viewModel = MsgVendorViewModel()
     
     var menuOptions = [Options(id: MenuType.veg.hashValue, display_name: MenuType.veg.rawValue, name: MenuType.veg.rawValue), Options(id: MenuType.nonveg.hashValue, display_name: MenuType.nonveg.rawValue, name: MenuType.nonveg.rawValue)]
 
@@ -219,11 +219,12 @@ class MessageVenueController: UIViewController, UITableViewDelegate, UITableView
             let vegSelected : Int = (menuTF.text?.contains(menuOptions[0].display_name))! ? 1 : 0
             let nonvegSelected : Int = (menuTF.text?.contains(menuOptions[1].display_name))! ? 1 : 0
             
-            let requirement = "{\"requirement\":{\"mobile\":\"\(mobileTF.text ?? "")\",\"people\":\"\(guestTF.text ?? "0")\",\"rooms_required\":\"\(roomsTF.text ?? "0")\",\"function_date\":\"\(dateTF.text ?? "")\",\"veg_selected\":\(vegSelected),\"nonveg_selected\":\(nonvegSelected)}}"
+            let requirement = "\"mobile\":\"\(mobileTF.text ?? "")\",\"people\":\"\(guestTF.text ?? "0")\",\"rooms_required\":\"\(roomsTF.text ?? "0")\",\"function_date\":\"\(dateTF.text ?? "")\",\"veg_selected\":\(vegSelected),\"nonveg_selected\":\(nonvegSelected)"
             
-            profileVM.messageVenue(requirement, completion: {(success) in
+            viewModel.messageVenue(requirement, completion: {(success) in
                 let msgVenueSuccessVC = MsgVenueSuccessController()
-                msgVenueSuccessVC.profileVM = self.profileVM
+                msgVenueSuccessVC.viewModel.profile = self.viewModel.profile
+                msgVenueSuccessVC.requirement = requirement
                 self.navigationController?.pushViewController(msgVenueSuccessVC, animated: true)
             })
         }

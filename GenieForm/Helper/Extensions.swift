@@ -82,4 +82,10 @@ extension UIImageView {
     }
 }
 
+extension String {
+    func apiJsonValue() -> String {
+        return self.lowercased().replacingOccurrences(of: " ", with: "-")
+    }
+}
+
 

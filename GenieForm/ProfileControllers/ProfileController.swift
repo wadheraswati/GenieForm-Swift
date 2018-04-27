@@ -172,6 +172,7 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         containerScroll.addSubview(aboutView)
     }
     
+    //TODO: Take user to venue concierge from this
     func addBestPrice() {
         bestPrice = BestPrice(frame: CGRect(x: 0, y: aboutView.frame.origin.y + aboutView.frame.size.height + 10, width: containerScroll.bounds.size.width, height: 0))
         bestPrice.displayPhone = viewModel.profile.concierge_display_phone!
@@ -331,11 +332,11 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         
         if viewModel.profile.category_id == 10 {
             let msgVendorVC = MessageVenueController()
-            msgVendorVC.profileVM = viewModel
+            msgVendorVC.viewModel.profile = viewModel.profile
             self.navigationController?.pushViewController(msgVendorVC, animated: true)
         } else {
             let msgVendorVC = MessageVendorController()
-            msgVendorVC.profileVM = viewModel
+            msgVendorVC.viewModel.profile = viewModel.profile
             self.navigationController?.pushViewController(msgVendorVC, animated: true)
         }
     }
