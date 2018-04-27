@@ -243,7 +243,7 @@ class MessageVenueController: UIViewController, UITableViewDelegate, UITableView
             Helper.highlightTextField(dateTF)
         } else {
             do {
-                let pass = try Validate.validateMobileNumber(mobileTF.text!)
+                let pass = try Validate.MobileNumber(mobileTF.text!)
                 if !pass {
                     Helper.highlightTextField(mobileTF)
                     error = "Please enter a valid mobile number"

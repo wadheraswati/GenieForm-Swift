@@ -21,6 +21,7 @@
 		D946C08320920A54004E91F7 /* MsgVenueSuccessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D946C08220920A54004E91F7 /* MsgVenueSuccessController.swift */; };
 		D946C0852092120E004E91F7 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D946C0842092120E004E91F7 /* Helper.swift */; };
 		D946C0872092DF14004E91F7 /* MsgVendorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D946C0862092DF14004E91F7 /* MsgVendorViewModel.swift */; };
+		D946C0892092F022004E91F7 /* PhotoListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D946C0882092F022004E91F7 /* PhotoListController.swift */; };
 		D9703B3F205CDB42004C9C3E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9703B3E205CDB42004C9C3E /* AppDelegate.swift */; };
 		D9703B41205CDB42004C9C3E /* GenieFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9703B40205CDB42004C9C3E /* GenieFormController.swift */; };
 		D9703B46205CDB42004C9C3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9703B45205CDB42004C9C3E /* Assets.xcassets */; };
@@ -99,6 +100,7 @@
 		D946C08220920A54004E91F7 /* MsgVenueSuccessController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MsgVenueSuccessController.swift; sourceTree = "<group>"; };
 		D946C0842092120E004E91F7 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		D946C0862092DF14004E91F7 /* MsgVendorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MsgVendorViewModel.swift; sourceTree = "<group>"; };
+		D946C0882092F022004E91F7 /* PhotoListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListController.swift; sourceTree = "<group>"; };
 		D9703B3B205CDB42004C9C3E /* GenieForm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenieForm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9703B3E205CDB42004C9C3E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9703B40205CDB42004C9C3E /* GenieFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenieFormController.swift; sourceTree = "<group>"; };
@@ -388,6 +390,7 @@
 				D9F21826209067B000891D2B /* AlbumListController.swift */,
 				D9F21828209067BE00891D2B /* VideoListController.swift */,
 				D9A85A952090F117000C9DEE /* MenuFilesController.swift */,
+				D946C0882092F022004E91F7 /* PhotoListController.swift */,
 			);
 			path = ProfileControllers;
 			sourceTree = "<group>";
@@ -710,6 +713,7 @@
 				D9F021E3205FB7F10092250D /* Extensions.swift in Sources */,
 				D9F21827209067B000891D2B /* AlbumListController.swift in Sources */,
 				D946C08320920A54004E91F7 /* MsgVenueSuccessController.swift in Sources */,
+				D946C0892092F022004E91F7 /* PhotoListController.swift in Sources */,
 				D918A183208F34D1001A2A85 /* VenueAreaCell.swift in Sources */,
 				D918A181208F0E03001A2A85 /* VendorPricing.swift in Sources */,
 				D9E4EBD7208477D7002D59B1 /* WMGInfinity.swift in Sources */,

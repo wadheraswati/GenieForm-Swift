@@ -70,13 +70,10 @@ class MenuFilesController: UIViewController, UICollectionViewDelegate, UICollect
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "menuCell", for: indexPath) as! GridCollectionViewCell
-        cell.isVideo = false
-        
+
         let menu = viewModel.menuFiles[indexPath.row]
         
-        cell.titleLbl.isHidden = true
-        cell.subtitleLbl.isHidden = true
-        cell.imgCountLbl.isHidden = true
+        cell.playBtn.isHidden = true
         cell.imgCountImgV.isHidden = true
         
         cell.gridImgV.loadImageUsingCache(withUrl: menu.menu_url)

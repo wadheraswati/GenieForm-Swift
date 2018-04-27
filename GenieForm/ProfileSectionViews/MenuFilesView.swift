@@ -26,11 +26,8 @@ class MenuFilesView: UIView, UICollectionViewDelegate, UICollectionViewDataSourc
         super.init(frame: frame)
         
         self.backgroundColor = AppColor.invisibleLightColor
-        self.layer.shadowColor = AppColor.secondaryBlackColor.cgColor;
-        self.layer.shadowOffset = CGSize(width: 0, height: 2)
-        self.layer.shadowOpacity = 1
-        self.layer.shadowRadius = 5
-        self.layer.masksToBounds = false
+        UIUpdates.addShadow(self.layer)
+
     }
     
     func loadData() {
@@ -74,14 +71,11 @@ class MenuFilesView: UIView, UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "menuCell", for: indexPath) as! GridCollectionViewCell
-        cell.isVideo = false
-        
+
         let menu = menuFiles[indexPath.row]
         
-        cell.titleLbl.isHidden = true
-        cell.subtitleLbl.isHidden = true
-        cell.imgCountLbl.isHidden = true
         cell.imgCountImgV.isHidden = true
+        cell.playBtn.isHidden = true
         
         cell.gridImgV.loadImageUsingCache(withUrl: menu.menu_url)
         //cell.gridImgV.af_setImage(withURL: URL(string:menu.menu_url.replacingOccurrences(of: "%%", with: "400"))!)

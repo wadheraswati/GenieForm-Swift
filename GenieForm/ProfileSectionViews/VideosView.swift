@@ -28,11 +28,8 @@ class VideosView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, 
         super.init(frame: frame)
         
         self.backgroundColor = AppColor.invisibleLightColor
-        self.layer.shadowColor = AppColor.secondaryBlackColor.cgColor;
-        self.layer.shadowOffset = CGSize(width: 0, height: 2)
-        self.layer.shadowOpacity = 1
-        self.layer.shadowRadius = 5
-        self.layer.masksToBounds = false
+        UIUpdates.addShadow(self.layer)
+
     }
     
     func loadData() {
@@ -74,8 +71,9 @@ class VideosView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "videoCell", for: indexPath) as! GridCollectionViewCell
-        cell.isVideo = true
-        
+
+        cell.imgCountImgV.isHidden = true
+
         let video = videos[indexPath.row]
         cell.titleLbl.text = "\(video.video_title)"
         cell.gridImgV.af_setImage(withURL: URL(string:video.video_image.replacingOccurrences(of: "%%", with: "400"))!)

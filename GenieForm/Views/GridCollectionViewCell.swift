@@ -20,9 +20,7 @@ class GridCollectionViewCell: UICollectionViewCell {
     var gradientLayer = CAGradientLayer()
     
     var playBtn = UIButton()
-    
-    var isVideo : Bool = false
-    
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
     
@@ -100,17 +98,5 @@ class GridCollectionViewCell: UICollectionViewCell {
         titleLbl.frame = CGRect(x: 5, y: subtitleLbl.frame.origin.y - titleLbl.bounds.size.height, width: self.bounds.size.width - 10, height: titleLbl.bounds.size.height)
         
         playBtn.center = CGPoint(x: self.bounds.size.width/2, y: self.bounds.size.height/2)
-        
-        if isVideo {
-            playBtn.isHidden = false
-            imgCountLbl.isHidden = true
-            imgCountImgV.isHidden = true
-            subtitleLbl.isHidden = true
-        } else {
-            playBtn.isHidden = true
-            imgCountLbl.isHidden = false
-            imgCountImgV.isHidden = false
-            subtitleLbl.isHidden = false
-        }
     }
 }

@@ -28,11 +28,8 @@ class AlbumsView : UIView, UICollectionViewDelegate, UICollectionViewDataSource,
         super.init(frame: frame)
         
         self.backgroundColor = AppColor.invisibleLightColor
-        self.layer.shadowColor = AppColor.secondaryBlackColor.cgColor;
-        self.layer.shadowOffset = CGSize(width: 0, height: 2)
-        self.layer.shadowOpacity = 1
-        self.layer.shadowRadius = 5
-        self.layer.masksToBounds = false
+        UIUpdates.addShadow(self.layer)
+
     }
     
     func loadData() {
@@ -73,7 +70,8 @@ class AlbumsView : UIView, UICollectionViewDelegate, UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "albumCell", for: indexPath) as! GridCollectionViewCell
-        cell.isVideo = false
+
+        cell.playBtn.isHidden = true
         
         let album = albums[indexPath.row]
         cell.imgCountLbl.text = "\(album.image_count)"

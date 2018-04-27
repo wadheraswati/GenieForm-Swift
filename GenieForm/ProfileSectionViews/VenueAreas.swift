@@ -26,11 +26,8 @@ class VenueAreas: UIView, UITableViewDelegate, UITableViewDataSource {
         super.init(frame: frame)
         
         self.backgroundColor = AppColor.invisibleLightColor
-        self.layer.shadowColor = AppColor.secondaryBlackColor.cgColor;
-        self.layer.shadowOffset = CGSize(width: 0, height: 2)
-        self.layer.shadowOpacity = 1
-        self.layer.shadowRadius = 5
-        self.layer.masksToBounds = false
+        UIUpdates.addShadow(self.layer)
+
     }
     
     func loadData() {

@@ -81,12 +81,12 @@ class AlbumListController: UIViewController, UICollectionViewDelegate, UICollect
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "albumCell", for: indexPath) as! GridCollectionViewCell
-        cell.isVideo = false
         
         let album = viewModel.albumList[indexPath.row]
         cell.imgCountLbl.text = album.image_count
         cell.titleLbl.text = album.project_name
         cell.subtitleLbl.text = album.location ?? ""
+        cell.playBtn.isHidden = true
         
         cell.gridImgV.af_setImage(withURL: URL(string:  album.cover_pic_url.replacingOccurrences(of: "%%", with: "400"))!)
         cell.layoutSubviews()

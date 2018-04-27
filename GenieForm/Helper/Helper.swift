@@ -37,9 +37,24 @@ class Helper {
     }
 }
 
+class UIUpdates {
+    
+    static func createGrid(withPictures : [Images]) {
+        
+    }
+    
+    static func addShadow(_ layer : CALayer) {
+        layer.shadowColor = AppColor.secondaryBlackColor.cgColor;
+        layer.shadowOffset = CGSize(width: 0, height: 2)
+        layer.shadowOpacity = 1
+        layer.shadowRadius = 5
+        layer.masksToBounds = false
+    }
+}
+
 class Validate {
     
-    static func validateMobileNumber(_ text : String) throws -> Bool {
+    static func MobileNumber(_ text : String) throws -> Bool {
         if text.count == 0 { return false }
         
         let regex = "([+]?1+[-]?)?+([(]?+([0-9]{3})?+[)]?)?+[-]?+[0-9]{3}+[-]?+[0-9]{4}"
@@ -48,7 +63,7 @@ class Validate {
         return test.evaluate(with: text)
     }
     
-    static func validateLength(text : String, min : Int?, max : Int?) -> Bool {
+    static func Length(text : String, min : Int?, max : Int?) -> Bool {
        
         if text.count == 0 { return false }
         

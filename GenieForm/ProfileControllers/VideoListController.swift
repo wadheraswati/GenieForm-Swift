@@ -81,7 +81,8 @@ class VideoListController: UIViewController, UICollectionViewDelegate, UICollect
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "videoCell", for: indexPath) as! GridCollectionViewCell
-        cell.isVideo = true
+        
+        cell.imgCountImgV.isHidden = true
         
         let video = viewModel.videoList[indexPath.row]
         cell.titleLbl.text = "\(video.video_title)"

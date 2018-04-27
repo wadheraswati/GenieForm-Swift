@@ -99,6 +99,7 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
         viewPhotosBtn.backgroundColor = AppColor.primaryWhiteColor
         viewPhotosBtn.layer.cornerRadius = 3
         viewPhotosBtn.titleLabel?.numberOfLines = 1
+        viewPhotosBtn.addTarget(self, action: #selector(viewPhotosBtnClicked), for: .touchUpInside)
         viewPhotosBtn.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         viewPhotosBtn.sizeToFit()
         viewPhotosBtn.frame.origin.y = portfolioScroll.frame.origin.y + portfolioScroll.frame.size.height - 60 - viewPhotosBtn.bounds.size.height
@@ -402,6 +403,14 @@ class ProfileController: UIViewController, ProfileHeaderDelegate, AboutVendorDel
     @objc func shareVendor(_ sender : UIButton) {
         Helper.share(viewModel.shareURL, self)
     }
+    
+    @objc func viewPhotosBtnClicked() {
+        let photoListObj = PhotoListController()
+        photoListObj.images = viewModel.portfolio
+        photoListObj.profile = viewModel.profile
+        self.navigationController?.pushViewController(photoListObj, animated: true)
+    }
+    
     
     //MARK: - UI Update Methods -
     override func viewDidLayoutSubviews() {
